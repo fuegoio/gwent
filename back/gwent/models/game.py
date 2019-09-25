@@ -1,7 +1,7 @@
 from gwent.models.player import Player
 from gwent.models.round import Round
 
-NUM_CARDS_HANDS = 2
+NUM_CARDS_HANDS = 10
 
 
 class Game:

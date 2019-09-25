@@ -1,6 +1,3 @@
-import random
-
-from gwent.data.cards import cards_db
 
 
 class Board:

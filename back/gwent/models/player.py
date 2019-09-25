@@ -3,8 +3,8 @@ import random
 from gwent.data.cards import cards_db
 from gwent.models.board import Board
 
-NUM_CARDS = 2
-NUM_NEUTRAL_CARDS = 1
+NUM_CARDS = 30
+NUM_NEUTRAL_CARDS = 0
 
 
 class Player:

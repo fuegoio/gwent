@@ -1,15 +1,14 @@
+import os
+import csv
+
 from gwent.models.card import Card
 
 
 class CardsDb:
     def __init__(self, filename):
         self.filename = filename
-        self.cards = [
-            Card('arachas', 'monster', 4, 0),
-            Card('arachas', 'monster', 4, 0),
-            Card('botchling', 'monster', 5, 1),
-            Card('biting_frost', 'neutral', 0, 0),
-        ]
+        self.cards = []
+        self.load_cards_from_file()
 
     def query_cards_by_faction(self, faction):
         filtered_cards = []
@@ -27,9 +26,13 @@ class CardsDb:
         return neutral_cards
 
     def load_cards_from_file(self):
-        # card_class = {'agile': AgileCard, 'default': Card}
-        with open(self.filename) as file:
-            pass
+        with open(os.path.join(os.path.realpath(__file__).split('cards.py')[0], self.filename)) as file:
+            csv_file_reader = csv.DictReader(file)
+            for card in csv_file_reader:
+                # All the heroes cards are not taken into account for now
+                if int(card['type']) < 4:
+                    self.cards.append(Card(card['name'], card['img'], card['faction'], int(card['power']), int(card['type']) - 1))
+            print(self.cards)
 
 
-cards_db = CardsDb('cards.txt')
+cards_db = CardsDb('cards.csv')
