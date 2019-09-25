@@ -1,8 +1,7 @@
 import random
 
-
 class Round:
-    def __init__(self, game, turn=None):
+    def __init__(self, game: 'Game', turn=None):
         print('[Round] New round')
         self.game = game
         self.turn = turn

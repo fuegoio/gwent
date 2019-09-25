@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from gwent import create_app, create_game
 
 app = create_app()
