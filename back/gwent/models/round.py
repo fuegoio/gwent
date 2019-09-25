@@ -25,15 +25,18 @@ class Round:
     def run_round(self):
         while not self.finished:
             player = self.game.players[self.turn % 2]
+            board = self.boards[self.turn % 2]
             print(f'[Game] {player.name}\'s turn. His hand : {player.hand}')
 
             card = player.select_card()
             if card is None:
                 player.pass_turn()
+                print(f'[Game] {player.name}\' passes his turn')
             else:
                 card.place_card(self)
                 for board in self.boards:
                     board.update_scores()
+                print(f'{board}')
             self.turn += 1
 
         # Define winner
