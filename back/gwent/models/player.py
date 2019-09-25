@@ -1,6 +1,7 @@
 import random
 
 from gwent.data.cards import cards_db
+from gwent.models.board import Board
 
 NUM_CARDS = 2
 NUM_NEUTRAL_CARDS = 1
@@ -13,7 +14,7 @@ class Player:
         self.lives = 2
         self.cards = []
         self.hand = []
-
+        self.cemetery = []
         self._passed = False
 
     def pick_cards(self):
@@ -50,11 +51,10 @@ class Player:
         print(f'[Player] {self.name} drew {card.name}')
         return card
 
-    def play_card(self):
+    def select_card(self):
         if len(self.hand) > 0 and not self._passed:
             random_card_number = random.randint(0, len(self.hand) - 1)
             card = self.hand.pop(random_card_number)
-
             return card
 
     def pass_turn(self):

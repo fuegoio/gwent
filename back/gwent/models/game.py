@@ -1,4 +1,3 @@
-from gwent.models.board import Board
 from gwent.models.player import Player
 from gwent.models.round import Round
 
@@ -8,7 +7,6 @@ NUM_CARDS_HANDS = 2
 class Game:
     def __init__(self, player_one: Player, player_two: Player):
         self.players = (player_one, player_two)
-        self.board = Board(self)
 
     @property
     def terminated(self):

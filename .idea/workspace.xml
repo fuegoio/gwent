@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ca7985cd-c084-46f5-9d1f-d6a18a9a30ad" name="Default Changelist" comment="">
+    <list default="true" id="ca7985cd-c084-46f5-9d1f-d6a18a9a30ad" name="Default Changelist" comment="object type 'game' checking in round __init__">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/gwent/data/cards.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/data/cards.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/gwent/models/board.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/models/board.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/gwent/models/card.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/models/card.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/gwent/models/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/models/game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/gwent/models/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/models/player.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/gwent/models/round.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/models/round.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/run.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,6 +47,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="Astings &lt;alexandre.laine@student.ecp.fr&gt;" />
         <option value="astings" />
       </list>
     </option>
@@ -56,7 +61,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$USER_HOME$/.node_modules/lib/node_modules/prettier" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -138,8 +143,16 @@
       <updated>1569329001855</updated>
       <workItem from="1569329002961" duration="8524000" />
       <workItem from="1569401574713" duration="3299000" />
-      <workItem from="1569409884421" duration="1371000" />
+      <workItem from="1569409884421" duration="8070000" />
     </task>
+    <task id="LOCAL-00001" summary="object type 'game' checking in round __init__">
+      <created>1569411484452</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1569411484452</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,8 +171,12 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="object type 'game' checking in round __init__" />
+    <option name="LAST_COMMIT_MESSAGE" value="object type 'game' checking in round __init__" />
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gwent$game.coverage" NAME="game Coverage Results" MODIFIED="1569410835032" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/back/gwent/models" />
-    <SUITE FILE_PATH="coverage/gwent$Run_web_server.coverage" NAME="Run web server Coverage Results" MODIFIED="1569411299149" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/back" />
+    <SUITE FILE_PATH="coverage/gwent$Run_web_server.coverage" NAME="Run web server Coverage Results" MODIFIED="1569419516581" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/back" />
   </component>
 </project>

@@ -5,10 +5,10 @@ class CardsDb:
     def __init__(self, filename):
         self.filename = filename
         self.cards = [
-            Card('arachas', 'monster'),
-            Card('arachas', 'monster'),
-            Card('botchling', 'monster'),
-            Card('biting_frost', 'neutral')
+            Card('arachas', 'monster', 4, 0),
+            Card('arachas', 'monster', 4, 0),
+            Card('botchling', 'monster', 5, 1),
+            Card('biting_frost', 'neutral', 0, 0),
         ]
 
     def query_cards_by_faction(self, faction):

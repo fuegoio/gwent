@@ -1,5 +1,8 @@
 import random
 
+from gwent.models.board import Board
+
+
 class Round:
     def __init__(self, game: 'Game', turn=None):
         print('[Round] New round')
@@ -7,7 +10,7 @@ class Round:
         self.turn = turn
         if self.turn is None:
             self.turn = random.randint(0, 1)
-
+        self.boards = [Board(self, player) for player in game.players]
         self.winner = None
         self.loser = None
 
@@ -24,10 +27,13 @@ class Round:
             player = self.game.players[self.turn % 2]
             print(f'[Game] {player.name}\'s turn. His hand : {player.hand}')
 
-            card = player.play_card()
+            card = player.select_card()
             if card is None:
                 player.pass_turn()
-
+            else:
+                card.place_card(self)
+                for board in self.boards:
+                    board.update_scores()
             self.turn += 1
 
         # Define winner
