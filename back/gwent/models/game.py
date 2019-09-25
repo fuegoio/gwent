@@ -1,20 +1,19 @@
-import random
-
+from gwent.models.board import Board
 from gwent.models.player import Player
+from gwent.models.round import Round
 
 NUM_CARDS_HANDS = 2
-
-
-class Row:
-    pass
 
 
 class Game:
     def __init__(self, player_one: Player, player_two: Player):
         self.players = (player_one, player_two)
-        self.terminated = False
+        self.board = Board(self)
 
-        self.rows = []
+    @property
+    def terminated(self):
+        players_deads = [player.lives == 0 for player in self.players]
+        return sum(players_deads) >= 1
 
     def run(self):
         # Choix du deck
@@ -26,10 +25,6 @@ class Game:
             for player in self.players:
                 player.draw_card()
 
-        turn = random.randint(0, 1)
         while not self.terminated:
-            player = self.players[turn % 2]
-            print(f'[Game] {player.name}\'s turn. His hand : {player.hand}')
-            input()
-
-            turn += 1
+            current_round = Round(self)
+            current_round.run_round()

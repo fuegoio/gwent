@@ -10,8 +10,11 @@ class Player:
     def __init__(self, name: str, faction: str):
         self.name = name
         self.faction = faction
+        self.lives = 2
         self.cards = []
         self.hand = []
+
+        self._passed = False
 
     def pick_cards(self):
         cards_available = cards_db.query_cards_by_faction(self.faction)
@@ -46,3 +49,19 @@ class Player:
 
         print(f'[Player] {self.name} drew {card.name}')
         return card
+
+    def play_card(self):
+        if len(self.hand) > 0 and not self._passed:
+            random_card_number = random.randint(0, len(self.hand) - 1)
+            card = self.hand.pop(random_card_number)
+
+            return card
+
+    def pass_turn(self):
+        self._passed = True
+
+    def reset_turn(self):
+        self._passed = False
+
+    def get_passed(self):
+        return self._passed
