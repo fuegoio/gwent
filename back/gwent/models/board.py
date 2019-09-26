@@ -11,7 +11,8 @@ class Board:
         return [sum([card.power for card in row]) for row in self.rows]
 
     def __repr__(self):
-        melee = f'      [Board] Melee : {self.rows[0]}'
-        ranged = f'      [Board] Ranged : {self.rows[1]}'
-        siege = f'      [Board] Siege : {self.rows[2]}'
+        scores = self.scores
+        melee = f'      [Board] [{scores[0]}] Melee : {self.rows[0]}'
+        ranged = f'      [Board] [{scores[1]}] Ranged : {self.rows[1]}'
+        siege = f'      [Board] [{scores[2]}] Siege : {self.rows[2]}'
         return melee + '\n' + ranged + '\n' + siege
