@@ -3,10 +3,7 @@ from gwent.models.cards.card import Card
 
 class UnitCard(Card):
     def __init__(self, id: str, name: str, img_name: str, hero: bool, faction: str, power: int, row: int):
-        self.id = id
-        self.name = name
-        self.img_name = img_name
-        self.faction = faction
+        super().__init__(id, name, img_name, faction)
         self.power = power
         self.hero = hero
         self.row = row
@@ -14,11 +11,11 @@ class UnitCard(Card):
     def __repr__(self):
         return f'<Card {self.img_name}>'
 
-    def place_card(self, round):
+    def place_card(self, board, adversary_board, player):
         # to be overridden depending on abilities
-        round.boards[round.turn % 2].rows[self.row].append(self)
-        self.apply_abilities(round)
+        board.rows[self.row].append(self)
+        self.apply_abilities(board, adversary_board, player)
 
-    def apply_abilities(self, round):
+    def apply_abilities(self, board, adversary_board, player):
         # to be overridden depending on abilities
         pass

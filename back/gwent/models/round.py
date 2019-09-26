@@ -18,13 +18,15 @@ class Round:
 
     @property
     def finished(self):
-        players_passed = [player.get_passed() for player in self.game.players]
+        players_passed = [player.passed for player in self.game.players]
         return sum(players_passed) == 2
 
     def run_round(self):
         while not self.finished:
             player = self.game.players[self.turn % 2]
             board = self.boards[self.turn % 2]
+            adversary_board = self.boards[(self.turn + 1) % 2]
+
             print(f'[Game] {player.name}\'s turn. His hand : {player.hand}')
 
             card = player.select_card()
@@ -32,7 +34,7 @@ class Round:
                 player.pass_turn()
                 print(f'[Game] {player.name}\' passes his turn')
             else:
-                card.place_card(self)
+                card.place_card(board, adversary_board, player)
                 print(f'{board}')
             self.turn += 1
 
@@ -40,5 +42,5 @@ class Round:
         boards_score = [sum(board.scores) for board in self.boards]
         self.losers = [self.game.players[i] for i, score in enumerate(boards_score) if score == min(boards_score)]
         for loser in self.losers:
-            loser.lives -= 1
+            loser.lose()
             print(f'[Round] {loser.name} loses the round.')
