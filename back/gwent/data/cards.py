@@ -29,7 +29,8 @@ class CardsDb:
             for card in csv_file_reader:
                 # All the heroes cards are not taken into account for now
                 if int(card['type']) < 4:
-                    self.cards.append(Card(card['name'], card['img'], card['faction'], int(card['power']), int(card['type']) - 1))
+                    self.cards.append(Card(card['name'], card['img'], card['faction'], int(card['power']),
+                                           int(card['type']) - 1))
             print(self.cards)
 
     def find_loaded_card(self, card_name):
