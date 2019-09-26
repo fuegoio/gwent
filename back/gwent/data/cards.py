@@ -33,7 +33,6 @@ class CardsDb:
                         self.cards.append(UnitCard(card['name'], card['img'], True, card['faction'], int(card['power']), int(card['type']) - 1))
                     else:
                         self.cards.append(UnitCard(card['name'], card['img'], False, card['faction'], int(card['power']), int(card['type']) - 1))
-            print(self.cards)
 
     def find_loaded_card(self, card_name):
         for card in self.cards:

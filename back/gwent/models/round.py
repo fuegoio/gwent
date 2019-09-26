@@ -11,8 +11,7 @@ class Round:
         if self.turn is None:
             self.turn = random.randint(0, 1)
         self.boards = [Board(self, player) for player in game.players]
-        self.winner = None
-        self.loser = None
+        self.losers = None
 
         for player in self.game.players:
             player.reset_turn()
@@ -38,8 +37,8 @@ class Round:
             self.turn += 1
 
         # Define winner
-        self.winner = self.game.players[0]
-        self.loser = self.game.players[1]
-        self.loser.lives -= 1
-
-        print(f'[Round] {self.winner.name} wins the round !')
+        boards_score = [sum(board.scores) for board in self.boards]
+        self.losers = [self.game.players[i] for i, score in enumerate(boards_score) if score == min(boards_score)]
+        for loser in self.losers:
+            loser.lives -= 1
+            print(f'[Round] {loser.name} loses the round.')

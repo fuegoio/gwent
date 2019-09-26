@@ -15,6 +15,9 @@ class Player:
         self.cemetery = []
         self._passed = False
 
+    def __repr__(self):
+        return self.name
+
     def pick_cards(self):
         cards_available = cards_db.query_deck_by_faction(self.faction)
 
