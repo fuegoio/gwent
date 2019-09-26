@@ -8,7 +8,7 @@ class Board:
 
     @property
     def scores(self):
-        return [sum([card.power for card in row]) for row in self.rows]
+        return [sum([card.get_effective_power() for card in row]) for row in self.rows]
 
     def __repr__(self):
         scores = self.scores

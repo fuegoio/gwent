@@ -5,7 +5,6 @@ class UnitCard(Card):
     def __init__(self, id: str, name: str, img_name: str, hero: bool, faction: str, power: int, row: int):
         super().__init__(id, name, img_name, faction)
         self.power = power
-        self.effective_power = power
         self.hero = hero
         self.row = row
 
@@ -20,3 +19,6 @@ class UnitCard(Card):
     def apply_abilities(self, board, adversary_board, player):
         # to be overridden depending on abilities
         pass
+
+    def get_effective_power(self, board):
+        return self.power
