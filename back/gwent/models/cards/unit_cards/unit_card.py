@@ -1,4 +1,7 @@
-class Card:
+from gwent.models.cards.card import Card
+
+
+class UnitCard(Card):
     def __init__(self, name: str, img_name: str, hero: bool, faction: str, power: int, row: int):
         self.name = name
         self.img_name = img_name
@@ -6,7 +9,6 @@ class Card:
         self.power = power
         self.hero = hero
         self.row = row
-        self.load_abilities()
 
     def __repr__(self):
         return f'<Card {self.img_name}>'

@@ -1,7 +1,7 @@
 import os
 import csv
 
-from gwent.models.cards.unit_cards.unit_card import Card
+from gwent.models.cards.unit_cards.unit_card import UnitCard
 
 
 class CardsDb:
@@ -27,9 +27,12 @@ class CardsDb:
         with open(os.path.join("./gwent/data/", self.card_filename)) as file:
             csv_file_reader = csv.DictReader(file)
             for card in csv_file_reader:
-                # All the heroes cards are not taken into account for now
                 if int(card['type']) < 4:
-                    self.cards.append(Card(card['name'], card['img'], card['faction'], int(card['power']), int(card['type']) - 1))
+                    # Card is a unit card
+                    if 'hero' in card['ability'].split(','):
+                        self.cards.append(UnitCard(card['name'], card['img'], True, card['faction'], int(card['power']), int(card['type']) - 1))
+                    else:
+                        self.cards.append(UnitCard(card['name'], card['img'], False, card['faction'], int(card['power']), int(card['type']) - 1))
             print(self.cards)
 
     def find_loaded_card(self, card_name):
