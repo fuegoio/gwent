@@ -9,11 +9,11 @@ class Player:
     def __init__(self, name: str, faction: str):
         self.name = name
         self.faction = faction
-        self.lives = 2
+        self.__lives = 2
         self.cards = []
         self.hand = []
         self.cemetery = []
-        self._passed = False
+        self.__passed = False
 
     def __repr__(self):
         return self.name
@@ -43,17 +43,26 @@ class Player:
         return card
 
     def select_card(self):
-        if len(self.hand) > 0 and not self._passed:
+        if len(self.hand) > 0 and not self.__passed:
             random_card_number = random.randint(0, len(self.hand) - 1)
             card = self.hand.pop(random_card_number)
             print(f'[Player] {self.name} selected card {card}')
             return card
 
     def pass_turn(self):
-        self._passed = True
+        self.__passed = True
 
     def reset_turn(self):
-        self._passed = False
+        self.__passed = False
 
-    def get_passed(self):
-        return self._passed
+    @property
+    def passed(self):
+        return self.__passed
+
+    def lose(self):
+        self.__lives -= 1
+        return self.__lives
+
+    @property
+    def lives(self):
+        return self.__lives
