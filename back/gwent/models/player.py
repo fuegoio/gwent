@@ -2,7 +2,7 @@ import random
 
 from gwent.data.cards import cards_db
 
-NUM_CARDS = 30
+NUM_CARDS = 22
 
 
 class Player:

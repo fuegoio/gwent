@@ -15,7 +15,6 @@ class CardsDb:
             self.loaded_decks[faction] = self.make_deck_by_faction(faction)
             print(self.loaded_decks[faction])
 
-
     def query_deck_by_faction(self, faction):
         return self.loaded_decks[faction]
 
@@ -35,7 +34,7 @@ class CardsDb:
         with open(os.path.join("./gwent/data/", self.card_filename)) as file:
             csv_file_reader = csv.DictReader(file)
             for card in csv_file_reader:
-                if int(card['type']) < 4:
+                if int(card['type']) < 3:
                     # Card is a unit card
                     if 'hero' in card['ability'].split(','):
                         self.cards.append(UnitCard(card['id'], card['name'], card['img'], True, card['faction'], int(card['power']), int(card['type'])))
