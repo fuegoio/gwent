@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca7985cd-c084-46f5-9d1f-d6a18a9a30ad" name="Default Changelist" comment="object type 'game' checking in round __init__">
+      <change afterPath="$PROJECT_DIR$/back/gwent/models/cards/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/gwent/models/cards/card.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/back/gwent/models/cards/unit_cards/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/gwent/data/cards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/data/cards.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/back/gwent/data/cards.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/data/cards.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/gwent/models/card.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/models/card.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/gwent/models/player.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/models/player.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/back/gwent/models/card.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/models/cards/unit_cards/unit_card.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,8 +39,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -63,6 +64,10 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/back/gwent/models/cards/unit_cards" />
+      <recent name="$PROJECT_DIR$/back/gwent/models/cards" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/back/gwent/models" />
     </key>
@@ -143,7 +148,7 @@
       <workItem from="1569329002961" duration="8524000" />
       <workItem from="1569401574713" duration="3299000" />
       <workItem from="1569409884421" duration="8070000" />
-      <workItem from="1569424144615" duration="10890000" />
+      <workItem from="1569424144615" duration="12096000" />
     </task>
     <task id="LOCAL-00001" summary="object type 'game' checking in round __init__">
       <created>1569411484452</created>

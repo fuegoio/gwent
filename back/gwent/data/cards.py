@@ -1,7 +1,7 @@
 import os
 import csv
 
-from gwent.models.card import Card
+from gwent.models.cards.unit_cards.unit_card import Card
 
 
 class CardsDb:
@@ -36,8 +36,7 @@ class CardsDb:
         for card in self.cards:
             if card.img_name == card_name:
                 return card
-        print(card_name)
-
+        return None
 
 
 cards_db = CardsDb('cards.csv', 'decks.csv')
