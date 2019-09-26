@@ -1,5 +1,6 @@
 class Card:
-    def __init__(self, name: str, img_name: str, faction: str):
+    def __init__(self, id: str, name: str, img_name: str, faction: str):
+        self.id = id
         self.name = name
         self.img_name = img_name
         self.faction = faction

@@ -10,8 +10,16 @@ class CardsDb:
         self.deck_filename = deck_filename
         self.cards = []
         self.load_cards_from_file()
+        self.loaded_decks = {}
+        for faction in ['northern', 'nilfgaardian', 'scoiatael', 'monster']:
+            self.loaded_decks[faction] = self.make_deck_by_faction(faction)
+            print(self.loaded_decks[faction])
+
 
     def query_deck_by_faction(self, faction):
+        return self.loaded_decks[faction]
+
+    def make_deck_by_faction(self, faction):
         deck = []
         with open(os.path.join("./gwent/data/", self.deck_filename)) as file:
             csv_file_reader = csv.DictReader(file)
@@ -30,14 +38,16 @@ class CardsDb:
                 if int(card['type']) < 4:
                     # Card is a unit card
                     if 'hero' in card['ability'].split(','):
-                        self.cards.append(UnitCard(card['name'], card['img'], True, card['faction'], int(card['power']), int(card['type']) - 1))
+                        self.cards.append(UnitCard(card['id'], card['name'], card['img'], True, card['faction'], int(card['power']), int(card['type'])))
                     else:
-                        self.cards.append(UnitCard(card['name'], card['img'], False, card['faction'], int(card['power']), int(card['type']) - 1))
+                        self.cards.append(UnitCard(card['id'], card['name'], card['img'], False, card['faction'], int(card['power']), int(card['type'])))
+            print(self.cards)
 
-    def find_loaded_card(self, card_name):
+    def find_loaded_card(self, card_id):
         for card in self.cards:
-            if card.img_name == card_name:
+            if card.id == card_id:
                 return card
+        print('Card not found ' + card_id)
         return None
 
 

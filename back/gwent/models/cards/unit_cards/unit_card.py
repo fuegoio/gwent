@@ -2,7 +2,8 @@ from gwent.models.cards.card import Card
 
 
 class UnitCard(Card):
-    def __init__(self, name: str, img_name: str, hero: bool, faction: str, power: int, row: int):
+    def __init__(self, id: str, name: str, img_name: str, hero: bool, faction: str, power: int, row: int):
+        self.id = id
         self.name = name
         self.img_name = img_name
         self.faction = faction
