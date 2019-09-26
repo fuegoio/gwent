@@ -5,10 +5,10 @@ class Board:
         self.game = game
         self.player = player
         self.rows = [[], [], []]
-        self.scores = [0, 0, 0]
 
-    def update_scores(self):
-        self.scores = [sum([card.power for card in row]) for row in self.rows]
+    @property
+    def scores(self):
+        return [sum([card.power for card in row]) for row in self.rows]
 
     def __repr__(self):
         melee = f'      [Board] Melee : {self.rows[0]}'

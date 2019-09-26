@@ -34,8 +34,6 @@ class Round:
                 print(f'[Game] {player.name}\' passes his turn')
             else:
                 card.place_card(self)
-                for board in self.boards:
-                    board.update_scores()
                 print(f'{board}')
             self.turn += 1
 
