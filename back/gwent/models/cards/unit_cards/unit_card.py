@@ -7,6 +7,7 @@ class UnitCard(Card):
         self.power = power
         self.hero = hero
         self.row = row
+        self.morale_boost = False
 
     def __repr__(self):
         return f'<Card {self.img_name}>'
@@ -21,4 +22,15 @@ class UnitCard(Card):
         pass
 
     def get_effective_power(self, board):
-        return self.power
+        if self.hero:
+            return self.power
+        else:
+            return self.power + self.get_morale_boost(board)
+
+    def get_morale_boost(self, board):
+        morale_boost = 0
+        for card in board.rows[self.row]:
+            if card.morale_boost:
+                morale_boost += 1
+        return morale_boost
+

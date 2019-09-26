@@ -9,4 +9,5 @@ class TightBondCard(UnitCard):
                 tight_bond_number += 1
 
         effective_power = self.power * tight_bond_number
-        return effective_power
+        return effective_power + self.get_morale_boost(board)
+
