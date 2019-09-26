@@ -131,9 +131,9 @@ shilard_fitz_oesterlen,Shilard Fitz-Oesterlen,7,spy,shilard,nilfgaardian,0
 stefan_skellen,Stefan Skellen,9,spy,stefan_skellen,nilfgaardian,0
 heavy_zerrikanian_fire_scorpion,Heavy Zerrikanian Fire Scorpion,10,,heavy_fire_scorpion,nilfgaardian,2
 black_infantry_archer,Black Infantry Archer,10,,black_infantry_archer1,nilfgaardian,1
-ciri,Cirilla Fiona Elen Riannon,15,hero,ciri,neutral,1
-geralt,Geralt of Rivia,15,hero,geralt,neutral,1
-triss,Triss Merigold,7,hero,triss,neutral,1
-vesemir,Vesemir,6,,vesemir,neutral,1
-yen,Yennefer of Vengerberg,7,"hero,medic",yen,neutral,2
-zoltan,Zoltan Chivay,5,,zoltan,neutral,1
+ciri,Cirilla Fiona Elen Riannon,15,hero,ciri,neutral,0
+geralt,Geralt of Rivia,15,hero,geralt,neutral,0
+triss,Triss Merigold,7,hero,triss,neutral,0
+vesemir,Vesemir,6,,vesemir,neutral,0
+yen,Yennefer of Vengerberg,7,"hero,medic",yen,neutral,1
+zoltan,Zoltan Chivay,5,,zoltan,neutral,0
