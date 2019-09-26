@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ca7985cd-c084-46f5-9d1f-d6a18a9a30ad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/gwent/data/cards.csv" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/data/cards.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/gwent/models/cards/unit_cards/tight_bond_card.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/models/cards/unit_cards/tight_bond_card.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/back/gwent/models/cards/unit_cards/unit_card.py" beforeDir="false" afterPath="$PROJECT_DIR$/back/gwent/models/cards/unit_cards/unit_card.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -123,7 +120,7 @@
       <workItem from="1569424144615" duration="12096000" />
       <workItem from="1569489794646" duration="692000" />
       <workItem from="1569502869328" duration="1727000" />
-      <workItem from="1569506385414" duration="4400000" />
+      <workItem from="1569504707637" duration="6080000" />
     </task>
     <task id="LOCAL-00001" summary="object type 'game' checking in round __init__">
       <created>1569411484452</created>
@@ -139,7 +136,56 @@
       <option name="project" value="LOCAL" />
       <updated>1569489835374</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add print in card selection">
+      <created>1569505624939</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1569505624939</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Fix decks.csv">
+      <created>1569506277869</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1569506277869</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fix decks.csv">
+      <created>1569506334811</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1569506334811</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add round winning and game winning">
+      <created>1569507434385</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1569507434385</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Add scores on board">
+      <created>1569508440091</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1569508440091</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Fix the card picking">
+      <created>1569508600303</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1569508600303</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Restrain scope of abilities">
+      <created>1569509864176</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1569509864176</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,11 +207,17 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="object type 'game' checking in round __init__" />
     <MESSAGE value="Update run configurations" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update run configurations" />
+    <MESSAGE value="Add print in card selection" />
+    <MESSAGE value="Fix decks.csv" />
+    <MESSAGE value="Add round winning and game winning" />
+    <MESSAGE value="Add scores on board" />
+    <MESSAGE value="Fix the card picking" />
+    <MESSAGE value="Restrain scope of abilities" />
+    <option name="LAST_COMMIT_MESSAGE" value="Restrain scope of abilities" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/gwent$Run_game.coverage" NAME="Run game Coverage Results" MODIFIED="1569508693005" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/back" />
     <SUITE FILE_PATH="coverage/gwent$Run_web_server.coverage" NAME="Run web server Coverage Results" MODIFIED="1569487099738" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/back" />
     <SUITE FILE_PATH="coverage/gwent$game.coverage" NAME="game Coverage Results" MODIFIED="1569410835032" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/back/gwent/models" />
+    <SUITE FILE_PATH="coverage/gwent$Run_game.coverage" NAME="Run game Coverage Results" MODIFIED="1569509732985" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/back" />
   </component>
 </project>
