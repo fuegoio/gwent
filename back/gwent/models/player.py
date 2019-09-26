@@ -4,7 +4,6 @@ from gwent.data.cards import cards_db
 from gwent.models.board import Board
 
 NUM_CARDS = 30
-NUM_NEUTRAL_CARDS = 0
 
 
 class Player:
@@ -18,18 +17,12 @@ class Player:
         self._passed = False
 
     def pick_cards(self):
-        cards_available = cards_db.query_cards_by_faction(self.faction)
-        neutral_cards_available = cards_db.neutral_cards
+        cards_available = cards_db.query_deck_by_faction(self.faction)
 
-        def pick_card(neutral=False):
+        def pick_card():
             while True:
-                if neutral:
-                    random_card_number = random.randint(0, len(neutral_cards_available) - 1)
-                    random_card = neutral_cards_available[random_card_number]
-                else:
-                    random_card_number = random.randint(0, len(cards_available) - 1)
-                    random_card = cards_available[random_card_number]
-
+                random_card_number = random.randint(0, len(cards_available) - 1)
+                random_card = cards_available[random_card_number]
                 if random_card not in self.cards:
                     return random_card
 
@@ -37,11 +30,6 @@ class Player:
             card = pick_card()
             self.cards.append(card)
             print(f'[Player] {self.name} picks card {card.name} !')
-
-        for i in range(NUM_NEUTRAL_CARDS):
-            neutral_card = pick_card(neutral=True)
-            self.cards.append(neutral_card)
-            print(f'[Player] {self.name} picks card {neutral_card.name} !')
 
     def draw_card(self):
         random_card_number = random.randint(0, len(self.cards) - 1)

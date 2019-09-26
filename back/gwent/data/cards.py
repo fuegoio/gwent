@@ -5,28 +5,26 @@ from gwent.models.card import Card
 
 
 class CardsDb:
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self, card_filename, deck_filename):
+        self.card_filename = card_filename
+        self.deck_filename = deck_filename
         self.cards = []
         self.load_cards_from_file()
 
-    def query_cards_by_faction(self, faction):
-        filtered_cards = []
-        for card in self.cards:
-            if card.faction == faction:
-                filtered_cards.append(card)
-        return filtered_cards
-
-    @property
-    def neutral_cards(self):
-        neutral_cards = []
-        for card in self.cards:
-            if card.faction == 'neutral':
-                neutral_cards.append(card)
-        return neutral_cards
+    def query_deck_by_faction(self, faction):
+        deck = []
+        with open(os.path.join("./gwent/data/", self.deck_filename)) as file:
+            csv_file_reader = csv.DictReader(file)
+            for cards in csv_file_reader:
+                if cards[faction] != "":
+                    card = self.find_loaded_card(cards[faction])
+                    # Most special cards are not taken into account so we check if they can be found in the "database"
+                    if card is not None:
+                        deck.append(card)
+        return deck
 
     def load_cards_from_file(self):
-        with open(os.path.join(os.path.realpath(__file__).split('cards.py')[0], self.filename)) as file:
+        with open(os.path.join("./gwent/data/", self.card_filename)) as file:
             csv_file_reader = csv.DictReader(file)
             for card in csv_file_reader:
                 # All the heroes cards are not taken into account for now
@@ -34,5 +32,12 @@ class CardsDb:
                     self.cards.append(Card(card['name'], card['img'], card['faction'], int(card['power']), int(card['type']) - 1))
             print(self.cards)
 
+    def find_loaded_card(self, card_name):
+        for card in self.cards:
+            if card.img_name == card_name:
+                return card
+        print(card_name)
 
-cards_db = CardsDb('cards.csv')
+
+
+cards_db = CardsDb('cards.csv', 'decks.csv')

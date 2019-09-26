@@ -29,6 +29,12 @@ Esterad Thyssen,10,hero,thyssen,northern,0
 Siege Tower,6,,siege_tower,northern,2
 Catapult,8,tight_bond,catapult,northern,2
 Decoy,-1,decoy,decoy,neutral,4
+Cirilla Fiona Elen Riannon,15,hero,ciri,neutral,1
+Geralt of Rivia,15,hero,geralt,neutral,1
+Triss Merigold,7,hero,triss,neutral,1
+Vesemir,6,,vesemir,neutral,1
+Yennefer of Vengerberg,7,"hero,medic",yen,neutral,2
+Zoltan Chivay,5,,zoltan,neutral,1
 Scorch,-1,scorch_card,scorch,neutral,4
 Commander's Horn,-1,commanders_horn_card,horn,neutral,4
 Impenetrable Fog,-1,weather_fog,fog,neutral,5

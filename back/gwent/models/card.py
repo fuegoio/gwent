@@ -15,10 +15,10 @@ class Card:
         pass
 
     def place_card(self, round):
-        #to be overriden depending on abilities
+        # to be overridden depending on abilities
         round.boards[round.turn % 2].rows[self.row].append(self)
-        self.apply_abilies(round)
+        self.apply_abilities(round)
 
-    def apply_abilies(self, round):
-        # to be overriden depending on abilities
+    def apply_abilities(self, round):
+        # to be overridden depending on abilities
         pass
