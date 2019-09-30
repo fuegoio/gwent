@@ -2,16 +2,20 @@ from gwent.models.cards.card import Card
 
 
 class UnitCard(Card):
-    def __init__(self, id: str, name: str, img_name: str, hero: bool, faction: str, power: int, row: int):
+    def __init__(self, id: str, name: str, img_name: str, agile: bool, hero: bool, faction: str, power: int, row: int):
         super().__init__(id, name, img_name, faction)
         self.power = power
+        self.agile = agile
         self.hero = hero
         self.row = row
         self.morale_boost = False
 
     def place_card(self, board, adversary_board, player):
         # to be overridden depending on abilities
-        board.rows[self.row].append(self)
+        if len(self.row)==1:
+            board.rows[self.row].append(self)
+        else:
+            pass #ask the player where to place
         self.apply_abilities(board, adversary_board, player)
 
     def apply_abilities(self, board, adversary_board, player):
