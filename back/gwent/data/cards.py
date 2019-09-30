@@ -1,8 +1,9 @@
 import os
 import csv
 
-from gwent.models.cards.unit_cards.scorch_card import ScorchCard
 from gwent.models.cards.unit_cards.unit_card import UnitCard
+from gwent.models.cards.unit_cards.muster_card import MusterCard
+from gwent.models.cards.unit_cards.scorch_card import ScorchCard
 from gwent.models.cards.unit_cards.morale_boost_card import MoraleBoostCard
 from gwent.models.cards.unit_cards.medic_card import MedicCard
 from gwent.models.cards.unit_cards.spy_card import SpyCard
@@ -14,7 +15,7 @@ constructor_dic = {
     'medic': MedicCard,
     'morale_boost': MoraleBoostCard,
     'scorch': ScorchCard,
-    'muster': UnitCard,
+    'muster': MusterCard,
     'hero': UnitCard,
     'commanders_horn': UnitCard,
     'agile': UnitCard,
@@ -55,9 +56,6 @@ class CardsDb:
                 if int(card['type']) < 3:
                     # Card is a unit card
                     if len(card['ability'].split(',')) >= 2:
-
-                        # Keyran est une carte qui est agile ET morale boost, sa deuxieme ability n'est pas encore prise en compte
-
                         self.cards.append(constructor_dic[card['ability'].split(',')[1]](
                             card['id'],
                             card['name'],
@@ -79,7 +77,6 @@ class CardsDb:
                             int(card['power']),
                             int(card['type'])
                         ))
-            print(self.cards)
 
     def find_loaded_card(self, card_id):
         for card in self.cards:

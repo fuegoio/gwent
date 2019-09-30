@@ -10,7 +10,7 @@ class Player:
         self.name = name
         self.faction = faction
         self.__lives = 2
-        self.cards = []
+        self.deck = []
         self.hand = []
         self.cemetery = []
         self.__passed = False
@@ -26,17 +26,17 @@ class Player:
             while True:
                 random_card_number = random.randint(0, len(cards_available) - 1)
                 random_card = cards_available[random_card_number]
-                if random_card not in self.cards:
+                if random_card not in self.deck:
                     return random_card
 
         for i in range(NUM_CARDS):
             card = pick_card()
-            self.cards.append(card)
+            self.deck.append(card)
             print(f'[Player] {self.name} picks card {card.name} !')
 
     def draw_card(self):
-        random_card_number = random.randint(0, len(self.cards) - 1)
-        card = self.cards.pop(random_card_number)
+        random_card_number = random.randint(0, len(self.deck) - 1)
+        card = self.deck.pop(random_card_number)
         self.hand.append(card)
 
         print(f'[Player] {self.name} drew {card.name}')
