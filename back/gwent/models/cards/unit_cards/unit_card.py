@@ -9,9 +9,6 @@ class UnitCard(Card):
         self.row = row
         self.morale_boost = False
 
-    def __repr__(self):
-        return f'<Card {self.img_name}>'
-
     def place_card(self, board, adversary_board, player):
         # to be overridden depending on abilities
         board.rows[self.row].append(self)
@@ -34,3 +31,6 @@ class UnitCard(Card):
                 morale_boost += 1
         return morale_boost
 
+    def destroy(self, board, player):
+        player.cemetery.append(self)
+        board.rows[self.row].remove(self)

@@ -3,8 +3,12 @@ from .defaults import DefaultNamespace
 
 def register_events(sio):
     @sio.event
-    def connect(sid, environ):
+    def connect(sid, env):
         print('connect ', sid)
+
+    @sio.event
+    def connected(sid):
+        print('Received connected from front-end')
 
     @sio.event
     def disconnect(sid):

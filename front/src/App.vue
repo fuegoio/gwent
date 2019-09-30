@@ -21,9 +21,17 @@
     created: () => ({
 
     }),
-    mounted: () => ({
-      this.$socket.emit('emit_method', {})
-    }),
+    mounted(){
+      this.$socket.on('connect', data => {
+        console.log('[SOCKET-IO] Connected to server')
+        this.$socket.emit('connected')
+      })
+
+      this.$socket.on('disconnect', data => {
+        console.log('[SOCKET-IO] Disconnected to server')
+        //this.$socket.emit('connected')
+      })
+    },
     methods: {
 
     }

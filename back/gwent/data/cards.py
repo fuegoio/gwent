@@ -2,6 +2,17 @@ import os
 import csv
 
 from gwent.models.cards.unit_cards.unit_card import UnitCard
+from gwent.models.cards.unit_cards.morale_boost_card import MoraleBoostCard
+from gwent.models.cards.unit_cards.medic_card import MedicCard
+from gwent.models.cards.unit_cards.spy_card import SpyCard
+from gwent.models.cards.unit_cards.tight_bond_card import TightBondCard
+
+constructor_dic = {
+    'tight_bond': TightBondCard,
+    'spy': SpyCard,
+    'medic': MedicCard,
+    'morale_boost': MoraleBoostCard
+}
 
 
 class CardsDb:
@@ -34,10 +45,15 @@ class CardsDb:
         with open(os.path.join("./gwent/data/", self.card_filename)) as file:
             csv_file_reader = csv.DictReader(file)
             for card in csv_file_reader:
+                print(card['ability'])
                 if int(card['type']) < 3:
                     # Card is a unit card
                     if 'hero' in card['ability'].split(','):
-                        self.cards.append(UnitCard(card['id'], card['name'], card['img'], True, card['faction'], int(card['power']), int(card['type'])))
+                        if card['ability'] == 'hero':
+                            self.cards.append(UnitCard(card['id'], card['name'], card['img'], True, card['faction'], int(card['power']), int(card['type'])))
+                        else:
+                            pass
+                            # self.cards.append()
                     else:
                         self.cards.append(UnitCard(card['id'], card['name'], card['img'], False, card['faction'], int(card['power']), int(card['type'])))
             print(self.cards)
