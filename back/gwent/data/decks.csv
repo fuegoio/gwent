@@ -30,7 +30,7 @@ biting_frost,decoy,isengrim_faoiltiarnah,vampire_fleder
 impenetrable_fog,scorch,eithne,vampire_garkain
 clear_weather,scorch,avallach,vampire_ekimmara
 clear_weather,commanders_horn,scorch,vampire_ekimmara
-commanders_horn,commanders_horn,scorch,arachas
+commanders_horn,commanders_horn,scorch,arachas1
 commanders_horn,impenetrable_fog,commanders_horn,botchling
 decoy,biting_frost,commanders_horn,forktail
 decoy,torrential_rain,decoy,plague_maiden
@@ -52,3 +52,5 @@ zoltan,,triss,crone_weavess
 ,,,vesemir
 ,,,yen
 ,,,zoltan
+,,,arachas2
+,,,arachas3
