@@ -85,7 +85,9 @@ vampire_bruxa,Vampire: Bruxa,4,muster,vampire_bruxa,monster,0
 vampire_fleder,Vampire: Fleder,4,muster,vampire_fleder,monster,0
 vampire_garkain,Vampire: Garkain,4,muster,vampire_garkain,monster,0
 vampire_ekimmara,Vampire: Ekimmara,4,muster,vampire_ekimmara,monster,0
-arachas,Arachas,4,muster,arachas1,monster,0
+arachas1,Arachas,4,muster,arachas1,monster,0
+arachas2,Arachas,4,muster,arachas2,monster,0
+arachas3,Arachas,4,muster,arachas3,monster,0
 botchling,Botchling,4,,botchling,monster,0
 forktail,Forktail,5,,forktail,monster,0
 plague_maiden,Plague Maiden,5,,forktail,monster,0

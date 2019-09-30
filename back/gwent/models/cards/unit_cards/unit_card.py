@@ -25,7 +25,7 @@ class UnitCard(Card):
             return self.power + self.get_morale_boost(board)
 
     def get_morale_boost(self, board):
-        morale_boost = 0
+        morale_boost = -1 if self.morale_boost else 0
         for card in board.rows[self.row]:
             if card.morale_boost:
                 morale_boost += 1

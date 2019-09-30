@@ -1,6 +1,7 @@
 import os
 import csv
 
+from gwent.models.cards.unit_cards.scorch_card import ScorchCard
 from gwent.models.cards.unit_cards.unit_card import UnitCard
 from gwent.models.cards.unit_cards.morale_boost_card import MoraleBoostCard
 from gwent.models.cards.unit_cards.medic_card import MedicCard
@@ -11,7 +12,8 @@ constructor_dic = {
     'tight_bond': TightBondCard,
     'spy': SpyCard,
     'medic': MedicCard,
-    'morale_boost': MoraleBoostCard
+    'morale_boost': MoraleBoostCard,
+    'scorch': ScorchCard,
 }
 
 
