@@ -1,3 +1,5 @@
+import random
+
 from gwent.models.cards.card import Card
 
 
@@ -12,10 +14,11 @@ class UnitCard(Card):
 
     def place_card(self, board, adversary_board, player):
         # to be overridden depending on abilities
-        if len(self.row)==1:
-            board.rows[self.row].append(self)
+        if self.agile:
+            # Choose
+            board.rows[random.randint(0, 1)].append(self)
         else:
-            pass #ask the player where to place
+            board.rows[self.row].append(self)
         self.apply_abilities(board, adversary_board, player)
 
     def apply_abilities(self, board, adversary_board, player):
