@@ -2,6 +2,17 @@ import os
 import csv
 
 from gwent.models.cards.unit_cards.unit_card import UnitCard
+from gwent.models.cards.unit_cards.morale_boost_card import MoraleBoostCard
+from gwent.models.cards.unit_cards.medic_card import MedicCard
+from gwent.models.cards.unit_cards.spy_card import SpyCard
+from gwent.models.cards.unit_cards.tight_bond_card import TightBondCard
+
+constructor_dic = {
+    'tight_bond': TightBondCard,
+    'spy': SpyCard,
+    'medic': MedicCard,
+    'morale_boost': MoraleBoostCard
+}
 
 
 class CardsDb:
@@ -10,8 +21,15 @@ class CardsDb:
         self.deck_filename = deck_filename
         self.cards = []
         self.load_cards_from_file()
+        self.loaded_decks = {}
+        for faction in ['northern', 'nilfgaardian', 'scoiatael', 'monster']:
+            self.loaded_decks[faction] = self.make_deck_by_faction(faction)
+            print(self.loaded_decks[faction])
 
     def query_deck_by_faction(self, faction):
+        return self.loaded_decks[faction]
+
+    def make_deck_by_faction(self, faction):
         deck = []
         with open(os.path.join("./gwent/data/", self.deck_filename)) as file:
             csv_file_reader = csv.DictReader(file)
@@ -27,18 +45,24 @@ class CardsDb:
         with open(os.path.join("./gwent/data/", self.card_filename)) as file:
             csv_file_reader = csv.DictReader(file)
             for card in csv_file_reader:
-                if int(card['type']) < 4:
+                print(card['ability'])
+                if int(card['type']) < 3:
                     # Card is a unit card
                     if 'hero' in card['ability'].split(','):
-                        self.cards.append(UnitCard(card['name'], card['img'], True, card['faction'], int(card['power']), int(card['type']) - 1))
+                        if card['ability'] == 'hero':
+                            self.cards.append(UnitCard(card['id'], card['name'], card['img'], True, card['faction'], int(card['power']), int(card['type'])))
+                        else:
+                            pass
+                            # self.cards.append()
                     else:
-                        self.cards.append(UnitCard(card['name'], card['img'], False, card['faction'], int(card['power']), int(card['type']) - 1))
+                        self.cards.append(UnitCard(card['id'], card['name'], card['img'], False, card['faction'], int(card['power']), int(card['type'])))
             print(self.cards)
 
-    def find_loaded_card(self, card_name):
+    def find_loaded_card(self, card_id):
         for card in self.cards:
-            if card.img_name == card_name:
+            if card.id == card_id:
                 return card
+        print('Card not found ' + card_id)
         return None
 
 

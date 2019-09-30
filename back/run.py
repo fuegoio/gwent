@@ -1,10 +1,11 @@
-from __future__ import annotations
+import uvicorn
 
-from gwent import create_app, create_game
+from gwent import create_app
 
 app = create_app()
 
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port=8000, debug=True)
-    game = create_game('Fuego', 'Moulq')
-    game.run()
+    uvicorn.run(app, host="0.0.0.0", port=3000)
+
+    # game = create_game('Fuego', 'Moulq')
+    # game.run()

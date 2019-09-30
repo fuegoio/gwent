@@ -7,6 +7,8 @@ NUM_CARDS_HANDS = 10
 class Game:
     def __init__(self, player_one: Player, player_two: Player):
         self.players = (player_one, player_two)
+        self.winner = None
+        self.loser = None
 
     @property
     def terminated(self):
@@ -26,3 +28,13 @@ class Game:
         while not self.terminated:
             current_round = Round(self)
             current_round.run_round()
+
+        for player in self.players:
+            if player.lives >= 1:
+                self.winner = player
+                print(f'[Game] Winner is : {self.winner} !')
+            elif player.lives == 0:
+                self.loser = player
+
+        if self.winner is None:
+            print(f'[Game] Draw !')

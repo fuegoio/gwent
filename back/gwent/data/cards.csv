@@ -1,139 +1,139 @@
-name,power,ability,img,faction,type
-Redanian Foot Soldier,1,,foot_soldier1,northern,0
-Poor Fucking Infantry,1,tight_bond,infantry,northern,0
-Yarpen Zigrin,2,,yarpen,northern,0
-Blue Stripes Commando,4,tight_bond,commando,northern,0
-Sigismund Dijkstra,4,spy,dijkstra,northern,0
-Prince Stennis,5,spy,stennis,northern,0
-Siegfried of Denesle,5,,siegfried,northern,0
-Ves,5,,ves,northern,0
-Vernon Roche,10,hero,roche,northern,0
-John Natalis,10,hero,natalis,northern,0
-Sheldon Skaggs,4,,skaggs,northern,1
-Sabrina Glevissig,4,,sabrina,northern,1
-Crinfrid Reaver's Dragon Hunter,5,tight_bond,crinfrid,northern,1
-Síle de Tansarville,5,,sile,northern,1
-Keira Metz,5,,keira,northern,1
-Dethmold,6,,dethmold,northern,1
-Kaedweni Siege Expert,1,morale_boost,siege_expert1,northern,2
-Dun Banner Medic,5,medic,medic,northern,2
-Ballista,6,,ballista1,northern,2
-Trebuchet,6,,trebuchet1,northern,2
-Thaler,1,spy,thaler,northern,2
-Foltest: King of Temeria,-1,foltest_leader1,foltest_king,northern,3
-Foltest: Lord Commander,-1,foltest_leader2,foltest_commander,northern,3
-Foltest: The Siegemaster,-1,foltest_leader3,foltest_siege,northern,3
-Foltest: The Steel-Forged,-1,foltest_leader4,foltest_forged,northern,3
-Philippa Eilhart,10,hero,eilhart,northern,1
-Esterad Thyssen,10,hero,thyssen,northern,0
-Siege Tower,6,,siege_tower,northern,2
-Catapult,8,tight_bond,catapult,northern,2
-Decoy,-1,decoy,decoy,neutral,4
-Cirilla Fiona Elen Riannon,15,hero,ciri,neutral,1
-Geralt of Rivia,15,hero,geralt,neutral,1
-Triss Merigold,7,hero,triss,neutral,1
-Vesemir,6,,vesemir,neutral,1
-Yennefer of Vengerberg,7,"hero,medic",yen,neutral,2
-Zoltan Chivay,5,,zoltan,neutral,1
-Scorch,-1,scorch_card,scorch,neutral,4
-Commander's Horn,-1,commanders_horn_card,horn,neutral,4
-Impenetrable Fog,-1,weather_fog,fog,neutral,5
-Biting Frost,-1,weather_frost,frost,neutral,5
-Torrential Rain,-1,weather_rain,rain,neutral,5
-Clear Weather,-1,weather_clear,clear,neutral,5
-Dandelion,2,commanders_horn,dandelion,neutral,0
-Avallac'h,0,"hero,spy",avallach,neutral,0
-Villentretenmerth ,7,scorch,villentretenmerth,neutral,0
-"Francesca, Pureblood Elf",-1,francesca_leader1,francesca_pureblood,scoiatael,3
-Francesca The Beautiful,-1,francesca_leader2,francesca_beautiful,scoiatael,3
-"Francesca, Daisy of The Valley",-1,francesca_leader3,francesca_daisy,scoiatael,3
-"Francesca, Queen of Dol Blathanna",-1,francesca_leader4,francesca_queen,scoiatael,3
-Saesenthessis,10,hero,saesenthessis,scoiatael,1
-Iorveth,10,hero,iorveth,scoiatael,1
-Isengrim Faoiltiarnah,10,"hero,morale_boost",isengrim,scoiatael,0
-Eithne,10,hero,eithne,scoiatael,1
-Havekar Healer,0,medic,healer,scoiatael,1
-Riordain,1,,riordain,scoiatael,1
-Toruviel,2,,toruviel,scoiatael,1
-Elven Skirmisher,2,muster,elven_skirmisher2,scoiatael,1
-Dwarven Skirmisher,3,muster,skirmisher2,scoiatael,0
-Ciaran aep Easnillien,3,agile,easnillien,scoiatael,1
-Vrihedd Brigade Recruit,4,,recruit,scoiatael,1
-Dol Blathanna Archer,4,,archer,scoiatael,1
-Havekar Smuggler,5,muster,smuggler1,scoiatael,0
-Mahakaman Defender,5,,defender2,scoiatael,0
-Vrihedd Brigade Veteran,5,agile,veteran1,scoiatael,0
-Dennis Cranmer,6,,cranmer,scoiatael,0
-Filavandrel aén Fidháil,6,agile,fidhail,scoiatael,1
-Ida Emean aep Sivney,6,,sivney,scoiatael,1
-Yaevinn,6,agile,yaevinn,scoiatael,0
-Barclay Els,6,agile,barclay,scoiatael,0
-Dol Blathanna Scout,6,agile,scout2,scoiatael,0
-Milva,10,morale_boost,milva,scoiatael,1
-"Eredin, Commander of the Red Riders",-1,eredin_leader1,eredin_commander,monster,3
-"Eredin, Bringer of Death",-1,eredin_leader2,eredin_bringer,monster,3
-"Eredin, Destroyer of Worlds",-1,eredin_leader3,eredin_destroyer,monster,3
-"Eredin, King of The Wild Hunt",-1,eredin_leader4,eredin_king,monster,3
-Kayran,8,"hero,morale_boost,agile",kayran,monster,1
-Leshen,10,hero,leshen,monster,1
-Imlerith,10,hero,imlerith,monster,0
-Draug,10,hero,draug,monster,0
-Ghoul,1,muster,ghoul1,monster,0
-Nekker,2,muster,nekker1,monster,0
-Wyvern,2,,wyvern,monster,1
-Foglet,2,,foglet,monster,0
-Celaeno Harpy,2,agile,celaeno_harpy,monster,1
-Gargoyle,2,,gargoyle,monster,1
-Cockatrice,2,,cockatrice,monster,1
-Harpy,2,agile,harpy,monster,1
-Endrega,2,,endrega,monster,1
-Vampire: Bruxa,4,muster,vampire_bruxa,monster,0
-Vampire: Fleder,4,muster,vampire_fleder,monster,0
-Vampire: Garkain,4,muster,vampire_garkain,monster,0
-Vampire: Ekimmara,4,muster,vampire_ekimmara,monster,0
-Arachas,4,muster,arachas1,monster,0
-Botchling,4,,botchling,monster,0
-Forktail,5,,forktail,monster,0
-Plague Maiden,5,,forktail,monster,0
-Griffin,5,,griffin,monster,0
-Werewolf,5,,werewolf,monster,0
-Frightener,5,,frightener,monster,0
-Ice Giant,5,,ice_giant,monster,2
-Grave Hag,5,,grave_hag,monster,1
-Crone: Whispess,6,muster,crone_whispess,monster,0
-Crone: Brewess,6,muster,crone_brewess,monster,0
-Crone: Weavess,6,muster,crone_weavess,monster,0
-Arachas Behemoth,6,muster,arachas_behemoth,monster,2
-Fire Elemental,6,,fire_elemental,monster,2
-Fiend,6,,fiend,monster,0
-Earth Elemental,6,,earth_elemental,monster,2
-Emhyr vas Emreis the Relentless,-1,emreis_leader4,emhyr_relentless,nilfgaardian,3
-test,10,hero,eggebracht,nilfgaardian,1
-Letho of Gulet,10,hero,letho,nilfgaardian,0
-Morvran Voorhis,10,hero,voorhis,nilfgaardian,2
-Menno Coehoorn,10,"hero,medic",menno,nilfgaardian,0
-Siege Technician,0,medic,siege_tech,nilfgaardian,2
-Etolian Auxiliary Archers,1,medic,aux_archers1,nilfgaardian,1
-Albrich,2,,albrich,nilfgaardian,1
-Sweers,2,,sweers,nilfgaardian,2
-Nausicaa Cavalry Rider,2,tight_bond,nausicaa_cavalry_rider,nilfgaardian,0
-Vreemde,2,,vreemde,nilfgaardian,0
-Rotten Mangonel,3,,rotten_mangonel,nilfgaardian,2
-Morteisen,3,,morteisen,nilfgaardian,0
-Puttkammer,3,,puttkammer,nilfgaardian,1
-Impera Brigade Guard,3,tight_bond,impera_brigade_guard,nilfgaardian,0
-Vanhemar,4,,vanhemar,nilfgaardian,1
-Vattier de Rideaux,4,spy,vattier,nilfgaardian,0
-Rainfarn,4,,rainfarn,nilfgaardian,0
-Cynthia,4,,cynthia,nilfgaardian,1
-Zerrikanian Fire Scorpion,5,,fire_scorpion,nilfgaardian,2
-Young Emissary,5,tight_bond,young_emissary1,nilfgaardian,0
-Renuald aep Matsen,5,,renauld,nilfgaardian,1
-Siege Engineer,6,,siege_engineer,nilfgaardian,2
-Cahir Mawr Dyffryn aep Ceallach,6,,ceallach,nilfgaardian,0
-Fringilla Vigo,6,,vigo,nilfgaardian,1
-Assire var Anahid,6,,assire_var_anahid,nilfgaardian,1
-Shilard Fitz-Oesterlen,7,spy,shilard,nilfgaardian,0
-Stefan Skellen,9,spy,stefan_skellen,nilfgaardian,0
-Heavy Zerrikanian Fire Scorpion,10,,heavy_fire_scorpion,nilfgaardian,2
-Black Infantry Archer,10,,black_infantry_archer1,nilfgaardian,1
+id,name,power,ability,img,faction,type
+redanian_foot_soldier,Redanian Foot Soldier,1,,foot_soldier1,northern,0
+poor_fucking_infantry,Poor Fucking Infantry,1,tight_bond,infantry,northern,0
+yarpen_zigrin,Yarpen Zigrin,2,,yarpen,northern,0
+blue_stripes_commando,Blue Stripes Commando,4,tight_bond,commando,northern,0
+sigismund_dijkstra,Sigismund Dijkstra,4,spy,dijkstra,northern,0
+prince_stennis,Prince Stennis,5,spy,stennis,northern,0
+siegfried_of_denesle,Siegfried of Denesle,5,,siegfried,northern,0
+ves,Ves,5,,ves,northern,0
+vernon_roche,Vernon Roche,10,hero,roche,northern,0
+john_natalis,John Natalis,10,hero,natalis,northern,0
+sheldon_skaggs,Sheldon Skaggs,4,,skaggs,northern,1
+sabrina_glevissig,Sabrina Glevissig,4,,sabrina,northern,1
+crinfrid_reavers_dragon_hunter,Crinfrid Reaver's Dragon Hunter,5,tight_bond,crinfrid,northern,1
+sile_de_tansarville,Síle de Tansarville,5,,sile,northern,1
+keira_metz,Keira Metz,5,,keira,northern,1
+dethmold,Dethmold,6,,dethmold,northern,1
+kaedweni_siege_expert,Kaedweni Siege Expert,1,morale_boost,siege_expert1,northern,2
+dun_banner_medic,Dun Banner Medic,5,medic,medic,northern,2
+ballista,Ballista,6,,ballista1,northern,2
+trebuchet,Trebuchet,6,,trebuchet1,northern,2
+thaler,Thaler,1,spy,thaler,northern,2
+foltest_king_of_temeria,Foltest: King of Temeria,-1,foltest_leader1,foltest_king,northern,3
+foltest_lord_commander,Foltest: Lord Commander,-1,foltest_leader2,foltest_commander,northern,3
+foltest_siegemaster,Foltest: The Siegemaster,-1,foltest_leader3,foltest_siege,northern,3
+foltest_forged,Foltest: The Steel-Forged,-1,foltest_leader4,foltest_forged,northern,3
+philippa_eilhart,Philippa Eilhart,10,hero,eilhart,northern,1
+esterad_thyssen,Esterad Thyssen,10,hero,thyssen,northern,0
+siege_tower,Siege Tower,6,,siege_tower,northern,2
+catapult,Catapult,8,tight_bond,catapult,northern,2
+decoy,Decoy,-1,decoy,decoy,neutral,4
+scorch,Scorch,-1,scorch_card,scorch,neutral,4
+commanders_horn,Commander's Horn,-1,commanders_horn_card,horn,neutral,4
+impenetrable_fog,Impenetrable Fog,-1,weather_fog,fog,neutral,5
+biting_frost,Biting Frost,-1,weather_frost,frost,neutral,5
+torrential_rain,Torrential Rain,-1,weather_rain,rain,neutral,5
+clear_weather,Clear Weather,-1,weather_clear,clear,neutral,5
+dandelion,Dandelion,2,commanders_horn,dandelion,neutral,0
+avallach,Avallac'h,0,"hero,spy",avallach,neutral,0
+villentretenmerth,Villentretenmerth ,7,scorch,villentretenmerth,neutral,0
+francesca_pureblood_elf,"Francesca, Pureblood Elf",-1,francesca_leader1,francesca_pureblood,scoiatael,3
+francesca_the_beautiful,Francesca The Beautiful,-1,francesca_leader2,francesca_beautiful,scoiatael,3
+francesca_daisy_of_the_valley,"Francesca, Daisy of The Valley",-1,francesca_leader3,francesca_daisy,scoiatael,3
+francesca_queen_of_dol_blathanna,"Francesca, Queen of Dol Blathanna",-1,francesca_leader4,francesca_queen,scoiatael,3
+saesenthessis,Saesenthessis,10,hero,saesenthessis,scoiatael,1
+iorveth,Iorveth,10,hero,iorveth,scoiatael,1
+isengrim_faoiltiarnah,Isengrim Faoiltiarnah,10,"hero,morale_boost",isengrim,scoiatael,0
+eithne,Eithne,10,hero,eithne,scoiatael,1
+havekar_healer,Havekar Healer,0,medic,healer,scoiatael,1
+riordain,Riordain,1,,riordain,scoiatael,1
+toruviel,Toruviel,2,,toruviel,scoiatael,1
+elven_skirmisher,Elven Skirmisher,2,muster,elven_skirmisher2,scoiatael,1
+dwarven_skirmisher,Dwarven Skirmisher,3,muster,skirmisher2,scoiatael,0
+ciaran_aep_easnillien,Ciaran aep Easnillien,3,agile,easnillien,scoiatael,1
+vrihedd_brigade_recruit,Vrihedd Brigade Recruit,4,,recruit,scoiatael,1
+dol_blathanna_archer,Dol Blathanna Archer,4,,archer,scoiatael,1
+havekar_smuggler,Havekar Smuggler,5,muster,smuggler1,scoiatael,0
+mahakaman_defender,Mahakaman Defender,5,,defender2,scoiatael,0
+vrihedd_brigade_veteran,Vrihedd Brigade Veteran,5,agile,veteran1,scoiatael,0
+dennis_cranmer,Dennis Cranmer,6,,cranmer,scoiatael,0
+filavandrel_aen_fidhail,Filavandrel aén Fidháil,6,agile,fidhail,scoiatael,1
+ida_emean_aep_sivney,Ida Emean aep Sivney,6,,sivney,scoiatael,1
+yaevinn,Yaevinn,6,agile,yaevinn,scoiatael,0
+barclay_els,Barclay Els,6,agile,barclay,scoiatael,0
+dol_blathanna_scout,Dol Blathanna Scout,6,agile,scout2,scoiatael,0
+milva,Milva,10,morale_boost,milva,scoiatael,1
+eredin_commander_of_the_red_riders,"Eredin, Commander of the Red Riders",-1,eredin_leader1,eredin_commander,monster,3
+eredin_bringer_of_death,"Eredin, Bringer of Death",-1,eredin_leader2,eredin_bringer,monster,3
+eredin_destroyer_of_worlds,"Eredin, Destroyer of Worlds",-1,eredin_leader3,eredin_destroyer,monster,3
+eredin_king_of_the_wild_hunt,"Eredin, King of The Wild Hunt",-1,eredin_leader4,eredin_king,monster,3
+kayran,Kayran,8,"hero,morale_boost,agile",kayran,monster,1
+leshen,Leshen,10,hero,leshen,monster,1
+imlerith,Imlerith,10,hero,imlerith,monster,0
+draug,Draug,10,hero,draug,monster,0
+ghoul,Ghoul,1,muster,ghoul1,monster,0
+nekker,Nekker,2,muster,nekker1,monster,0
+wyvern,Wyvern,2,,wyvern,monster,1
+foglet,Foglet,2,,foglet,monster,0
+celaeno_harpy,Celaeno Harpy,2,agile,celaeno_harpy,monster,1
+gargoyle,Gargoyle,2,,gargoyle,monster,1
+cockatrice,Cockatrice,2,,cockatrice,monster,1
+harpy,Harpy,2,agile,harpy,monster,1
+endrega,Endrega,2,,endrega,monster,1
+vampire_bruxa,Vampire: Bruxa,4,muster,vampire_bruxa,monster,0
+vampire_fleder,Vampire: Fleder,4,muster,vampire_fleder,monster,0
+vampire_garkain,Vampire: Garkain,4,muster,vampire_garkain,monster,0
+vampire_ekimmara,Vampire: Ekimmara,4,muster,vampire_ekimmara,monster,0
+arachas,Arachas,4,muster,arachas1,monster,0
+botchling,Botchling,4,,botchling,monster,0
+forktail,Forktail,5,,forktail,monster,0
+plague_maiden,Plague Maiden,5,,forktail,monster,0
+griffin,Griffin,5,,griffin,monster,0
+werewolf,Werewolf,5,,werewolf,monster,0
+frightener,Frightener,5,,frightener,monster,0
+ice_giant,Ice Giant,5,,ice_giant,monster,2
+grave_hag,Grave Hag,5,,grave_hag,monster,1
+crone_whispess,Crone: Whispess,6,muster,crone_whispess,monster,0
+crone_brewess,Crone: Brewess,6,muster,crone_brewess,monster,0
+crone_weavess,Crone: Weavess,6,muster,crone_weavess,monster,0
+arachas_behemoth,Arachas Behemoth,6,muster,arachas_behemoth,monster,2
+fire_elemental,Fire Elemental,6,,fire_elemental,monster,2
+fiend,Fiend,6,,fiend,monster,0
+earth_elemental,Earth Elemental,6,,earth_elemental,monster,2
+emreis_relentless,Emhyr vas Emreis the Relentless,-1,emreis_leader4,emhyr_relentless,nilfgaardian,3
+tibor_eggebracht,test,10,hero,eggebracht,nilfgaardian,1
+letho_of_gulet,Letho of Gulet,10,hero,letho,nilfgaardian,0
+morvran_voorhis,Morvran Voorhis,10,hero,voorhis,nilfgaardian,2
+menno_coehoorn,Menno Coehoorn,10,"hero,medic",menno,nilfgaardian,0
+siege_technician,Siege Technician,0,medic,siege_tech,nilfgaardian,2
+etolian_auxiliary_archers,Etolian Auxiliary Archers,1,medic,aux_archers1,nilfgaardian,1
+albrich,Albrich,2,,albrich,nilfgaardian,1
+sweers,Sweers,2,,sweers,nilfgaardian,2
+nausicaa_cavalry_rider,Nausicaa Cavalry Rider,2,tight_bond,nausicaa_cavalry_rider,nilfgaardian,0
+vreemde,Vreemde,2,,vreemde,nilfgaardian,0
+rotten_mangonel,Rotten Mangonel,3,,rotten_mangonel,nilfgaardian,2
+morteisen,Morteisen,3,,morteisen,nilfgaardian,0
+puttkammer,Puttkammer,3,,puttkammer,nilfgaardian,1
+impera_brigade_guard,Impera Brigade Guard,3,tight_bond,impera_brigade_guard,nilfgaardian,0
+vanhemar,Vanhemar,4,,vanhemar,nilfgaardian,1
+vattier_de_rideaux,Vattier de Rideaux,4,spy,vattier,nilfgaardian,0
+rainfarn,Rainfarn,4,,rainfarn,nilfgaardian,0
+cynthia,Cynthia,4,,cynthia,nilfgaardian,1
+zerrikanian_fire_scorpion,Zerrikanian Fire Scorpion,5,,fire_scorpion,nilfgaardian,2
+young_emmisary,Young Emissary,5,tight_bond,young_emissary1,nilfgaardian,0
+renuald_aep_matsen,Renuald aep Matsen,5,,renauld,nilfgaardian,1
+siege_engineer,Siege Engineer,6,,siege_engineer,nilfgaardian,2
+cahir_mawr_dyffryn_aep_ceallach,Cahir Mawr Dyffryn aep Ceallach,6,,ceallach,nilfgaardian,0
+fringilla_vigo,Fringilla Vigo,6,,vigo,nilfgaardian,1
+assire_var_anahid,Assire var Anahid,6,,assire_var_anahid,nilfgaardian,1
+shilard_fitz_oesterlen,Shilard Fitz-Oesterlen,7,spy,shilard,nilfgaardian,0
+stefan_skellen,Stefan Skellen,9,spy,stefan_skellen,nilfgaardian,0
+heavy_zerrikanian_fire_scorpion,Heavy Zerrikanian Fire Scorpion,10,,heavy_fire_scorpion,nilfgaardian,2
+black_infantry_archer,Black Infantry Archer,10,,black_infantry_archer1,nilfgaardian,1
+ciri,Cirilla Fiona Elen Riannon,15,hero,ciri,neutral,0
+geralt,Geralt of Rivia,15,hero,geralt,neutral,0
+triss,Triss Merigold,7,hero,triss,neutral,0
+vesemir,Vesemir,6,,vesemir,neutral,0
+yen,Yennefer of Vengerberg,7,"hero,medic",yen,neutral,1
+zoltan,Zoltan Chivay,5,,zoltan,neutral,0

@@ -1,11 +1,12 @@
-from flask import Flask
+import socketio
+
+from gwent.events import register_events
 
 
 def create_app():
-    app = Flask(__name__)
+    sio = socketio.AsyncServer(async_mode='asgi', cors_allowed_origins='*')
+    register_events(sio)
 
-    @app.route('/')
-    def hello():
-        return 'Hello, World!'
+    app = socketio.ASGIApp(sio)
 
     return app
