@@ -14,6 +14,11 @@ constructor_dic = {
     'medic': MedicCard,
     'morale_boost': MoraleBoostCard,
     'scorch': ScorchCard,
+    'muster': UnitCard,
+    'hero': UnitCard,
+    'commanders_horn': UnitCard,
+    'agile': UnitCard,
+    '': UnitCard
 }
 
 
@@ -47,17 +52,31 @@ class CardsDb:
         with open(os.path.join("./gwent/data/", self.card_filename)) as file:
             csv_file_reader = csv.DictReader(file)
             for card in csv_file_reader:
-                print(card['ability'])
                 if int(card['type']) < 3:
                     # Card is a unit card
-                    if 'hero' in card['ability'].split(','):
-                        if card['ability'] == 'hero':
-                            self.cards.append(UnitCard(card['id'], card['name'], card['img'], True, card['faction'], int(card['power']), int(card['type'])))
-                        else:
-                            pass
-                            # self.cards.append()
+                    if len(card['ability'].split(',')) >= 2:
+
+                        # Keyran est une carte qui est agile ET morale boost, sa deuxieme ability n'est pas encore prise en compte
+
+                        self.cards.append(constructor_dic[card['ability'].split(',')[1]](
+                            card['id'],
+                            card['name'],
+                            card['img'],
+                            'hero' in card['ability'].split(','),
+                            card['faction'],
+                            int(card['power']),
+                            int(card['type'])
+                        ))
                     else:
-                        self.cards.append(UnitCard(card['id'], card['name'], card['img'], False, card['faction'], int(card['power']), int(card['type'])))
+                        self.cards.append(constructor_dic[card['ability']](
+                            card['id'],
+                            card['name'],
+                            card['img'],
+                            'hero' in card['ability'].split(','),
+                            card['faction'],
+                            int(card['power']),
+                            int(card['type'])
+                        ))
             print(self.cards)
 
     def find_loaded_card(self, card_id):
