@@ -1,7 +1,9 @@
 <template>
   <v-app>
-    <v-content style="height: 100%">
-      <Board/>
+    <v-content style="height: 100%; background-color: #3F3632">
+      <v-container style="height: 100%">
+        <router-view></router-view>
+      </v-container>
     </v-content>
   </v-app>
 </template>

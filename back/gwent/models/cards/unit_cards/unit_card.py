@@ -12,17 +12,16 @@ class UnitCard(Card):
         self.row = row
         self.morale_boost = False
 
-    def place_card(self, board, adversary_board, player):
+    def place_card(self, board, adversary_board, player, adversary):
         # to be overridden depending on abilities
         if self.agile:
             # Choose
             board.rows[random.randint(0, 1)].append(self)
         else:
             board.rows[self.row].append(self)
-        self.apply_abilities(board, adversary_board, player)
+        self.apply_abilities(board, adversary_board, player, adversary)
 
-    def apply_abilities(self, board, adversary_board, player):
-        # to be overridden depending on abilities
+    def apply_abilities(self, board, adversary_board, player, adversary):
         pass
 
     def get_effective_power(self, board):

@@ -24,6 +24,7 @@ class Round:
     def run_round(self):
         while not self.finished:
             player = self.game.players[self.turn % 2]
+            adversary = self.game.players[(self.turn + 1) % 2]
             board = self.boards[self.turn % 2]
             adversary_board = self.boards[(self.turn + 1) % 2]
 
@@ -34,7 +35,7 @@ class Round:
                 player.pass_turn()
                 print(f'[Game] {player.name}\' passes his turn')
             else:
-                card.place_card(board, adversary_board, player)
+                card.place_card(board, adversary_board, player, adversary)
                 print(f'{board}')
             self.turn += 1
 
@@ -44,3 +45,7 @@ class Round:
         for loser in self.losers:
             loser.lose()
             print(f'[Round] {loser.name} loses the round.')
+
+        # Sending all the board cards to cemetery
+        self.boards[0].delete_board(self.game.players[0])
+        self.boards[1].delete_board(self.game.players[1])

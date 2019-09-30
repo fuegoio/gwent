@@ -10,6 +10,11 @@ class Board:
     def scores(self):
         return [sum([card.get_effective_power(self) for card in row]) for row in self.rows]
 
+    def delete_board(self, player):
+        for row in self.rows:
+            for card in row:
+                card.destroy(self, player)
+
     def __repr__(self):
         scores = self.scores
         melee = f'      [Board] [{scores[0]}] Melee : {self.rows[0]}'
