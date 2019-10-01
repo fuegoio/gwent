@@ -16,12 +16,18 @@
     export default {
         name: "GameFinder",
         data: () => ({
-            username: ""
+            username: "",
+            users: [],
         }),
         methods: {
             sign_in(){
                 this.$socket.emit('register', {'username': this.username})
             }
+        },
+        mounted() {
+            this.$socket.on('available_players', () => {
+                print('received available players')
+            })
         }
     }
 </script>
