@@ -38,5 +38,8 @@ class UnitCard(Card):
         return boost
 
     def destroy(self, board, player):
-        player.cemetery.append(self)
-        board.rows[self.row].remove(self)
+        try:
+            player.cemetery.append(self)
+            board.rows[self.row].remove(self)
+        except ValueError:
+            print("No more cards to remove !")
