@@ -1,9 +1,15 @@
 import os
 import csv
 
+from gwent.models.cards.special_cards.clear_weather_card import ClearWeatherCard
+from gwent.models.cards.special_cards.commanders_horn_card import CommandersHornCard
+from gwent.models.cards.special_cards.decoy_card import DecoyCard
+from gwent.models.cards.special_cards.scorch_card import ScorchCard
+from gwent.models.cards.special_cards.weather_card import WeatherCard
+from gwent.models.cards.unit_cards.commanders_horn_unit_card import CommandersHornUnitCard
 from gwent.models.cards.unit_cards.unit_card import UnitCard
 from gwent.models.cards.unit_cards.muster_card import MusterCard
-from gwent.models.cards.unit_cards.scorch_card import ScorchCard
+from gwent.models.cards.unit_cards.scorch_unit_card import ScorchUnitCard
 from gwent.models.cards.unit_cards.morale_boost_card import MoraleBoostCard
 from gwent.models.cards.unit_cards.medic_card import MedicCard
 from gwent.models.cards.unit_cards.spy_card import SpyCard
@@ -14,12 +20,17 @@ constructor_dic = {
     'spy': SpyCard,
     'medic': MedicCard,
     'morale_boost': MoraleBoostCard,
-    'scorch': ScorchCard,
+    'scorch': ScorchUnitCard,
     'muster': MusterCard,
     'hero': UnitCard,
-    'commanders_horn': UnitCard,
+    'commanders_horn': CommandersHornUnitCard,
     'agile': UnitCard,
-    '': UnitCard
+    '': UnitCard,
+    'weather': WeatherCard,
+    'decoy': DecoyCard,
+    'scorch_card': ScorchCard,
+    'weather_clear': ClearWeatherCard,
+    'commanders_horn_card': CommandersHornCard,
 }
 
 
@@ -53,9 +64,19 @@ class CardsDb:
         with open(os.path.join("./gwent/data/", self.card_filename)) as file:
             csv_file_reader = csv.DictReader(file)
             for card in csv_file_reader:
+                print(card['name'])
                 if int(card['type']) < 3:
                     # Card is a unit card
-                    if len(card['ability'].split(',')) >= 2:
+                    if 'weather' in card['ability'].split('_'):
+                        print(card['ability'])
+                        self.cards.append(constructor_dic['weather'](
+                            card['id'],
+                            card['name'],
+                            card['img'],
+                            card['faction'],
+                            int(card['type'])
+                        ))
+                    elif len(card['ability'].split(',')) >= 2:
                         self.cards.append(constructor_dic[card['ability'].split(',')[1]](
                             card['id'],
                             card['name'],
@@ -66,6 +87,8 @@ class CardsDb:
                             int(card['power']),
                             int(card['type'])
                         ))
+                    elif int(card['type']) == 3:
+                        continue
                     else:
                         self.cards.append(constructor_dic[card['ability']](
                             card['id'],
@@ -77,6 +100,16 @@ class CardsDb:
                             int(card['power']),
                             int(card['type'])
                         ))
+                elif int(card['type']) == 3:
+                    continue
+                else:
+                    self.cards.append(constructor_dic[card['ability']](
+                        card['id'],
+                        card['name'],
+                        card['img'],
+                        card['faction'],
+                        int(card['type'])
+                    ))
 
     def find_loaded_card(self, card_id):
         for card in self.cards:

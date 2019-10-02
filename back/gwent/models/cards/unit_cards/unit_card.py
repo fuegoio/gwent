@@ -1,6 +1,7 @@
 import random
 
 from gwent.models.cards.card import Card
+from gwent.models.cards.special_cards.weather_card import WeatherCard
 
 
 class UnitCard(Card):
@@ -26,16 +27,27 @@ class UnitCard(Card):
 
     def get_effective_power(self, board):
         if self.hero:
-            return self.power
+            return self.power * self.get_commanders_horn(board)
+        elif any(isinstance(x, WeatherCard) for x in board.rows[self.row]):
+            return (1 + self.get_morale_boost(board)) * self.get_commanders_horn(board)
         else:
-            return self.power + self.get_morale_boost(board)
+            return (self.power + self.get_morale_boost(board)) * self.get_commanders_horn(board)
 
+    # TODO : mix up get_moral_boost and get_commanders_horn method to check only once how to update the score
     def get_morale_boost(self, board):
         boost = -1 if self.morale_boost else 0
         for card in board.rows[self.row]:
-            if card.morale_boost:
-                boost += 1
+            if isinstance(card, UnitCard):
+                if card.morale_boost:
+                    boost += 1
         return boost
+
+    def get_commanders_horn(self, board):
+        horn = 1
+        for card in board.rows[self.row]:
+            if card.commanders_horn:
+                horn += 1
+        return horn
 
     def destroy(self, board, player):
         try:

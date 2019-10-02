@@ -29,11 +29,11 @@ esterad_thyssen,Esterad Thyssen,10,hero,thyssen,northern,0
 siege_tower,Siege Tower,6,,siege_tower,northern,2
 catapult,Catapult,8,tight_bond,catapult,northern,2
 decoy,Decoy,-1,decoy,decoy,neutral,4
-scorch,Scorch,-1,scorch_card,scorch,neutral,4
+scorch,Scorch,-1,scorch_card,scorch,neutral,5
 commanders_horn,Commander's Horn,-1,commanders_horn_card,horn,neutral,4
-impenetrable_fog,Impenetrable Fog,-1,weather_fog,fog,neutral,5
-biting_frost,Biting Frost,-1,weather_frost,frost,neutral,5
-torrential_rain,Torrential Rain,-1,weather_rain,rain,neutral,5
+impenetrable_fog,Impenetrable Fog,-1,weather_fog,fog,neutral,1
+biting_frost,Biting Frost,-1,weather_frost,frost,neutral,0
+torrential_rain,Torrential Rain,-1,weather_rain,rain,neutral,2
 clear_weather,Clear Weather,-1,weather_clear,clear,neutral,5
 dandelion,Dandelion,2,commanders_horn,dandelion,neutral,0
 avallach,Avallac'h,0,"hero,spy",avallach,neutral,0
