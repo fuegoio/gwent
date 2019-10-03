@@ -47,10 +47,3 @@ class UnitCard(Card):
             if card.commanders_horn:
                 horn += 1
         return horn
-
-    def destroy(self, board, player):
-        try:
-            player.cemetery.append(self)
-            board.rows[self.row].remove(self)
-        except ValueError:
-            print("No more cards to remove !")

@@ -8,11 +8,9 @@ class ScorchUnitCard(UnitCard):
     def apply_abilities(self, my_board, adversary_board, player, adversary):
         max_power = 0
         for card in adversary_board.rows[self.row]:
-            if isinstance(card, UnitCard):
-                if card.get_effective_power(adversary_board) > max_power:
-                    max_power = card.get_effective_power(adversary_board)
+            if card.get_effective_power(adversary_board) > max_power and card.hero is False:
+                max_power = card.get_effective_power(adversary_board)
 
         for card in adversary_board.rows[self.row]:
-            if isinstance(card, UnitCard):
-                if 0 < max_power == card.get_effective_power(adversary_board):
-                    card.destroy(adversary_board, adversary)
+            if 0 < max_power == card.get_effective_power(adversary_board) and card.hero is False:
+                card.destroy(adversary_board, adversary)

@@ -8,4 +8,3 @@ class MoraleBoostCard(UnitCard):
     def __init__(self, id: str, name: str, img_name: str, agile: bool, hero: bool, faction: str, power: int, row: int):
         super().__init__(id, name, img_name, agile, hero, faction, power, row)
         self.morale_boost = True
-
