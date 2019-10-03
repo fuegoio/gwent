@@ -1,6 +1,3 @@
-from gwent.models.cards.unit_cards.unit_card import UnitCard
-
-
 class Board:
     def __init__(self, game, player):
         self.game = game
@@ -9,7 +6,7 @@ class Board:
 
     @property
     def scores(self):
-        return [sum([card.get_effective_power(self) for card in row if isinstance(card, UnitCard)]) for row in self.rows]
+        return [sum([card.get_effective_power(self) for card in row]) for row in self.rows]
 
     def delete_board(self, player):
         for row in self.rows:

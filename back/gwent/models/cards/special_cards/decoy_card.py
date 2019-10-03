@@ -19,4 +19,3 @@ class DecoyCard(SpecialCard):
             board.rows[self.row].append(self)
         else:
             board.rows[self.row].append(self)
-

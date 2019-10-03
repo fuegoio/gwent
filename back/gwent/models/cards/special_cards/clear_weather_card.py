@@ -11,4 +11,4 @@ class ClearWeatherCard(SpecialCard):
             for row in board.rows:
                 for card in row:
                     if isinstance(card, WeatherCard):
-                        card.destroy(board)
+                        card.destroy(board, player)
