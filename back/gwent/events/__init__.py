@@ -15,7 +15,19 @@ def register_events(sio):
         if not already_registered:
             registered_users.append({'id': sid, 'username': data['username'], 'available': True})
         print(registered_users)
-        await sio.emit('available_players', {'available_users': [user for user in registered_users if (user['id'] != sid)]})
+        await sio.emit('available_players', {'available_users': registered_users, 'registered': sid})
+
+    @sio.event
+    async def propose_game(sid, data):
+        await sio.emit('game_proposal', {'player': [user for user in registered_users if user['id'] == sid]}, data['adversary_id'])
+
+    @sio.event
+    async def refuse_game(sid, data):
+        await sio.emit('game_refused', {}, data['proposer'])
+
+    @sio.event
+    async def launch_game(sid, data):
+        pass
 
     @sio.event
     def disconnect(sid):
