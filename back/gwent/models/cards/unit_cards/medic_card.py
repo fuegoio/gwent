@@ -8,7 +8,7 @@ class MedicCard(UnitCard):
         return f'<Medic {self.img_name}>'
 
     def apply_abilities(self, board, adversary_board, player, adversary):
-        if len(player.cemetery) > 0:
-            random_card_number = random.randint(0, len(player.cemetery) - 1)
-            player.cemetery[random_card_number].place_card(board, adversary_board, player, adversary)
-
+        revivable = [card for card in player.cemetery if card.hero is False and isinstance(card, UnitCard)]
+        if len(revivable) > 0:
+            random_card_number = random.randint(0, len(revivable) - 1)
+            revivable[random_card_number].place_card(board, adversary_board, player, adversary)

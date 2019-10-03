@@ -9,9 +9,3 @@ class SpecialCard(Card):
 
     def apply_abilities(self, board, adversary_board, player, adversary):
         pass
-
-    def destroy(self, board, player):
-        try:
-            board.rows[self.row].remove(self)
-        except ValueError:
-            print("No more cards to remove !")

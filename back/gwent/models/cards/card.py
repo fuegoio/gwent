@@ -7,6 +7,7 @@ class Card:
         self.power = 0
         self.row = row
         self.commanders_horn = False
+        self.hero = False
 
     def __repr__(self):
         return f'<Card {self.img_name}>'
@@ -15,7 +16,11 @@ class Card:
         pass
 
     def destroy(self, board, player):
-        pass
+        try:
+            player.cemetery.append(self)
+            board.rows[self.row].remove(self)
+        except ValueError:
+            print("No more cards to remove !")
 
     def get_effective_power(self, board):
         return self.power
