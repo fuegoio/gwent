@@ -5,6 +5,6 @@ class WeatherCard(SpecialCard):
     def __repr__(self):
         return f'<Weather {self.name}>'
 
-    def place_card(self, board, adversary_board, player, adversary):
+    def place_card(self, board, adversary_board, player, adversary, target):
         for board in [board, adversary_board]:
             board.rows[self.row].append(self)

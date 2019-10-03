@@ -35,7 +35,12 @@ class Round:
                 player.pass_turn()
                 print(f'[Game] {player.name}\' passes his turn')
             else:
-                card.place_card(board, adversary_board, player, adversary)
+                target = None
+                targets = card.get_targets(player, board)
+                if targets is not None and len(targets) > 0:
+                    print(len(targets))
+                    target = targets[random.randint(0, len(targets) - 1)]
+                card.place_card(board, adversary_board, player, adversary, target)
                 print(f'{board}')
             self.turn += 1
 

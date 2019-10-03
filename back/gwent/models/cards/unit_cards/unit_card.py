@@ -1,5 +1,3 @@
-import random
-
 from gwent.models.cards.card import Card
 from gwent.models.cards.special_cards.weather_card import WeatherCard
 
@@ -12,16 +10,21 @@ class UnitCard(Card):
         self.hero = hero
         self.morale_boost = False
 
-    def place_card(self, board, adversary_board, player, adversary):
+    def get_targets(self, player, board):
+        if self.agile:
+            return [0, 1]
+        else:
+            return None
+
+    def place_card(self, board, adversary_board, player, adversary, target):
         # to be overridden depending on abilities
         if self.agile:
-            # Choose
-            board.rows[random.randint(0, 1)].append(self)
+            board.rows[target].append(self)
         else:
             board.rows[self.row].append(self)
-        self.apply_abilities(board, adversary_board, player, adversary)
+        self.apply_abilities(board, adversary_board, player, adversary, target)
 
-    def apply_abilities(self, board, adversary_board, player, adversary):
+    def apply_abilities(self, board, adversary_board, player, adversary, target):
         pass
 
     def get_effective_power(self, board):
