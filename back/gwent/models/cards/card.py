@@ -14,5 +14,8 @@ class Card:
     def place_card(self, board, adversary_board, player, adversary):
         pass
 
+    def destroy(self, board, player):
+        pass
+
     def get_effective_power(self, board):
         return self.power
