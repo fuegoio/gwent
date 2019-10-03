@@ -15,7 +15,7 @@ def register_events(sio):
         if not already_registered:
             registered_users.append({'id': sid, 'username': data['username'], 'available': True})
         print(registered_users)
-        await sio.emit('available_players', {'available_users': [user for user in registered_users if user['available']]})
+        await sio.emit('available_players', {'available_users': [user for user in registered_users if (user['id'] != sid)]})
 
     @sio.event
     def disconnect(sid):
