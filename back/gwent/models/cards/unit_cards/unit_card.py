@@ -6,11 +6,10 @@ from gwent.models.cards.special_cards.weather_card import WeatherCard
 
 class UnitCard(Card):
     def __init__(self, id: str, name: str, img_name: str, agile: bool, hero: bool, faction: str, power: int, row: int):
-        super().__init__(id, name, img_name, faction)
+        super().__init__(id, name, img_name, faction, row)
         self.power = power
         self.agile = agile
         self.hero = hero
-        self.row = row
         self.morale_boost = False
 
     def place_card(self, board, adversary_board, player, adversary):

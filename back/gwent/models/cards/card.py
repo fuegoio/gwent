@@ -1,9 +1,11 @@
 class Card:
-    def __init__(self, id: str, name: str, img_name: str, faction: str):
+    def __init__(self, id: str, name: str, img_name: str, faction: str, row: int):
         self.id = id
         self.name = name
         self.img_name = img_name
         self.faction = faction
+        self.power = 0
+        self.row = row
         self.commanders_horn = False
 
     def __repr__(self):
@@ -11,3 +13,6 @@ class Card:
 
     def place_card(self, board, adversary_board, player, adversary):
         pass
+
+    def get_effective_power(self, board):
+        return self.power
