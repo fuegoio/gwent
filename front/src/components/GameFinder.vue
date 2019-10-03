@@ -19,15 +19,15 @@
             username: "",
             users: [],
         }),
-        methods: {
-            sign_in(){
-                this.$socket.emit('register', {'username': this.username})
+        sockets: {
+            available_players(data) {
+                console.log(data);
             }
         },
-        mounted() {
-            this.$socket.on('available_players', () => {
-                print('received available players')
-            })
+        methods: {
+            sign_in() {
+                this.$socket.emit('register', {'username': this.username})
+            }
         }
     }
 </script>

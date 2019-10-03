@@ -23,7 +23,7 @@
     created: () => ({
 
     }),
-    mounted(){
+    mounted() {
       this.$socket.on('connect', data => {
         console.log('[SOCKET-IO] Connected to server')
         this.$socket.emit('connected')
