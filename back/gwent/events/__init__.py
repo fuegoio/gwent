@@ -30,10 +30,10 @@ def register_events(sio):
         pass
 
     @sio.event
-    def disconnect(sid):
+    async def disconnect(sid):
         for user in registered_users:
             if user['id'] == sid:
                 registered_users.remove(user)
-        print(f'{sid} just disconnected')
+        await sio.emit('available_players', {'available_users': registered_users, 'registered': sid})
 
     sio.register_namespace(DefaultNamespace('/default'))
