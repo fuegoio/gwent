@@ -5,9 +5,8 @@
                 <v-text-field v-model="username" placeholder="Username" outlined dark hide-details :disabled="registered"></v-text-field>
                 <v-btn block style="margin-top: 20px" :disabled="username.length == 0" v-if="!registered" @click="sign_in">Connect</v-btn><br><br>
                 <v-card
-                  style="background-color: #3F3632"
+                  style="background-color: #3F3632; border-radius: 15px"
                   class="mx-auto"
-                  tile
                   v-if="registered && users.length > 0"
                 >
                   <v-list-item two-line v-for="user in users" class="list-item" v-if="sid != user['id']">
@@ -15,19 +14,19 @@
                       <v-list-item-title>{{user['username']}}</v-list-item-title>
                       <v-list-item-subtitle>{{user['available'] ? 'Available' : 'In game'}}</v-list-item-subtitle>
                     </v-list-item-content>
-                    <v-btn :disabled="!user['available']" @click="propose_game(user)">Connect</v-btn>
+                    <v-btn rounded :disabled="!user['available']" @click="propose_game(user)">PLay</v-btn>
                   </v-list-item>
                 </v-card>
-                <p v-if="!registered" class="title" style="text-align: center">Enter a username to access matchmaking</p>
-                <p v-if="registered && users.length == 0" class="title" style="text-align: center">No users logged in</p>
+                <p v-if="!registered" style="text-align: center; color: #05DC95;">Enter a username to access matchmaking</p>
+                <p v-if="registered && users.length == 0" style="text-align: center; color: #05DC95;">No users logged in</p>
             </v-container>
         </v-flex>
         <v-flex class="full-height" xs8>
             <img src="gwent_logo.gif" id="logo">
         </v-flex>
-        <v-dialog v-model="game_proposal" max-width="290">
+        <v-dialog v-model="game_proposal" max-width="30%">
             <v-card v-if="!proposer">
-                <v-card-title>{{adversary['username']}} wants to play with you!</v-card-title>
+                <p style="text-align: center; padding: 15px; margin: 0" class="title">{{adversary['username']}} wants to play with you!</p>
                 <v-card-actions>
                     <div class="flex-grow-1"></div>
                     <v-btn color="#05DC95" text @click="refuse_game">
@@ -39,15 +38,23 @@
                 </v-card-actions>
             </v-card>
             <v-card v-if="proposer">
-                <v-card-title>Waiting for {{adversary['username']}} to accept your invitation</v-card-title>
-                <v-container style="margin-left: 40%; margin-right: 40%; width: 20%">
+                <v-container>
+                    <p style="text-align: center; padding: 10px" class="title">Waiting for {{adversary['username']}} to accept your invitation</p>
                     <v-progress-circular
+                            style="margin-left: 40%; margin-right: 40%; width: 20%; margin-bottom: 30px"
                         indeterminate
                         color="#05DC95"
                     ></v-progress-circular>
                 </v-container>
             </v-card>
         </v-dialog>
+        <v-snackbar
+            v-model="snackbar"
+            :timeout="2000"
+        >
+            Game proposal refused
+        <v-btn color="#05DC95" text @click="snackbar = false">Close</v-btn>
+      </v-snackbar>
     </v-layout>
 </template>
 
@@ -61,7 +68,8 @@
             users: [],
             game_proposal: false,
             proposer: false,
-            adversary: []
+            adversary: [],
+            snackbar: false
         }),
         sockets: {
             connect(){
@@ -78,6 +86,10 @@
             game_proposal(data) {
                 this.adversary = data['player'][0]
                 this.game_proposal = true
+            },
+            game_refused() {
+                this.game_proposal = false
+                this.snackbar = true
             }
         },
         methods: {
@@ -97,6 +109,7 @@
                 this.$socket.emit('launch_game', {accepter: this.sid, proposer: this.adversary['id']})
             },
             refuse_game() {
+                this.game_proposal = false
                 this.$socket.emit('refuse_game', {refuser: this.sid, proposer: this.adversary['id']})
             }
         }
@@ -115,13 +128,13 @@
     }
     #side-bar {
         padding: 20px;
+        margin-top: 20%;
     }
     .list-item {
         background-color: #05DC95;
         border-radius: 15px;
         margin-bottom: 5px;
-    }
-    .title {
-        color: #05DC95;
+        overflow-y: auto;
+        max-height: 50%;
     }
 </style>

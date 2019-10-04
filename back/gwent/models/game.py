@@ -5,10 +5,13 @@ NUM_CARDS_HANDS = 10
 
 
 class Game:
+    game_id = 0
+
     def __init__(self, player_one: Player, player_two: Player):
         self.players = (player_one, player_two)
         self.winner = None
         self.loser = None
+        Game.game_id += 1
 
     @property
     def terminated(self):

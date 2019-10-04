@@ -1,7 +1,7 @@
 import socketio
 
 
-class DefaultNamespace(socketio.AsyncNamespace):
+class GameNamespace(socketio.AsyncNamespace):
     def on_connect(self, sid, environ):
         print('coucou')
         self.emit('connected')

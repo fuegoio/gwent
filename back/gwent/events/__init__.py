@@ -1,8 +1,11 @@
-from .defaults import DefaultNamespace
+from gwent.models.game import Game
+from .game import GameNamespace
 
+GAME_ID = 0
 
 def register_events(sio):
     registered_users = []
+
     @sio.event
     def connect(sid, data):
         print(f'{sid} just connected')
@@ -27,7 +30,9 @@ def register_events(sio):
 
     @sio.event
     async def launch_game(sid, data):
-        pass
+        # Get game id and create game db
+        sio.register_namespace(GameNamespace('/' + str()))
+        await sio.emit()
 
     @sio.event
     async def disconnect(sid):
@@ -36,4 +41,3 @@ def register_events(sio):
                 registered_users.remove(user)
         await sio.emit('available_players', {'available_users': registered_users, 'registered': sid})
 
-    sio.register_namespace(DefaultNamespace('/default'))
