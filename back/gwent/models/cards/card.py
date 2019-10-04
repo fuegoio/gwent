@@ -12,7 +12,10 @@ class Card:
     def __repr__(self):
         return f'<Card {self.img_name}>'
 
-    def place_card(self, board, adversary_board, player, adversary):
+    def get_targets(self, player, board):
+        return None
+
+    def place_card(self, board, adversary_board, player, adversary, target):
         pass
 
     def destroy(self, board, player):

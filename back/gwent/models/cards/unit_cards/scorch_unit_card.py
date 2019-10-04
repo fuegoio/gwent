@@ -5,7 +5,7 @@ class ScorchUnitCard(UnitCard):
     def __repr__(self):
         return f'<Scorch {self.img_name}>'
 
-    def apply_abilities(self, my_board, adversary_board, player, adversary):
+    def apply_abilities(self, board, adversary_board, player, adversary, target):
         max_power = 0
         for card in adversary_board.rows[self.row]:
             if card.get_effective_power(adversary_board) > max_power and card.hero is False:

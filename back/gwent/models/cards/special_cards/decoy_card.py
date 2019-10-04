@@ -8,16 +8,24 @@ class DecoyCard(SpecialCard):
     def __repr__(self):
         return f'<Decoy {self.name}>'
 
-    def place_card(self, board, adversary_board, player, adversary):
-        # when placed for another card, we change the value of the decoy's row
-        # Random card replaced
-        self.row = random.randint(0, 2)
-        targetable = [card for card in board.rows[self.row] if isinstance(card, UnitCard) and self.hero is False]
+    def get_targets(self, player, board):
+        targets = []
+        for row in board.rows:
+            for card in row:
+                if isinstance(card, UnitCard) and card.hero is False:
+                    targets.append(card)
+        print(targets)
+        if len(targets) > 0:
+            return targets
+        else:
+            return None
 
-        if len(targetable) > 0:
-            card_replaced = targetable[random.randint(0, len(targetable) - 1)]
-            player.hand.append(card_replaced)
-            card_replaced.destroy(board, player)
+    def place_card(self, board, adversary_board, player, adversary, target):
+        if isinstance(target, UnitCard):
+            self.row = target.row
+            player.hand.append(target)
+            target.destroy(board, player)
             board.rows[self.row].append(self)
         else:
+            self.row = random.randint(0, 2)
             board.rows[self.row].append(self)

@@ -3,7 +3,7 @@ from gwent.models.cards.special_cards.weather_card import WeatherCard
 
 
 class ClearWeatherCard(SpecialCard):
-    def place_card(self, board, adversary_board, player, adversary):
+    def place_card(self, board, adversary_board, player, adversary, target):
         pass
 
     def apply_abilities(self, board, adversary_board, player, adversary):
