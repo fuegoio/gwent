@@ -18,7 +18,7 @@ class Game:
         players_deads = [player.lives == 0 for player in self.players]
         return sum(players_deads) >= 1
 
-    def run(self):
+    def draw_decks(self):
         # Choix du deck
         for player in self.players:
             player.pick_cards()
@@ -27,7 +27,9 @@ class Game:
         for i in range(NUM_CARDS_HANDS):
             for player in self.players:
                 player.draw_card()
+        return [player.hand for player in self.players]
 
+    def run(self):
         while not self.terminated:
             current_round = Round(self)
             current_round.run_round()

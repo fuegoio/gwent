@@ -13,5 +13,11 @@ class GamesDb():
         self.games[id] = Game(player1, player2)
         return id
 
+    def get_by_id(self, id):
+        if id in self.games.keys():
+            return self.games[id]
+        else:
+            return None
+
 
 games_db = GamesDb()

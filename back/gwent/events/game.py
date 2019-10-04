@@ -5,17 +5,8 @@ class GameNamespace(socketio.AsyncNamespace):
     def __init__(self, id):
         super().__init__(f'/{id}')
         self.id = id
+        self.game = games_db.get_by_id(id)
 
-    def on_connect(self, sid, environ):
-        print('coucou')
-        self.emit('connected')
+    async def on_draw_cards(self, sid, environ):
+        print('Drawing cards')
 
-    def on_connected(self, sid, environ):
-        print('front end connected')
-
-    def on_disconnect(self, sid):
-        print('test')
-        self.emit('test')
-
-    async def on_michel(self, sid, data):
-        await self.emit('my_response', data)

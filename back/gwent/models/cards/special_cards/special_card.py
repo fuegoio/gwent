@@ -2,6 +2,14 @@ from gwent.models.cards.card import Card
 
 
 class SpecialCard(Card):
+    def get_data(self):
+        return {
+            'name': self.name,
+            'img_name': self.img_name,
+            'row': self.row,
+            'unit_card': False
+        }
+
     def place_card(self, board, adversary_board, player, adversary, target):
         # to be overridden depending on abilities
         board.rows[self.row].append(self)

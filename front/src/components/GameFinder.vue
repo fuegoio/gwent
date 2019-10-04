@@ -68,7 +68,8 @@
             users: [],
             game_proposal: false,
             proposer: false,
-            adversary: [],
+            yourself: {},
+            adversary: {},
             snackbar: false
         }),
         sockets: {
@@ -76,12 +77,18 @@
                 this.sid = this.$socket.id
             },
             available_players(data) {
-                console.log(data)
                 if (data['registered'] == this.sid) {
                     this.registered = true
                 }
-                this.users = data['available_users']
+                console.log(this.sid)
                 console.log(this.users)
+                this.users = data['available_users']
+                for (let i in this.users.length) {
+                    if (this.users[i][id] == this.sid){
+                        this.yourself = this.users[i]
+                        console.log('found yourself')
+                    }
+                }
             },
             game_proposal(data) {
                 this.adversary = data['player'][0]
@@ -90,6 +97,9 @@
             game_refused() {
                 this.game_proposal = false
                 this.snackbar = true
+            },
+            game_created(data) {
+                console.log(data)
             }
         },
         methods: {
@@ -104,11 +114,13 @@
                 this.$socket.emit('propose_game', {adversary_id: adversary['id']})
             },
             launch_game() {
-                this.$router.push('/game')
-                this.game_proposal = true
-                const faction1 = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))]
-                const faction2 = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))]
-                this.$socket.emit('launch_game', {name1: this.username, faction1: faction1, name2: this.adversary['username'], faction2: faction2})
+                this.game_proposal = false
+                this.adversary['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))]
+                this.yourself['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))]
+                this.$socket.emit('launch_game', {
+                    player1: this.adversary,
+                    player2: this.yourself,
+                })
             },
             refuse_game() {
                 this.game_proposal = false
