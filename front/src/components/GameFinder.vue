@@ -106,7 +106,9 @@
             launch_game() {
                 this.$router.push('/game')
                 this.game_proposal = true
-                this.$socket.emit('launch_game', {accepter: this.sid, proposer: this.adversary['id']})
+                const faction1 = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))]
+                const faction2 = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))]
+                this.$socket.emit('launch_game', {name1: this.username, faction1: faction1, name2: this.adversary['username'], faction2: faction2})
             },
             refuse_game() {
                 this.game_proposal = false

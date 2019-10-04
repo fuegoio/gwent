@@ -1,7 +1,7 @@
-from gwent.models.game import Game
+from gwent.data.games import GamesDb
+from gwent.data.games import games_db
 from .game import GameNamespace
 
-GAME_ID = 0
 
 def register_events(sio):
     registered_users = []
@@ -30,9 +30,9 @@ def register_events(sio):
 
     @sio.event
     async def launch_game(sid, data):
-        # Get game id and create game db
-        sio.register_namespace(GameNamespace('/' + str()))
-        await sio.emit()
+        game_id = games_db.launch_game(data['name1'], data['faction1'], data['name2'], data['faction2'])
+        sio.register_namespace(GameNamespace(game_id))
+        await sio.emit('game_created', {}, [])
 
     @sio.event
     async def disconnect(sid):

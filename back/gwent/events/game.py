@@ -1,7 +1,11 @@
 import socketio
-
+from gwent.data.games import games_db
 
 class GameNamespace(socketio.AsyncNamespace):
+    def __init__(self, id):
+        super().__init__(f'/{id}')
+        self.id = id
+
     def on_connect(self, sid, environ):
         print('coucou')
         self.emit('connected')
