@@ -31,6 +31,7 @@ def register_events(sio):
 
     @sio.event
     async def launch_game(sid, data):
+        print('Launching game')
         if random.randint(0, 2) == 0:
             player1 = data['player1']
             player2 = data['player2']
