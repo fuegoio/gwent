@@ -10,15 +10,24 @@ class UnitCard(Card):
         self.hero = hero
         self.morale_boost = False
 
-    def get_data(self):
-        return {
-            'name': self.name,
-            'img_name': self.img_name,
-            'effective_power': self.get_effective_power(),
-            'agile': self.agile,
-            'row': self.row,
-            'unit_card': True
-        }
+    def get_data(self, board=None):
+        if(board is None):
+            return {
+                'name': self.name,
+                'img_name': self.img_name,
+                'agile': self.agile,
+                'row': self.row,
+                'unit_card': True
+            }
+        else:
+            return {
+                'name': self.name,
+                'img_name': self.img_name,
+                'effective_power': self.get_effective_power(board),
+                'agile': self.agile,
+                'row': self.row,
+                'unit_card': True
+            }
 
     def get_targets(self, player, board):
         if self.agile:

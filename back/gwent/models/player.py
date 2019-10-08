@@ -66,3 +66,6 @@ class Player:
     @property
     def lives(self):
         return self.__lives
+
+    def get_hand_as_json(self):
+        return [card.get_data() for card in self.hand]

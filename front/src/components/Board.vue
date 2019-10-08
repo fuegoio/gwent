@@ -23,6 +23,22 @@
                     {id: 3, cards: ['/cards/catapult.png']}
                 ]
             }
+        },
+        mounted() {
+            console.log(this.$vueSocketIo)
+            this.$socket.emit('get_cards');
+            this.$socket.on('deck', (data) => {
+                console.log(data);
+            })
+        },
+        sockets: {
+            deck(data) {
+                console.log('Poulet')
+                console.log(data)
+            }
+        },
+        methods: {
+
         }
     }
 </script>

@@ -12,6 +12,7 @@ class GameNamespace(socketio.AsyncNamespace):
 
         self.game = games_db.launch_game(name1, faction1, name2, faction2)
         self.game_id = self.game.game_id
+        self.game.draw_decks()
 
         super().__init__(f'/{self.game_id}')
 
@@ -41,5 +42,6 @@ class GameNamespace(socketio.AsyncNamespace):
         player = self.add_player_sid(sid, token)
         print(f'Player {player} connected on namespace')
 
-    async def on_michel(self, sid, data):
-        print(f'Michel {sid}')
+    async def on_get_cards(self, sid):
+        print(self.get_player_from_sid(sid).get_hand_as_json())
+        await self.emit('deck', {'deck': self.get_player_from_sid(sid).get_hand_as_json()}, sid)

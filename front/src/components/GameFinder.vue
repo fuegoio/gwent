@@ -133,8 +133,9 @@
                 this.snackbar = true
             },
             game_created(data) {
+                this.game_proposal = false;
+                this.$router.push('/game')
                 this.$socket.io = io('http://localhost:3000/' + data.namespace, {query: {token: this.sid}});
-                this.$socket.emit('michel', {'michel': 'michel'});
             }
         },
         methods: {
