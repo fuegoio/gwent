@@ -19,12 +19,6 @@ class GameNamespace(socketio.AsyncNamespace):
         self.players_token = (player1['id'], player2['id'])
         self.players_sid = [None, None]
 
-    def add_player_sid(self, sid, token):
-        for i, player_token in enumerate(self.players_token):
-            if token == player_token:
-                self.players_sid[i] = sid
-                return self.game.players[i]
-
     def get_player_from_sid(self, sid):
         for i, player_sid in enumerate(self.players_sid):
             if sid == player_sid:
@@ -39,9 +33,26 @@ class GameNamespace(socketio.AsyncNamespace):
             if query_name == 'token':
                 token = query_value
 
-        player = self.add_player_sid(sid, token)
+        player = None
+        for i, player_token in enumerate(self.players_token):
+            if token == player_token:
+                self.players_sid[i] = sid
+                player = self.game.players[i]
+                break
+
         print(f'Player {player} connected on namespace')
 
     async def on_get_cards(self, sid):
         print(self.get_player_from_sid(sid).get_hand_as_json())
         await self.emit('deck', {'deck': self.get_player_from_sid(sid).get_hand_as_json()}, sid)
+
+    async def on_disconnect(self, sid):
+        for i, player_sid in enumerate(self.players_sid):
+            if player_sid == sid:
+                self.players_sid[i] = None
+                break
+
+        if len([sid for sid in self.players_sid if sid is not None]) == 0:
+            print('Deleting namespace ...')
+            del self.server.namespace_handlers[self.namespace]
+
