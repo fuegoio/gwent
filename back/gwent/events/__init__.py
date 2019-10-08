@@ -1,7 +1,7 @@
-from gwent.data.games import GamesDb
+import random
+
 from gwent.data.games import games_db
 from .game import GameNamespace
-import random
 
 
 def register_events(sio):
@@ -23,7 +23,8 @@ def register_events(sio):
 
     @sio.event
     async def propose_game(sid, data):
-        await sio.emit('game_proposal', {'player': [user for user in registered_users if user['id'] == sid]}, data['adversary_id'])
+        await sio.emit('game_proposal', {'player': [user for user in registered_users if user['id'] == sid]},
+                       data['adversary_id'])
 
     @sio.event
     async def refuse_game(sid, data):
@@ -48,4 +49,3 @@ def register_events(sio):
             if user['id'] == sid:
                 registered_users.remove(user)
         await sio.emit('available_players', {'available_users': registered_users, 'registered': sid})
-

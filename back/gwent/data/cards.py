@@ -1,19 +1,7 @@
 import os
 import csv
 
-from gwent.models.cards.special_cards.clear_weather_card import ClearWeatherCard
-from gwent.models.cards.special_cards.commanders_horn_card import CommandersHornCard
-from gwent.models.cards.special_cards.decoy_card import DecoyCard
-from gwent.models.cards.special_cards.scorch_card import ScorchCard
-from gwent.models.cards.special_cards.weather_card import WeatherCard
-from gwent.models.cards.unit_cards.commanders_horn_unit_card import CommandersHornUnitCard
-from gwent.models.cards.unit_cards.unit_card import UnitCard
-from gwent.models.cards.unit_cards.muster_card import MusterCard
-from gwent.models.cards.unit_cards.scorch_unit_card import ScorchUnitCard
-from gwent.models.cards.unit_cards.morale_boost_card import MoraleBoostCard
-from gwent.models.cards.unit_cards.medic_card import MedicCard
-from gwent.models.cards.unit_cards.spy_card import SpyCard
-from gwent.models.cards.unit_cards.tight_bond_card import TightBondCard
+from gwent.models.cards import *
 
 constructor_dic = {
     'tight_bond': TightBondCard,

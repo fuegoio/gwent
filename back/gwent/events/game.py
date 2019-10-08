@@ -1,5 +1,7 @@
 import socketio
+
 from gwent.data.games import games_db
+
 
 class GameNamespace(socketio.AsyncNamespace):
     def __init__(self, id):
@@ -9,4 +11,3 @@ class GameNamespace(socketio.AsyncNamespace):
 
     async def on_draw_cards(self, sid, environ):
         print('Drawing cards')
-
