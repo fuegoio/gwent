@@ -4,12 +4,13 @@ from gwent.models.board import Board
 
 
 class Round:
-    def __init__(self, game: 'Game', turn=None):
+    def __init__(self, game: 'Game', first_to_play: int = None):
         print('[Round] New round')
         self.game = game
-        self.turn = turn
-        if self.turn is None:
-            self.turn = random.randint(0, 1)
+        self.turn = 0
+        if first_to_play is not None:
+            self.turn = first_to_play
+
         self.boards = [Board(self, player) for player in game.players]
         self.losers = None
 

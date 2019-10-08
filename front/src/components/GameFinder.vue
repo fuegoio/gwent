@@ -31,7 +31,8 @@
                     <p style="text-align: center; color: #05DC95;" class="mt-3">
                         Available users
                     </p>
-                    <v-list-item two-line v-for="user in users" class="list-item" v-if="sid !== user['id']" style="margin-top: 10px">
+                    <v-list-item two-line v-for="user in users" class="list-item" v-if="sid !== user['id']"
+                                 style="margin-top: 10px">
                         <v-list-item-content>
                             <v-list-item-title>{{user['username']}}</v-list-item-title>
                             <v-list-item-subtitle>{{user['available'] ? 'Available' : 'In game'}}
@@ -88,6 +89,8 @@
 </template>
 
 <script>
+    import io from 'socket.io-client';
+
     export default {
         name: "GameFinder",
         data: () => ({
@@ -107,12 +110,12 @@
                 this.sid = this.$socket.id;
             },
             available_players(data) {
-                if (data['registered'] == this.sid) {
+                if (data['registered'] === this.sid) {
                     this.registered = true
                 }
                 this.users = data['available_users']
                 for (let i = 0; i < this.users.length; i++) {
-                    if (this.users[i]['id'] == this.sid){
+                    if (this.users[i]['id'] === this.sid) {
                         this.yourself = this.users[i]
                     }
                 }
@@ -130,7 +133,8 @@
                 this.snackbar = true
             },
             game_created(data) {
-                console.log(data)
+                this.$socket.io = io('http://localhost:3000/' + data.namespace, {query: {token: this.sid}});
+                this.$socket.emit('michel', {'michel': 'michel'});
             }
         },
         methods: {
@@ -154,7 +158,7 @@
                     player2: this.yourself,
                 })
             },
-            refuse_game(){
+            refuse_game() {
                 this.game_proposal = false;
                 this.$socket.emit('refuse_game', {refuser: this.sid, proposer: this.adversary['id']})
             }

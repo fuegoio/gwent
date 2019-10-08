@@ -11,13 +11,15 @@ Vue.config.productionTip = false
 
 Vue.use(new VueSocketIO({
     debug: false,
-    connection: 'localhost:3000'
+    connection: 'http://localhost:3000/'
 }))
 
-const router = new VueRouter({routes: [
-  { path: '/', component: GameFinder },
-  { path: '/game', component: Board }
-]})
+const router = new VueRouter({
+    routes: [
+        {path: '/', component: GameFinder},
+        {path: '/game', component: Board}
+    ]
+})
 
 Vue.use(VueRouter)
 

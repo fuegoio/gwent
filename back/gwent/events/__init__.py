@@ -1,6 +1,3 @@
-import random
-
-from gwent.data.games import games_db
 from .game import GameNamespace
 
 
@@ -32,17 +29,13 @@ def register_events(sio):
 
     @sio.event
     async def launch_game(sid, data):
-        print('Launching game')
-        if random.randint(0, 2) == 0:
-            player1 = data['player1']
-            player2 = data['player2']
-        else:
-            player2 = data['player1']
-            player1 = data['player2']
-        game_id = games_db.launch_game(player1['username'], player1['faction'], player2['username'], player2['faction'])
-        sio.register_namespace(GameNamespace(game_id))
-        await sio.emit('game_created', {'id': game_id}, player1['id'])
-        await sio.emit('game_created', {'id': game_id}, player2['id'])
+        player1 = data['player1']
+        player2 = data['player2']
+        game_namespace = GameNamespace(player1, player2)
+        sio.register_namespace(game_namespace)
+
+        await sio.emit('game_created', {'namespace': game_namespace.game_id}, to=player1['id'])
+        await sio.emit('game_created', {'namespace': game_namespace.game_id}, to=player2['id'])
 
     @sio.event
     async def disconnect(sid):
