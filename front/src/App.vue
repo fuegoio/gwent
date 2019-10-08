@@ -9,33 +9,21 @@
 </template>
 
 <script>
-  import Board from './components/Board';
-
   export default {
     name: 'App',
-    components: {
-      Board,
-    },
     data: () => ({
       state: "not_connected",
       blocked: false,
     }),
-    created: () => ({
+    beforeCreate() {
+      this.$sockets.main.on('connect', data => {
+        console.log('[SOCKET-IO] Connected to server');
+        this.$sockets.main.emit('connected')
+      });
 
-    }),
-    mounted() {
-      this.$socket.on('connect', data => {
-        console.log('[SOCKET-IO] Connected to server')
-        this.$socket.emit('connected')
-      })
-
-      this.$socket.on('disconnect', data => {
+      this.$sockets.main.on('disconnect', data => {
         console.log('[SOCKET-IO] Disconnected to server')
-        //this.$socket.emit('connected')
-      })
-    },
-    methods: {
-
+      });
     }
   };
 </script>

@@ -1,27 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify';
-import VueSocketIO from 'vue-socket.io'
-import VueRouter from 'vue-router'
+import router from './plugins/router';
+import sockets from './plugins/sockets';
 
-import GameFinder from "./components/GameFinder";
-import Board from "./components/Board";
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-Vue.use(new VueSocketIO({
-    debug: false,
-    connection: 'http://localhost:3000/'
-}))
-
-const router = new VueRouter({
-    routes: [
-        {path: '/', component: GameFinder},
-        {path: '/game', component: Board}
-    ]
-})
-
-Vue.use(VueRouter)
+Vue.prototype.$sockets = sockets;
 
 new Vue({
     vuetify,

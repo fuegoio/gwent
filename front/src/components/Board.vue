@@ -1,9 +1,9 @@
 <template>
     <v-layout column class="full-height">
-        <v-flex  v-for="row in rows" id="rows">
+        <v-flex v-for="row in rows" id="rows">
             <Row
-                :key="row.id"
-                :cards="row.cards"
+                    :key="row.id"
+                    :cards="row.cards"
             ></Row>
         </v-flex>
     </v-layout>
@@ -24,21 +24,12 @@
                 ]
             }
         },
-        mounted() {
-            console.log(this.$vueSocketIo)
-            this.$socket.emit('get_cards');
-            this.$socket.on('deck', (data) => {
+        beforeCreate() {
+            this.$sockets.game.on('deck', (data) => {
                 console.log(data);
-            })
-        },
-        sockets: {
-            deck(data) {
-                console.log('Poulet')
-                console.log(data)
-            }
-        },
-        methods: {
+            });
 
+            this.$sockets.game.emit('get_cards');
         }
     }
 </script>

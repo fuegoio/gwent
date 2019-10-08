@@ -31,8 +31,8 @@
                     <p style="text-align: center; color: #05DC95;" class="mt-3">
                         Available users
                     </p>
-                    <v-list-item two-line v-for="user in users" class="list-item" v-if="sid !== user['id']"
-                                 style="margin-top: 10px">
+                    <v-list-item two-line v-for="user in users.filter((user) => user.id !== sid)" class="list-item"
+                                 style="margin-top: 10px" :key="user.sid">
                         <v-list-item-content>
                             <v-list-item-title>{{user['username']}}</v-list-item-title>
                             <v-list-item-subtitle>{{user['available'] ? 'Available' : 'In game'}}
@@ -90,6 +90,7 @@
 
 <script>
     import io from 'socket.io-client';
+    import sockets from '../plugins/sockets';
 
     export default {
         name: "GameFinder",
@@ -105,15 +106,16 @@
             adversary: {},
             snackbar: false
         }),
-        sockets: {
-            connect() {
-                this.sid = this.$socket.id;
-            },
-            available_players(data) {
+        beforeCreate() {
+            this.$sockets.main.on('connect', () =>  {
+                this.sid = this.$sockets.main.id;
+            });
+
+            this.$sockets.main.on('available_players', (data) => {
                 if (data['registered'] === this.sid) {
                     this.registered = true
                 }
-                this.users = data['available_users']
+                this.users = data['available_users'];
                 for (let i = 0; i < this.users.length; i++) {
                     if (this.users[i]['id'] === this.sid) {
                         this.yourself = this.users[i]
@@ -123,45 +125,48 @@
                 setTimeout(() => {
                     this.loading = false
                 }, 1000);
-            },
-            game_proposal(data) {
+            });
+
+            this.$sockets.main.on('game_proposal', (data) => {
                 this.adversary = data['player'][0];
                 this.game_proposal = true
-            },
-            game_refused() {
+            });
+
+            this.$sockets.main.on('game_refused', () => {
                 this.game_proposal = false;
                 this.snackbar = true
-            },
-            game_created(data) {
+            });
+
+            this.$sockets.main.on('game_created', (data) => {
                 this.game_proposal = false;
-                this.$router.push('/game')
-                this.$socket.io = io('http://localhost:3000/' + data.namespace, {query: {token: this.sid}});
-            }
+                sockets.game = io('http://localhost:3000/' + data.namespace, {query: {token: this.sid}, forceNew: true});
+                this.$router.push('/game');
+            });
         },
         methods: {
             sign_in() {
                 this.loading = true;
-                this.$socket.emit('register', {'username': this.username});
+                this.$sockets.main.emit('register', {'username': this.username});
             },
             propose_game(adversary) {
                 console.log('Sending game proposal to ' + adversary['id']);
                 this.game_proposal = true;
                 this.proposer = true;
                 this.adversary = adversary;
-                this.$socket.emit('propose_game', {adversary_id: adversary['id']})
+                this.$sockets.main.emit('propose_game', {adversary_id: adversary['id']})
             },
             launch_game() {
-                this.game_proposal = false
-                this.adversary['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))]
-                this.yourself['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))]
-                this.$socket.emit('launch_game', {
+                this.game_proposal = false;
+                this.adversary['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))];
+                this.yourself['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))];
+                this.$sockets.main.emit('launch_game', {
                     player1: this.adversary,
                     player2: this.yourself,
                 })
             },
             refuse_game() {
                 this.game_proposal = false;
-                this.$socket.emit('refuse_game', {refuser: this.sid, proposer: this.adversary['id']})
+                this.$sockets.main.emit('refuse_game', {refuser: this.sid, proposer: this.adversary['id']})
             }
         }
     }

@@ -6,7 +6,7 @@ def register_events(sio):
 
     @sio.event
     def connect(sid, data):
-        print(f'{sid} just connected')
+        pass
 
     @sio.event
     async def register(sid, data):
