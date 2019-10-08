@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-content style="height: 100%; background-color: #3F3632">
-      <v-container style="height: 100%">
+      <v-container style="height: 100%" fluid>
         <router-view></router-view>
       </v-container>
     </v-content>
