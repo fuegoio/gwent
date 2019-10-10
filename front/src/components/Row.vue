@@ -1,7 +1,7 @@
 <template>
     <v-col cols="12">
       <v-row justify="center">
-        <v-card v-for="card in cards" style="background-color: #3F3632">
+        <v-card v-for="card in cards" style="background-color: #3F3632" v-on:click="click(card['id'])">
           <v-img id="card" :src="'./cards/' + card['img_name'] + '.png'"></v-img>
         </v-card>
       </v-row>
@@ -12,7 +12,12 @@
     export default {
         name: "Row",
         components: {},
-        props: ['cards', 'mulligan']
+        props: ['cards', 'mulligan'],
+        methods: {
+            click(id){
+                this.$emit('click', {id})
+            }
+        }
     }
 </script>
 

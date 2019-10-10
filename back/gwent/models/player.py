@@ -69,3 +69,6 @@ class Player:
 
     def get_hand_as_json(self):
         return [card.get_data() for card in self.hand]
+
+    def do_mulligan(self):
+        pass

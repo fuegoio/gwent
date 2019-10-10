@@ -5,7 +5,7 @@
                 <p style="color: #05DC95; text-align: center; margin-top: 10px">
                     Choose a card to redraw ({{mulligan_count}}/2)
                 </p>
-                <Row :cards="deck" :mulligan="true"></Row>
+                <Row :cards="deck" :mulligan="true" v-on:click="do_mulligan"></Row>
                 <v-btn class="skip-button" style="background-color: #05DC95">Skip</v-btn>
             </v-layout>
         </v-dialog>
@@ -27,6 +27,7 @@
         },
         beforeCreate() {
             this.$sockets.game.on('deck', (data) => {
+                console.log(data['deck'])
                 this.deck = data['deck'];
                 this.mulligan = true
             });
@@ -40,6 +41,11 @@
             })
 
             this.$sockets.game.emit('get_cards');
+        },
+        methods: {
+            do_mulligan(id){
+                this.$sockets.game.emit('mulligan', {'id': id})
+            }
         }
     }
 </script>

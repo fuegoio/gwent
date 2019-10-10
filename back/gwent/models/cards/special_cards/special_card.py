@@ -4,6 +4,7 @@ from gwent.models.cards.card import Card
 class SpecialCard(Card):
     def get_data(self):
         return {
+            'id': self.id,
             'name': self.name,
             'img_name': self.img_name,
             'row': self.row,
