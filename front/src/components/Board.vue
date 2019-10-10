@@ -1,12 +1,12 @@
 <template>
     <div>
-        <v-dialog v-model="mulligan" persistent hide-overlay>
+        <v-dialog v-model="mulligan" persistent>
             <v-layout column class="full-height" style="background-color: #3F3632">
-                <p style="color: #05DC95; text-align: center">
+                <p style="color: #05DC95; text-align: center; margin-top: 10px">
                     Choose a card to redraw ({{mulligan_count}}/2)
                 </p>
                 <Row :cards="deck" :mulligan="true"></Row>
-                <v-btn  style="margin-top: 10px">Skip</v-btn>
+                <v-btn class="skip-button" style="background-color: #05DC95">Skip</v-btn>
             </v-layout>
         </v-dialog>
     </div>
@@ -45,11 +45,12 @@
 </script>
 
 <style scoped>
-    .centered {
-        text-align: center;
-    }
-
     .full-height {
         height: 100%;
+    }
+
+    .skip-button {
+        margin: 20px;
+        color: white;
     }
 </style>
