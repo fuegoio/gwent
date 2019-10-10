@@ -43,7 +43,6 @@ class GameNamespace(socketio.AsyncNamespace):
         print(f'Player {player} connected on namespace')
 
     async def on_get_cards(self, sid):
-        print(self.get_player_from_sid(sid).get_hand_as_json())
         await self.emit('deck', {'deck': self.get_player_from_sid(sid).get_hand_as_json()}, sid)
 
     async def on_disconnect(self, sid):

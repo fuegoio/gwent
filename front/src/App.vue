@@ -1,3 +1,4 @@
+<script src="plugins/vuetify.js"></script>
 <template>
   <v-app>
     <v-content style="height: 100%; background-color: #3F3632">

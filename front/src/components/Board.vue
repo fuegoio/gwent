@@ -1,12 +1,15 @@
 <template>
-    <v-layout column class="full-height">
-        <v-flex v-for="row in rows" id="rows">
-            <Row
-                    :key="row.id"
-                    :cards="row.cards"
-            ></Row>
-        </v-flex>
-    </v-layout>
+    <div>
+        <v-dialog v-model="mulligan" persistent hide-overlay>
+            <v-layout column class="full-height" style="background-color: #3F3632">
+                <p style="color: #05DC95; text-align: center">
+                    Choose a card to redraw ({{mulligan_count}}/2)
+                </p>
+                <Row :cards="deck" :mulligan="true"></Row>
+                <v-btn  style="margin-top: 10px">Skip</v-btn>
+            </v-layout>
+        </v-dialog>
+    </div>
 </template>
 
 <script>
@@ -17,17 +20,24 @@
         components: {Row},
         data() {
             return {
-                rows: [
-                    {id: 1, cards: ['/cards/arachas1.png', '/cards/arachas2.png', '/cards/arachas3.png']},
-                    {id: 2, cards: ['/cards/archer.png']},
-                    {id: 3, cards: ['/cards/catapult.png']}
-                ]
+                deck: [],
+                mulligan: false,
+                mulligan_count: 0
             }
         },
         beforeCreate() {
             this.$sockets.game.on('deck', (data) => {
-                console.log(data);
+                this.deck = data['deck'];
+                this.mulligan = true
             });
+
+            this.$sockets.game.on('mulligan', (data) => {
+                this.deck = data['deck'];
+                this.mulligan_count += 1;
+                if(this.mulligan_count >= 2){
+                    this.mulligan = false;
+                }
+            })
 
             this.$sockets.game.emit('get_cards');
         }
@@ -35,12 +45,8 @@
 </script>
 
 <style scoped>
-    #rows {
-        background-color: red;
-        width: 95%;
-        height: 30%;
-        margin-top: 2.5%;
-        margin-left: 2.5%;
+    .centered {
+        text-align: center;
     }
 
     .full-height {
