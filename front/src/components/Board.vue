@@ -53,7 +53,6 @@
                 if(this.mulligan_chronometer < 100){
                     this.mulligan_chronometer += 1
                     setTimeout(() => {
-                        console.log('incrementing')
                         this.increment_chronometer()
                     }, 200)
                 } else {

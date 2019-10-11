@@ -50,6 +50,10 @@ class GameNamespace(socketio.AsyncNamespace):
         player.do_mulligan(data['id'], self.game.round_number)
         await self.emit('done_mulligan', {'deck': player.get_hand_as_json()}, sid)
 
+    async def on_ready_to_play(self, sid):
+        self.get_player_from_sid(sid).ready = True
+        pass
+
     async def on_disconnect(self, sid):
         for i, player_sid in enumerate(self.players_sid):
             if player_sid == sid:

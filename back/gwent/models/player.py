@@ -15,6 +15,7 @@ class Player:
         self.hand = []
         self.cemetery = []
         self.__passed = False
+        self.ready = False
 
     def __repr__(self):
         return self.name
