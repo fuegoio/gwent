@@ -32,11 +32,14 @@
                 this.mulligan = true
             });
 
-            this.$sockets.game.on('mulligan', (data) => {
+            this.$sockets.game.on('done_mulligan', (data) => {
+                console.log(data['deck'])
                 this.deck = data['deck'];
                 this.mulligan_count += 1;
                 if(this.mulligan_count >= 2){
-                    this.mulligan = false;
+                    setTimeout(() => {
+                        this.mulligan = false
+                    }, 1000);
                 }
             })
 
@@ -44,7 +47,8 @@
         },
         methods: {
             do_mulligan(id){
-                this.$sockets.game.emit('mulligan', {'id': id})
+                console.log(id)
+                this.$sockets.game.emit('mulligan', id)
             }
         }
     }

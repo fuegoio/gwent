@@ -8,6 +8,7 @@ NUM_CARDS = 22
 class Player:
     def __init__(self, name: str, faction: str):
         self.name = name
+        self.muligan_count = 0
         self.faction = faction
         self.__lives = 2
         self.deck = []
@@ -70,5 +71,21 @@ class Player:
     def get_hand_as_json(self):
         return [card.get_data() for card in self.hand]
 
-    def do_mulligan(self):
-        pass
+    def do_mulligan(self, id, round_number):
+        if self.muligan_count > 2 or round_number != 1:
+            print('Unauthorized mulligan')
+            # Raise error
+        else:
+            card_to_mullian = None
+            for card in self.hand:
+                if card.id == id:
+                    card_to_mullian = card
+            if card_to_mullian is not None:
+                self.deck.append(card_to_mullian)
+                self.hand.remove(card_to_mullian)
+                self.draw_card()
+                self.muligan_count += 1
+                print('Mulligan done correctly')
+            else:
+                print('Card not found')
+                # Raise error

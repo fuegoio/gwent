@@ -16,6 +16,7 @@ class Game:
 
         self.game_id = Game.game_id
         Game.game_id += 1
+        self.round_number = 1
 
     def __repr__(self):
         return f'<Game {self.game_id}>'
@@ -43,6 +44,7 @@ class Game:
                 first_to_play = random.randint(0, 1)
 
             current_round = Round(self, first_to_play)
+            self.round_number += 1
             current_round.run_round()
 
             if len(current_round.losers) == 1:
