@@ -73,9 +73,9 @@ class Player:
         return [card.get_data() for card in self.hand]
 
     def do_mulligan(self, id, round_number):
-        if self.muligan_count > 2 or round_number != 1:
+        if self.muligan_count >= 2 or round_number != 1:
             print('Unauthorized mulligan')
-            # Raise error
+            return False
         else:
             card_to_mullian = None
             for card in self.hand:
@@ -87,6 +87,7 @@ class Player:
                 self.draw_card()
                 self.muligan_count += 1
                 print('Mulligan done correctly')
+                return True
             else:
                 print('Card not found')
-                # Raise error
+                return False

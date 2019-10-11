@@ -47,8 +47,8 @@ class GameNamespace(socketio.AsyncNamespace):
 
     async def on_mulligan(self, sid, data):
         player = self.get_player_from_sid(sid)
-        player.do_mulligan(data['id'], self.game.round_number)
-        await self.emit('done_mulligan', {'deck': player.get_hand_as_json()}, sid)
+        if player.do_mulligan(data['id'], self.game.round_number):
+            await self.emit('done_mulligan', {'deck': player.get_hand_as_json()}, sid)
 
     async def on_ready_to_play(self, sid):
         self.get_player_from_sid(sid).ready = True

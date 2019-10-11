@@ -36,14 +36,13 @@
             });
 
             this.$sockets.game.on('done_mulligan', (data) => {
-                console.log(data['deck'])
                 this.deck = data['deck'];
                 this.mulligan_count += 1;
                 if(this.mulligan_count >= 2){
                     setTimeout(() => {
                         this.mulligan = false
                         this.$sockets.game.emit('ready_to_play')
-                    }, 1000);
+                    }, 2000);
                 }
             })
             this.$sockets.game.emit('get_cards');
@@ -51,10 +50,10 @@
         methods: {
             increment_chronometer(){
                 if(this.mulligan_chronometer < 100){
-                    this.mulligan_chronometer += 1
+                    this.mulligan_chronometer += 0.5
                     setTimeout(() => {
                         this.increment_chronometer()
-                    }, 200)
+                    }, 100)
                 } else {
                     this.mulligan = false
                     this.$sockets.game.emit('ready_to_play');
