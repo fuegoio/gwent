@@ -2,11 +2,12 @@
     <div>
         <v-dialog v-model="mulligan" persistent>
             <v-layout column class="full-height" style="background-color: #3F3632">
+                <v-progress-linear color="#3F3632" background-color="#05DC95" v-model="mulligan_chronometer"></v-progress-linear>
                 <p style="color: #05DC95; text-align: center; margin-top: 10px">
                     Choose a card to redraw ({{mulligan_count}}/2)
                 </p>
                 <Row :cards="deck" :mulligan="true" v-on:click="do_mulligan"></Row>
-                <v-btn class="skip-button" style="background-color: #05DC95">Skip</v-btn>
+                <v-btn class="skip-button" style="background-color: #05DC95" @click="skip_mulligan">Skip</v-btn>
             </v-layout>
         </v-dialog>
     </div>
@@ -22,7 +23,8 @@
             return {
                 deck: [],
                 mulligan: false,
-                mulligan_count: 0
+                mulligan_count: 0,
+                mulligan_chronometer: 0,
             }
         },
         beforeCreate() {
@@ -30,6 +32,7 @@
                 console.log(data['deck'])
                 this.deck = data['deck'];
                 this.mulligan = true
+                this.increment_chronometer()
             });
 
             this.$sockets.game.on('done_mulligan', (data) => {
@@ -39,16 +42,31 @@
                 if(this.mulligan_count >= 2){
                     setTimeout(() => {
                         this.mulligan = false
+                        this.$sockets.game.emit('ready_to_play')
                     }, 1000);
                 }
             })
-
             this.$sockets.game.emit('get_cards');
         },
         methods: {
+            increment_chronometer(){
+                if(this.mulligan_chronometer < 100){
+                    this.mulligan_chronometer += 1
+                    setTimeout(() => {
+                        console.log('incrementing')
+                        this.increment_chronometer()
+                    }, 200)
+                } else {
+                    this.mulligan = false
+                    this.$sockets.game.emit('ready_to_play');
+                }
+            },
             do_mulligan(id){
-                console.log(id)
                 this.$sockets.game.emit('mulligan', id)
+            },
+            skip_mulligan(){
+                this.mulligan = false;
+                this.$sockets.game.emit('ready_to_play');
             }
         }
     }
