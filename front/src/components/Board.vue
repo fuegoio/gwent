@@ -60,7 +60,9 @@
                 }
             },
             do_mulligan(id){
-                this.$sockets.game.emit('mulligan', id)
+                if (this.mulligan_count < 2){
+                    this.$sockets.game.emit('mulligan', id)
+                }
             },
             skip_mulligan(){
                 this.mulligan = false;
