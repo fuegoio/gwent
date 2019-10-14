@@ -72,6 +72,9 @@ class Player:
     def get_hand_as_json(self):
         return [card.get_data() for card in self.hand]
 
+    def get_cemetery_as_json(self):
+        return [card.get_data() for card in self.cemetery]
+
     def do_mulligan(self, id, round_number):
         if self.muligan_count >= 2 or round_number != 1:
             print('Unauthorized mulligan')

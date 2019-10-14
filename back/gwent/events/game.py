@@ -1,4 +1,5 @@
 import socketio
+import random
 
 from gwent.data.games import games_db
 
@@ -52,7 +53,31 @@ class GameNamespace(socketio.AsyncNamespace):
 
     async def on_ready_to_play(self, sid):
         self.get_player_from_sid(sid).ready = True
-        pass
+        print(len([player for player in self.game.players if player.ready]) == 2)
+        if len([player for player in self.game.players if player.ready]) == 2:
+            self.game.init_round()
+            await self.broadcast_board()
+
+    async def on_play(self, sid, data):
+        if self.game.terminated:
+            self.emit('terminated')
+        elif sid == self.players_sid[self.game.turn]:
+            self.game.play_turn(data)
+            await self.broadcast_board()
+        else:
+            print('Wrong user')
+
+    async def broadcast_board(self):
+        for i, sid in enumerate(self.players_sid):
+            player = self.get_player_from_sid(sid)
+            data = {
+                'hand': player.get_hand_as_json(),
+                'cemetery': player.get_cemetery_as_json(),
+                'board': self.game.boards[i].get_board_as_json(),
+                'adversary_board': self.game.boards[1 - i].get_board_as_json(),
+                'turn': i == self.game.turn
+            }
+            await self.emit('board', data, sid)
 
     async def on_disconnect(self, sid):
         for i, player_sid in enumerate(self.players_sid):

@@ -11,7 +11,6 @@ class Round:
         if first_to_play is not None:
             self.turn = first_to_play
 
-        self.boards = [Board(self, player) for player in game.players]
         self.losers = None
 
         for player in self.game.players:
@@ -21,6 +20,12 @@ class Round:
     def finished(self):
         players_passed = [player.passed for player in self.game.players]
         return sum(players_passed) == 2
+
+    def pass_turn(self):
+        pass
+
+    def play_card(self, data):
+        pass
 
     def run_round(self):
         while not self.finished:
@@ -44,14 +49,3 @@ class Round:
                 card.place_card(board, adversary_board, player, adversary, target)
                 print(f'{board}')
             self.turn += 1
-
-        # Define winner
-        boards_score = [sum(board.scores) for board in self.boards]
-        self.losers = [self.game.players[i] for i, score in enumerate(boards_score) if score == min(boards_score)]
-        for loser in self.losers:
-            loser.lose()
-            print(f'[Round] {loser.name} loses the round.')
-
-        # Sending all the board cards to cemetery
-        self.boards[0].delete_board(self.game.players[0])
-        self.boards[1].delete_board(self.game.players[1])

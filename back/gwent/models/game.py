@@ -1,5 +1,6 @@
 import random
 
+from gwent.models.board import Board
 from gwent.models.player import Player
 from gwent.models.round import Round
 
@@ -17,6 +18,10 @@ class Game:
         self.game_id = Game.game_id
         Game.game_id += 1
         self.round_number = 1
+        self.current_round = None
+        self.boards = [Board(self, player) for player in self.players]
+        self.first_player = random.randint(0, 1)
+        self.turn = 0
 
     def __repr__(self):
         return f'<Game {self.game_id}>'
@@ -37,27 +42,30 @@ class Game:
                 player.draw_card()
         return [player.hand for player in self.players]
 
-    def run(self):
-        first_to_play = None
-        while not self.terminated:
-            if first_to_play is None:
-                first_to_play = random.randint(0, 1)
+    def init_round(self):
+        self.boards[0].delete_board(self.players[0])
+        self.boards[1].delete_board(self.players[1])
+        self.round_number += 1
+        self.current_round = Round(self, self.first_player)
+        self.turn = self.first_player
+        self.first_player = 1 - self.first_player
 
-            current_round = Round(self, first_to_play)
-            self.round_number += 1
-            current_round.run_round()
+    def play_turn(self, data):
+        if self.current_round.finished:
+            boards_score = self.get_score()
+            losers = [self.game.players[i] for i, score in enumerate(boards_score) if score == min(boards_score)]
+            for loser in losers:
+                loser.lose()
+                print(f'[Round] {loser.name} loses the round.')
+            self.init_round()
+        elif len(self.players[self.turn].hand) != 0:
+            if data['action'] == 'pass':
+                self.current_round.pass_turn()
+            elif data['action'] == 'play_card':
+                self.current_round.play_card(data)
+        if sum([player.passed for player in self.players]) == 0:
+            self.turn = 1 - self.turn
 
-            if len(current_round.losers) == 1:
-                first_to_play = current_round.losers[0]
-            else:
-                first_to_play = None
+    def get_score(self):
+        return [sum(board.scores) for board in self.boards]
 
-        for player in self.players:
-            if player.lives >= 1:
-                self.winner = player
-                print(f'[Game] Winner is : {self.winner} !')
-            elif player.lives == 0:
-                self.loser = player
-
-        if self.winner is None:
-            print(f'[Game] Draw !')

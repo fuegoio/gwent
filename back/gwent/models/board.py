@@ -19,3 +19,9 @@ class Board:
         ranged = f'      [Board] [{scores[1]}] Ranged : {self.rows[1]}'
         siege = f'      [Board] [{scores[2]}] Siege : {self.rows[2]}'
         return melee + '\n' + ranged + '\n' + siege
+
+    def get_board_as_json(self):
+        board = {}
+        for i in range(3):
+            board[['melee', 'distance', 'siege'][i]] = [card.get_data() for card in self.rows[i]]
+        return board

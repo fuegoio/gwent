@@ -42,8 +42,13 @@
                     setTimeout(() => {
                         this.mulligan = false
                         this.$sockets.game.emit('ready_to_play')
-                    }, 2000);
+                    }, 1000);
                 }
+            })
+
+            this.$sockets.game.on('board', (data) => {
+                console.log('board')
+                console.log(data)
             })
             this.$sockets.game.emit('get_cards');
         },
@@ -54,7 +59,7 @@
                     setTimeout(() => {
                         this.increment_chronometer()
                     }, 100)
-                } else {
+                } else if (this.mulligan) {
                     this.mulligan = false
                     this.$sockets.game.emit('ready_to_play');
                 }
