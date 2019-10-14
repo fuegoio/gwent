@@ -1,20 +1,35 @@
 <template>
-    <v-col cols="12">
-      <v-row justify="center">
-        <v-card v-for="card in cards" style="background-color: #3F3632" v-on:click="click(card['id'])">
-          <v-img id="card" :src="'./cards/' + card['img_name'] + '.png'"></v-img>
-        </v-card>
-      </v-row>
-    </v-col>
+    <div>
+        <v-col v-if="!description" cols="12">
+            <v-row justify="center">
+                <v-card v-for="card in cards" style="background-color: #3F3632; border-radius: 14px;"
+                        @click="click(card['id'])">
+                    <figure id="without_description">
+                        <v-img :src="'./cards/' + card['img_name'] + '.png'"></v-img>
+                    </figure>
+                </v-card>
+            </v-row>
+        </v-col>
+        <v-col v-if="description" cols="12">
+            <v-row justify="center">
+                <v-card v-for="card in cards" style="background-color: #3F3632; border-radius: 14px;"
+                        :disabled="disabled" @click="click(card['id'])">
+                    <figure id="with_description">
+                        <v-img :src="'./cards/' + card['img_name'] + '.png'"></v-img>
+                    </figure>
+                </v-card>
+            </v-row>
+        </v-col>
+    </div>
 </template>
 
 <script>
     export default {
         name: "Row",
         components: {},
-        props: ['cards', 'mulligan'],
+        props: ['cards', 'description', 'disabled'],
         methods: {
-            click(id){
+            click(id) {
                 this.$emit('click', {id})
             }
         }
@@ -22,12 +37,17 @@
 </script>
 
 <style scoped>
-    .full-height {
-        height: 100%;
+    #without_description {
+        width: 130px;
+        height: 181px;
+        overflow: hidden;
+        margin: 0;
+        border-radius: 18px;
     }
-    #card {
-        max-height: 300px;
-        max-width: 150px;
+    #with_description {
+        width: 130px;
+        overflow: hidden;
+        margin: 0;
         border-radius: 18px;
     }
 </style>

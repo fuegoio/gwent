@@ -44,12 +44,13 @@ class GameNamespace(socketio.AsyncNamespace):
         print(f'Player {player} connected on namespace')
 
     async def on_get_cards(self, sid):
-        await self.emit('deck', {'deck': self.get_player_from_sid(sid).get_hand_as_json()}, sid)
+        print('serving cards')
+        await self.emit('hand', {'hand': self.get_player_from_sid(sid).get_hand_as_json()}, sid)
 
     async def on_mulligan(self, sid, data):
         player = self.get_player_from_sid(sid)
         if player.do_mulligan(data['id'], self.game.round_number):
-            await self.emit('done_mulligan', {'deck': player.get_hand_as_json()}, sid)
+            await self.emit('done_mulligan', {'hand': player.get_hand_as_json()}, sid)
 
     async def on_ready_to_play(self, sid):
         self.get_player_from_sid(sid).ready = True
