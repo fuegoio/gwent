@@ -1,9 +1,9 @@
 <template>
     <div>
-        <v-col v-if="!description" cols="12">
+        <v-col v-if="!description" cols="12" style="height: 125px; padding: 0">
             <v-row justify="center">
                 <v-card v-for="card in cards" style="background-color: #3F3632; border-radius: 14px;"
-                        @click="click(card['id'])">
+                        :disabled="disabled" @click="click(card['id'])">
                     <figure id="without_description">
                         <v-img :src="'./cards/' + card['img_name'] + '.png'"></v-img>
                     </figure>
@@ -38,12 +38,13 @@
 
 <style scoped>
     #without_description {
-        width: 130px;
-        height: 181px;
+        width: 90px;
+        height: 125px;
         overflow: hidden;
         margin: 0;
-        border-radius: 18px;
+        border-radius: 12px;
     }
+
     #with_description {
         width: 130px;
         overflow: hidden;
