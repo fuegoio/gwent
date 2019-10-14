@@ -1,23 +1,26 @@
 <template>
     <div>
         <div v-if="!mulligan">
-            <Row :cards="adversary_board['siege']" :description="false"></Row>
-            <Row :cards="adversary_board['distance']" :description="false"></Row>
-            <Row :cards="adversary_board['melee']" :description="false"></Row>
-            <Row :cards="board['melee']" :description="false"></Row>
-            <Row :cards="board['distance']" :description="false"></Row>
-            <Row :cards="board['siege']" :description="false"></Row>
-            <Row :cards="hand" :description="false"></Row>
+            <Row :cards="adversary_board['siege']" :number="5" :description="false"></Row>
+            <Row :cards="adversary_board['distance']" :number="4" :description="false"></Row>
+            <Row :cards="adversary_board['melee']" :number="3" :description="false"></Row>
+            <Row :cards="board['melee']" :number="0" :description="false" v-on:row_click="place_card"></Row>
+            <Row :cards="board['distance']" :number="1" :description="false" v-on:row_click="place_card"></Row>
+            <Row :cards="board['siege']" :number="2" :description="false" v-on:row_click="place_card"></Row>
+            <Row :cards="hand" :number="6" :description="false" v-on:card_click="select_card"></Row>
         </div>
 
         <v-dialog v-model="mulligan" persistent>
             <v-layout column class="full-height" style="background-color: #3F3632">
-                <v-progress-linear color="#3F3632" background-color="#05DC95" v-model="mulligan_chronometer"></v-progress-linear>
+                <v-progress-linear color="#3F3632" background-color="#05DC95"
+                                   v-model="mulligan_chronometer"></v-progress-linear>
                 <p style="color: #05DC95; text-align: center; margin-top: 10px">
                     Choose a card to redraw ({{mulligan_count}}/2)
                 </p>
-                <Row :cards="hand" :description="true" v-on:click="do_mulligan" :disabled="disable_mulligan"></Row>
-                <v-btn :disabled="disable_mulligan" class="skip-button" style="background-color: #05DC95" @click="skip_mulligan">Skip</v-btn>
+                <Row :cards="hand" :description="true" v-on:mulligan="do_mulligan" :disabled="disable_mulligan"></Row>
+                <v-btn :disabled="disable_mulligan" class="skip-button" style="background-color: #05DC95"
+                       @click="skip_mulligan">Skip
+                </v-btn>
             </v-layout>
         </v-dialog>
     </div>
@@ -31,6 +34,7 @@
         components: {Row},
         data() {
             return {
+                selected_card: null,
                 hand: [],
                 board: {
                     melee: [],
@@ -61,7 +65,7 @@
             this.$sockets.game.on('done_mulligan', (data) => {
                 this.hand = data['hand'];
                 this.mulligan_count += 1;
-                if(this.mulligan_count >= 2){
+                if (this.mulligan_count >= 2) {
                     this.disable_mulligan = true
                     setTimeout(() => {
                         this.mulligan = false
@@ -81,8 +85,12 @@
             this.$sockets.game.emit('get_cards');
         },
         methods: {
-            increment_chronometer(){
-                if(this.mulligan_chronometer < 100){
+            select_card(card) {
+                console.log(card)
+                this.selected_card = card;
+            },
+            increment_chronometer() {
+                if (this.mulligan_chronometer < 100) {
                     this.mulligan_chronometer += 0.5
                     setTimeout(() => {
                         this.increment_chronometer()
@@ -92,15 +100,34 @@
                     this.$sockets.game.emit('ready_to_play');
                 }
             },
-            do_mulligan(id){
-                if (this.mulligan_count < 2){
-                    this.$sockets.game.emit('mulligan', id)
+            do_mulligan(id) {
+                if (this.mulligan_count < 2) {
+                    this.$sockets.game.emit('mulligan', {id: id})
                 }
             },
-            skip_mulligan(){
+            skip_mulligan() {
                 this.mulligan = false;
                 this.$sockets.game.emit('ready_to_play');
-            }
+            },
+            place_card(row_number) {
+                if (this.selected_card != null && this.check_emplacement(row_number)) {
+                    console.log('good placement')
+                    this.$sockets.game.emit('place_card', {raw_number: row_number, id: this.selected_card['id']})
+                } else {
+                    this.selected_card = null
+                }
+            },
+            check_emplacement(row_number) {
+                if (this.selected_card['unit_card']) {
+                    if (this.selected_card['agile']) {
+                        return 0 <= row_number <= 1
+                    } else if (this.selected_card['type'] == 'spy') {
+                        return this.selected_card['row'] + 3 == row_number
+                    } else {
+                        return this.selected_card['row'] == row_number
+                    }
+                }
+            },
         }
     }
 </script>
