@@ -18,13 +18,13 @@
 
 <script>
     export default {
-        name: "CemetaryDialog",
+        name: "MedicDialog",
         props: ['cards', 'active'],
         methods: {
             card_click(card) {
                 this.$emit('card_click', card);
             }
-        }
+        },
     }
 </script>
 

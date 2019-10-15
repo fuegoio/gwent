@@ -12,12 +12,13 @@ class UnitCard(Card):
         self.type = ''
 
     def get_data(self, board=None):
-        if(board is None):
+        if board is None:
             return {
                 'id': self.id,
                 'name': self.name,
                 'img_name': self.img_name,
                 'agile': self.agile,
+                'hero': self.hero,
                 'row': self.row,
                 'unit_card': True,
                 'type': self.type
@@ -29,6 +30,7 @@ class UnitCard(Card):
                 'img_name': self.img_name,
                 'effective_power': self.get_effective_power(board),
                 'agile': self.agile,
+                'hero': self.hero,
                 'row': self.row,
                 'unit_card': True,
                 'type': self.type

@@ -2,12 +2,14 @@
     <div>
         <div>
             <Row :cards="adversary_board['siege']" :number="5" :description="false" v-on:row_click="place_card"></Row>
-            <Row :cards="adversary_board['distance']" :number="4" :description="false" v-on:row_click="place_card"></Row>
+            <Row :cards="adversary_board['distance']" :number="4" :description="false"
+                 v-on:row_click="place_card"></Row>
             <Row :cards="adversary_board['melee']" :number="3" :description="false" v-on:row_click="place_card"></Row>
             <Row :cards="board['melee']" :number="0" :description="false" v-on:row_click="place_card"></Row>
             <Row :cards="board['distance']" :number="1" :description="false" v-on:row_click="place_card"></Row>
             <Row :cards="board['siege']" :number="2" :description="false" v-on:row_click="place_card"></Row>
-            <Row :cards="hand" :number="6" :description="false" v-on:card_click="select_card" hand="true" :disabled="!turn"></Row>
+            <Row :cards="hand" :number="6" :description="false" v-on:card_click="select_card" hand="true"
+                 :disabled="!turn"></Row>
         </div>
 
         <MulliganDialog :cards="hand"></MulliganDialog>
@@ -19,7 +21,7 @@
 <script>
     import Row from "./Row"
     import MulliganDialog from "./MulliganDialog";
-    import CemeteryDialog from "./CemetaryDialog";
+    import CemeteryDialog from "./MedicDialog";
 
     export default {
         name: "Board",
@@ -74,12 +76,28 @@
             place_card(row_number) {
                 if (this.selected_card != null && this.check_emplacement(row_number)) {
                     console.log('good placement')
-                    if (this.selected_card['agile'] == true){
-                        this.$sockets.game.emit('play', {action: 'play_card', id: this.selected_card['id'], target: row_number})
+                    if (this.selected_card['agile'] == true) {
+                        this.$sockets.game.emit('play', {
+                            action: 'play_card',
+                            id: this.selected_card['id'],
+                            target: row_number
+                        })
                     } else if (this.selected_card['type'] == 'medic') {
-                        this.medic = true
+                        if (this.any_card_revivable()) {
+                            this.medic = true
+                        } else {
+                            this.$sockets.game.emit('play', {
+                                action: 'play_card',
+                                id: this.selected_card['id'],
+                                target: null
+                            })
+                        }
                     } else {
-                        this.$sockets.game.emit('play', {action: 'play_card', id: this.selected_card['id'], target: null})
+                        this.$sockets.game.emit('play', {
+                            action: 'play_card',
+                            id: this.selected_card['id'],
+                            target: null
+                        })
                     }
                 } else {
                     this.selected_card = null
@@ -98,9 +116,19 @@
                     return false
                 }
             },
-            choose_medic_target(card){
+            choose_medic_target(card) {
+                console.log({action: 'play_card', id: this.selected_card['id'], target: card['id']})
                 this.$sockets.game.emit('play', {action: 'play_card', id: this.selected_card['id'], target: card['id']})
                 this.medic = false
+            },
+            any_card_revivable() {
+                let revivable_card = 0
+                for (let i = 0; i < this.cemetery.length; i++) {
+                    if (this.cemetery[i]['unit_card'] && !this.cemetery[i]['hero']) {
+                        revivable_card += 1
+                    }
+                }
+                return revivable_card > 0
             }
         }
     }
