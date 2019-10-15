@@ -2,7 +2,7 @@ from gwent.models.cards.card import Card
 
 
 class SpecialCard(Card):
-    def get_data(self):
+    def get_data(self, board = None):
         return {
             'id': self.id,
             'name': self.name,
