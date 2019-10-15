@@ -1,22 +1,18 @@
 <template>
-    <div style="background-color: #B78D9C; border-radius: 14px" @click="row_click">
-        <v-col v-if="!description" cols="12" class="row">
-            <v-row justify="center" style="margin: 0">
-                <v-card v-for="card in cards" style="background-color: #3F3632; border-radius: 14px;" :key="card.id"
-                        :disabled="disabled" @click="card_click(card)">
-                    <figure id="without_description">
-                        <v-btn v-if="!hand" class="effective_power"
-                            absolute
-                            fab
-                        >
-                            {{card.effective_power}}
-                        </v-btn>
-                        <v-img :src="'./cards/' + card['img_name'] + '.png'"></v-img>
-                    </figure>
-                </v-card>
-            </v-row>
-        </v-col>
-    </div>
+    <v-row justify="center" style="margin: 0" v-if="!description" cols="10" class="custom_row" @click="row_click">
+        <v-card v-for="card in cards" style="background-color: #3F3632; border-radius: 14px;" :key="card.id"
+                :disabled="disabled" @click="card_click(card)">
+            <figure id="without_description">
+                <v-btn v-if="!hand" class="effective_power"
+                       absolute
+                       fab
+                >
+                    {{card.effective_power}}
+                </v-btn>
+                <v-img :src="'./cards/' + card['img_name'] + '.png'"></v-img>
+            </figure>
+        </v-card>
+    </v-row>
 </template>
 
 <script>
@@ -25,7 +21,7 @@
         components: {},
         props: ['cards', 'description', 'disabled', 'number', 'hand'],
         methods: {
-            row_click(){
+            row_click() {
                 this.$emit('row_click', this.number)
             },
             card_click(card){
@@ -44,11 +40,12 @@
         border-radius: 12px;
     }
 
-    .row {
+    .custom_row {
         height: 125px;
-        margin: 2px;
         padding: 0;
         border-color: coral;
+        background-color: #B78D9C;
+        border-radius: 14px;
     }
 
     .effective_power {

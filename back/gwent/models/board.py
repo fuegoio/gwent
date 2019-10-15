@@ -21,7 +21,9 @@ class Board:
         return melee + '\n' + ranged + '\n' + siege
 
     def get_board_as_json(self):
-        board = {}
+        board = {'score_total': sum(self.scores)}
         for i in range(3):
-            board[['melee', 'distance', 'siege'][i]] = [card.get_data(self) for card in self.rows[i]]
+            row = ['melee', 'distance', 'siege'][i]
+            board[row] = {'cards': [card.get_data(self) for card in self.rows[i]],
+                          'score': self.scores[i]}
         return board
