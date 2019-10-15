@@ -2,7 +2,7 @@
     <div style="background-color: #B78D9C; border-radius: 14px" @click="row_click">
         <v-col v-if="!description" cols="12" class="row">
             <v-row justify="center" style="margin: 0">
-                <v-card v-for="card in cards" style="background-color: #3F3632; border-radius: 14px;"
+                <v-card v-for="card in cards" style="background-color: #3F3632; border-radius: 14px;" :key="card.id"
                         :disabled="disabled" @click="card_click(card)">
                     <figure id="without_description">
                         <v-btn v-if="!hand" class="effective_power"

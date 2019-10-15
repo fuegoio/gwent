@@ -7,7 +7,8 @@
 
             <v-col cols="12" class="description_row">
                 <v-row justify="center">
-                    <v-card v-for="card in cards" style="background-color: #3F3632" @click="card_click(card)">
+                    <v-card v-for="card in cards" style="background-color: #3F3632" @click="card_click(card)"
+                            :key="card.id">
                         <v-img id="card" :src="'./cards/' + card['img_name'] + '.png'"></v-img>
                     </v-card>
                 </v-row>
