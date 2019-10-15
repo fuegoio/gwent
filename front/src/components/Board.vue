@@ -7,7 +7,7 @@
             <Row :cards="board['melee']" :number="0" :description="false" v-on:row_click="place_card"></Row>
             <Row :cards="board['distance']" :number="1" :description="false" v-on:row_click="place_card"></Row>
             <Row :cards="board['siege']" :number="2" :description="false" v-on:row_click="place_card"></Row>
-            <Row :cards="hand" :number="6" :description="false" v-on:card_click="select_card"></Row>
+            <Row :cards="hand" :number="6" :description="false" v-on:card_click="select_card" :disabled="!turn"></Row>
         </div>
 
         <v-dialog v-model="mulligan" persistent>

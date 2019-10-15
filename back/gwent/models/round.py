@@ -35,7 +35,7 @@ class Round:
         print(f'[Game] {player.name}\'s turn. His hand : {player.hand}')
         card = player.find_card_by_id(data['id'])
         if card is not None:
-            card.place_card(player, adversary, board, adversary_board, data['target'])
+            card.place_card(board, adversary_board, player, adversary, data['target'])
             self.toggle_turn()
         else:
             print('Card not found')

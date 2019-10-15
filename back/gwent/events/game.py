@@ -44,7 +44,6 @@ class GameNamespace(socketio.AsyncNamespace):
         print(f'Player {player} connected on namespace')
 
     async def on_get_cards(self, sid):
-        print('serving cards')
         await self.emit('hand', {'hand': self.get_player_from_sid(sid).get_hand_as_json()}, sid)
 
     async def on_mulligan(self, sid, data):
@@ -60,7 +59,7 @@ class GameNamespace(socketio.AsyncNamespace):
             await self.broadcast_board()
 
     async def on_play(self, sid, data):
-        if sid == self.players_sid[self.game.turn]:
+        if sid == self.players_sid[self.game.current_round.turn]:
             game_over = self.game.play_turn(data)
             if game_over:
                 await self.emit('terminated')
@@ -75,9 +74,9 @@ class GameNamespace(socketio.AsyncNamespace):
             data = {
                 'hand': player.get_hand_as_json(),
                 'cemetery': player.get_cemetery_as_json(),
-                'board': self.game.boards[i].get_board_as_json(),
-                'adversary_board': self.game.boards[1 - i].get_board_as_json(),
-                'turn': i == self.game.turn
+                'board': self.game.current_round.boards[i].get_board_as_json(),
+                'adversary_board': self.game.current_round.boards[1 - i].get_board_as_json(),
+                'turn': i == self.game.current_round.turn
             }
             await self.emit('board', data, sid)
 

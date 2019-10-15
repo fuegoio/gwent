@@ -47,9 +47,8 @@ class Player:
     def find_card_by_id(self, id):
         card = None
         for i, hand_card in enumerate(self.hand):
-            if card is None and card.id == id:
+            if card is None and hand_card.id == id:
                 card = self.hand.pop(i)
-
         print(f'[Player] {self.name} selected card {card}')
         return card
 
