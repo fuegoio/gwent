@@ -27,9 +27,10 @@ class DecoyCard(SpecialCard):
     def place_card(self, board, adversary_board, player, adversary, target):
         if isinstance(target, UnitCard):
             self.row = target.row
+            print(len(player.hand))
             player.hand.append(target)
+            print(len(player.hand))
             target.destroy(board, player)
             board.rows[self.row].append(self)
         else:
-            self.row = random.randint(0, 2)
-            board.rows[self.row].append(self)
+            print('Error on target')
