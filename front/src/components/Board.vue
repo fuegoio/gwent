@@ -75,11 +75,11 @@
                 if (this.selected_card != null && this.check_emplacement(row_number)) {
                     console.log('good placement')
                     if (this.selected_card['agile'] == true){
-                        this.$sockets.game.emit('play', {action: 'play_card', id: this.selected_card['id'], target: row_number})
+                        this.$sockets.game.emit('play_card', {card: this.selected_card['id'], target: row_number})
                     } else if (this.selected_card['type'] == 'medic') {
                         this.medic = true
                     } else {
-                        this.$sockets.game.emit('play', {action: 'play_card', id: this.selected_card['id'], target: null})
+                        this.$sockets.game.emit('play_card', {card: this.selected_card['id'], target: null})
                     }
                 } else {
                     this.selected_card = null
@@ -99,7 +99,7 @@
                 }
             },
             choose_medic_target(card){
-                this.$sockets.game.emit('play', {action: 'play_card', id: this.selected_card['id'], target: card['id']})
+                this.$sockets.game.emit('play_card', {card: this.selected_card['id'], target: card['id']})
                 this.medic = false
             }
         }

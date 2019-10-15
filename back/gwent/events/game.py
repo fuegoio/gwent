@@ -1,5 +1,4 @@
 import socketio
-import random
 
 from gwent.data.games import games_db
 
@@ -44,36 +43,52 @@ class GameNamespace(socketio.AsyncNamespace):
         print(f'Player {player} connected on namespace')
 
     async def on_get_cards(self, sid):
-        await self.emit('hand', {'hand': self.get_player_from_sid(sid).get_hand_as_json()}, sid)
+        player = self.get_player_from_sid(sid)
+        await self.emit('hand', {'hand': player.get_hand_data()}, sid)
 
     async def on_mulligan(self, sid, data):
         player = self.get_player_from_sid(sid)
         if player.do_mulligan(data['id'], self.game.round_number):
-            await self.emit('done_mulligan', {'hand': player.get_hand_as_json()}, sid)
+            await self.emit('done_mulligan', {'hand': player.get_hand_data()}, sid)
 
     async def on_ready_to_play(self, sid):
-        self.get_player_from_sid(sid).ready = True
-        print(len([player for player in self.game.players if player.ready]) == 2)
+        player = self.get_player_from_sid(sid)
+        player.set_ready()
+
         if len([player for player in self.game.players if player.ready]) == 2:
             self.game.init_round()
             await self.broadcast_board()
 
-    async def on_play(self, sid, data):
-        if sid == self.players_sid[self.game.current_round.turn]:
-            game_over = self.game.play_turn(data)
-            if game_over:
-                await self.emit('terminated')
-            else:
-                await self.broadcast_board()
+    async def on_play_card(self, sid, data):
+        turn = self.game.get_current_turn()
+
+        if sid == self.players_sid[turn]:
+            card = data['card']
+            target = data['target']
+            current_round = self.game.current_round
+
+            current_round.play_card(card, target)
+
+            await self.broadcast_board()
+            await self.check_finished()
         else:
             print('Wrong user')
+
+    async def check_finished(self):
+        current_round = self.game.current_round
+        if current_round.finished:
+            self.game.finish_round()
+            await self.emit('round_finished')
+
+        if self.game.finished:
+            await self.emit('finished')
 
     async def broadcast_board(self):
         for i, sid in enumerate(self.players_sid):
             player = self.get_player_from_sid(sid)
             data = {
-                'hand': player.get_hand_as_json(),
-                'cemetery': player.get_cemetery_as_json(),
+                'hand': player.get_hand_data(),
+                'cemetery': player.get_cemetery_data(),
                 'board': self.game.current_round.boards[i].get_board_as_json(),
                 'adversary_board': self.game.current_round.boards[1 - i].get_board_as_json(),
                 'turn': i == self.game.current_round.turn
@@ -89,4 +104,3 @@ class GameNamespace(socketio.AsyncNamespace):
         if len([sid for sid in self.players_sid if sid is not None]) == 0:
             print('Deleting namespace ...')
             del self.server.namespace_handlers[self.namespace]
-

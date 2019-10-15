@@ -8,17 +8,40 @@ NUM_CARDS = 22
 class Player:
     def __init__(self, name: str, faction: str):
         self.name = name
-        self.muligan_count = 0
         self.faction = faction
+
         self.__lives = 2
+        self.__mulligan_count = 0
+        self.__passed = False
+        self.__ready = False
+
         self.deck = []
         self.hand = []
         self.cemetery = []
-        self.__passed = False
-        self.ready = False
+
+    @property
+    def passed(self):
+        return self.__passed
+
+    @property
+    def lives(self):
+        return self.__lives
+
+    @property
+    def ready(self):
+        return self.__ready
 
     def __repr__(self):
         return self.name
+
+    def get_hand_data(self):
+        return [card.get_data() for card in self.hand]
+
+    def get_cemetery_data(self):
+        return [card.get_data() for card in self.cemetery]
+
+    def set_ready(self):
+        self.__ready = True
 
     def pick_cards(self):
         cards_available = cards_db.query_deck_by_faction(self.faction)
@@ -44,10 +67,10 @@ class Player:
         print(f'[Player] {self.name} drew {card.name}')
         return card
 
-    def find_card_by_id(self, id):
+    def find_card_by_id(self, card_id):
         card = None
         for i, hand_card in enumerate(self.hand):
-            if card is None and hand_card.id == id:
+            if card is None and hand_card.id == card_id:
                 card = self.hand.pop(i)
         print(f'[Player] {self.name} selected card {card}')
         return card
@@ -58,38 +81,25 @@ class Player:
     def reset_turn(self):
         self.__passed = False
 
-    @property
-    def passed(self):
-        return self.__passed
-
     def lose(self):
         self.__lives -= 1
         return self.__lives
 
-    @property
-    def lives(self):
-        return self.__lives
-
-    def get_hand_as_json(self):
-        return [card.get_data() for card in self.hand]
-
-    def get_cemetery_as_json(self):
-        return [card.get_data() for card in self.cemetery]
-
-    def do_mulligan(self, id, round_number):
-        if self.muligan_count >= 2 or round_number != 0:
+    def do_mulligan(self, card_id, round_number):
+        if self.__mulligan_count >= 2 or round_number != 0:
             print('Unauthorized mulligan')
             return False
         else:
-            card_to_mullian = None
+            card_to_mulligan = None
             for card in self.hand:
-                if card.id == id:
-                    card_to_mullian = card
-            if card_to_mullian is not None:
-                self.deck.append(card_to_mullian)
-                self.hand.remove(card_to_mullian)
+                if card.id == card_id:
+                    card_to_mulligan = card
+            if card_to_mulligan is not None:
+                self.deck.append(card_to_mulligan)
+                self.hand.remove(card_to_mulligan)
                 self.draw_card()
-                self.muligan_count += 1
+
+                self.__mulligan_count += 1
                 print('Mulligan done correctly')
                 return True
             else:

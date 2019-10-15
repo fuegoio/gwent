@@ -1,6 +1,5 @@
 import random
 
-from gwent.models.board import Board
 from gwent.models.player import Player
 from gwent.models.round import Round
 
@@ -22,9 +21,16 @@ class Game:
         return f'<Game {self.game_id}>'
 
     @property
-    def terminated(self):
+    def finished(self):
         players_deads = [player.lives == 0 for player in self.players]
         return sum(players_deads) >= 1
+
+    def get_score(self):
+        return [sum(board.scores) for board in self.current_round.boards]
+
+    def get_current_turn(self):
+        if self.current_round is not None:
+            return self.current_round.turn
 
     def draw_decks(self):
         # Pick deck
@@ -35,33 +41,19 @@ class Game:
         for i in range(NUM_CARDS_HANDS):
             for player in self.players:
                 player.draw_card()
-        return [player.hand for player in self.players]
 
     def init_round(self):
         if self.current_round is not None:
             self.current_round.boards[0].delete_board(self.players[0])
             self.current_round.boards[1].delete_board(self.players[1])
+
         self.round_number += 1
         self.current_round = Round(self, self.first_player)
         self.first_player = 1 - self.first_player
 
-    def play_turn(self, data):
-        if self.terminated:
-            return True
-        elif self.current_round.finished:
-            boards_score = self.get_score()
-            losers = [self.game.players[i] for i, score in enumerate(boards_score) if score == min(boards_score)]
-            for loser in losers:
-                loser.lose()
-                print(f'[Round] {loser.name} loses the round.')
-            self.init_round()
-        elif len(self.players[self.current_round.turn].hand) != 0:
-            if data['action'] == 'pass':
-                self.current_round.pass_turn()
-            elif data['action'] == 'play_card':
-                self.current_round.play_card(data)
-        return False
-
-    def get_score(self):
-        return [sum(board.scores) for board in self.current_round.boards]
-
+    def finish_round(self):
+        boards_score = self.get_score()
+        losers = [self.players[i] for i, score in enumerate(boards_score) if score == min(boards_score)]
+        for loser in losers:
+            loser.lose()
+            print(f'[Round] {loser.name} loses the round.')
