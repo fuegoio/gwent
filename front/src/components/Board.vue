@@ -37,7 +37,8 @@
                 </v-chip>
             </v-col>
             <v-col cols="10">
-                <Row :cards="board['melee'].cards" :number="0" :description="false" v-on:row_click="place_card"></Row>
+                <Row :cards="board['melee'].cards" :number="0" :description="false" v-on:row_click="place_card"
+                     v-on:card_click="handle_card_click"></Row>
             </v-col>
             <v-col cols="2" align-self="center" class="text-center">
                 <v-chip>
