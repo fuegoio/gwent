@@ -1,13 +1,18 @@
 <template>
     <div>
         <div>
-            <Row :cards="adversary_board['siege']" :number="5" :description="false" v-on:row_click="place_card"></Row>
+            <Row :cards="adversary_board['siege']" :number="5" :description="false" v-on:row_click="place_card"
+                 v-on:card_click="handle_card_click"></Row>
             <Row :cards="adversary_board['distance']" :number="4" :description="false"
-                 v-on:row_click="place_card"></Row>
-            <Row :cards="adversary_board['melee']" :number="3" :description="false" v-on:row_click="place_card"></Row>
-            <Row :cards="board['melee']" :number="0" :description="false" v-on:row_click="place_card"></Row>
-            <Row :cards="board['distance']" :number="1" :description="false" v-on:row_click="place_card"></Row>
-            <Row :cards="board['siege']" :number="2" :description="false" v-on:row_click="place_card"></Row>
+                 v-on:row_click="place_card" v-on:card_click="handle_card_click"></Row>
+            <Row :cards="adversary_board['melee']" :number="3" :description="false" v-on:row_click="place_card"
+                 v-on:card_click="handle_card_click"></Row>
+            <Row :cards="board['melee']" :number="0" :description="false" v-on:row_click="place_card"
+                 v-on:card_click="handle_card_click"></Row>
+            <Row :cards="board['distance']" :number="1" :description="false" v-on:row_click="place_card"
+                 v-on:card_click="handle_card_click"></Row>
+            <Row :cards="board['siege']" :number="2" :description="false" v-on:row_click="place_card"
+                 v-on:card_click="handle_card_click"></Row>
             <Row :cards="hand" :number="6" :description="false" v-on:card_click="select_card" hand="true"
                  :disabled="!turn"></Row>
         </div>
@@ -52,31 +57,31 @@
 
             this.$sockets.game.on('terminated', () => {
                 console.log('Game is over')
-            })
+            });
 
             this.$sockets.game.on('done_mulligan', (data) => {
                 this.hand = data['hand'];
-            })
+            });
 
             this.$sockets.game.on('board', (data) => {
-                console.log(data)
+                console.log(data);
                 this.hand = data['hand'];
                 this.board = data['board'];
                 this.adversary_board = data['adversary_board'];
                 this.cemetery = data['cemetery'];
                 this.turn = data['turn']
-            })
+            });
 
             this.$sockets.game.emit('get_cards');
         },
         methods: {
-            select_card(card) {
-                this.selected_card = card;
+            select_card(data) {
+                this.selected_card = data['card'];
             },
             place_card(row_number) {
                 if (this.selected_card != null && this.check_emplacement(row_number)) {
                     console.log('good placement')
-                    if (this.selected_card['agile'] == true) {
+                    if (this.selected_card['agile'] == true || this.selected_card['type'] == "commanders_horn") {
                         this.$sockets.game.emit('play_card', {
                             card: this.selected_card['id'],
                             target: row_number
@@ -100,12 +105,28 @@
                     this.selected_card = null
                 }
             },
+            handle_card_click(data) {
+                if (this.selected_card['type'] == 'decoy') {
+                    console.log('Hello decoy', {
+                        card: this.selected_card['id'],
+                        target: data['card']['id']
+                    })
+                    this.$sockets.game.emit('play_card', {
+                        card: this.selected_card['id'],
+                        target: data['card']['id']
+                    })
+                } else {
+                    this.place_card(data['row_number'])
+                }
+            },
             check_emplacement(row_number) {
                 if (this.selected_card['unit_card']) {
                     if (this.selected_card['agile']) {
                         return 0 <= row_number && row_number <= 1
                     } else if (this.selected_card['type'] == 'spy') {
                         return this.selected_card['row'] + 3 == row_number
+                    } else if (this.selected_card['type'] == 'commanders_horn') {
+                        return 0 <= row_number && row_number <= 2
                     } else {
                         return this.selected_card['row'] == row_number
                     }
@@ -113,7 +134,7 @@
                     return false
                 }
             },
-            choose_medic_target(card){
+            choose_medic_target(card) {
                 this.$sockets.game.emit('play_card', {card: this.selected_card['id'], target: card['id']})
                 this.medic = false
             },

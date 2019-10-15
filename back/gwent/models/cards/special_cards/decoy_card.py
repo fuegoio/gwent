@@ -5,6 +5,10 @@ from gwent.models.cards.unit_cards.unit_card import UnitCard
 
 
 class DecoyCard(SpecialCard):
+    def __init__(self, id: str, name: str, img_name: str, faction: str, row: int):
+        super().__init__(id, name, img_name, faction, row)
+        self.type = 'decoy'
+
     def __repr__(self):
         return f'<Decoy {self.name}>'
 

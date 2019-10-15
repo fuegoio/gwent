@@ -8,7 +8,8 @@ class SpecialCard(Card):
             'name': self.name,
             'img_name': self.img_name,
             'row': self.row,
-            'unit_card': False
+            'unit_card': False,
+            'type': self.type
         }
 
     def place_card(self, board, adversary_board, player, adversary, target):

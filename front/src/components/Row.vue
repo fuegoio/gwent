@@ -29,7 +29,7 @@
                 this.$emit('row_click', this.number)
             },
             card_click(card){
-                this.$emit('card_click', card);
+                this.$emit('card_click', {card: card, row_number: this.number});
             }
         }
     }
