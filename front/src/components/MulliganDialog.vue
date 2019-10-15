@@ -11,7 +11,7 @@
                 <v-col cols="12" class="description_row">
                     <v-row justify="center">
                         <v-card v-for="card in cards" style="background-color: #3F3632" @click="do_mulligan(card)"
-                                :disabled="disable_mulligan">
+                                :disabled="disable_mulligan" :key="card.id">
                             <v-img id="card" :src="'./cards/' + card['img_name'] + '.png'"></v-img>
                         </v-card>
                     </v-row>
