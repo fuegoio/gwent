@@ -60,11 +60,12 @@ class GameNamespace(socketio.AsyncNamespace):
             await self.broadcast_board()
 
     async def on_play(self, sid, data):
-        if self.game.terminated:
-            self.emit('terminated')
-        elif sid == self.players_sid[self.game.turn]:
-            self.game.play_turn(data)
-            await self.broadcast_board()
+        if sid == self.players_sid[self.game.turn]:
+            game_over = self.game.play_turn(data)
+            if game_over:
+                await self.emit('terminated')
+            else:
+                await self.broadcast_board()
         else:
             print('Wrong user')
 

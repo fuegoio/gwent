@@ -96,7 +96,7 @@
             place_card(row_number) {
                 if (this.selected_card != null && this.check_emplacement(row_number)) {
                     console.log('good placement')
-                    this.$sockets.game.emit('play', {action: 'play_card', id: this.selected_card['id'], raw_number: row_number})
+                    this.$sockets.game.emit('play', {action: 'play_card', id: this.selected_card['id'], target: null})
                 } else {
                     this.selected_card = null
                 }
