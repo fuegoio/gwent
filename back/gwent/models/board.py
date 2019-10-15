@@ -23,5 +23,5 @@ class Board:
     def get_board_as_json(self):
         board = {}
         for i in range(3):
-            board[['melee', 'distance', 'siege'][i]] = [card.get_data() for card in self.rows[i]]
+            board[['melee', 'distance', 'siege'][i]] = [card.get_data(self) for card in self.rows[i]]
         return board

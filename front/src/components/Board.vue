@@ -7,7 +7,7 @@
             <Row :cards="board['melee']" :number="0" :description="false" v-on:row_click="place_card"></Row>
             <Row :cards="board['distance']" :number="1" :description="false" v-on:row_click="place_card"></Row>
             <Row :cards="board['siege']" :number="2" :description="false" v-on:row_click="place_card"></Row>
-            <Row :cards="hand" :number="6" :description="false" v-on:card_click="select_card" :disabled="!turn"></Row>
+            <Row :cards="hand" :number="6" :description="false" v-on:card_click="select_card" hand="true" :disabled="!turn"></Row>
         </div>
 
         <v-dialog v-model="mulligan" persistent>
@@ -21,6 +21,15 @@
                 <v-btn :disabled="disable_mulligan" class="skip-button" style="background-color: #05DC95"
                        @click="skip_mulligan">Skip
                 </v-btn>
+            </v-layout>
+        </v-dialog>
+
+        <v-dialog v-model="medic" persistent>
+            <v-layout column class="full-height" style="background-color: #3F3632">
+                <p style="color: #05DC95; text-align: center; margin-top: 10px">
+                    Choose a card to resuscitate
+                </p>
+                <Row :cards="cemetery" :description="true" v-on:card_click="choose_medic_target"></Row>
             </v-layout>
         </v-dialog>
     </div>
@@ -53,6 +62,7 @@
                 disable_mulligan: false,
                 mulligan_count: 0,
                 mulligan_chronometer: 0,
+                medic: false,
             }
         },
         beforeCreate() {
@@ -96,7 +106,13 @@
             place_card(row_number) {
                 if (this.selected_card != null && this.check_emplacement(row_number)) {
                     console.log('good placement')
-                    this.$sockets.game.emit('play', {action: 'play_card', id: this.selected_card['id'], target: null})
+                    if (this.selected_card['agile'] == true){
+                        this.$sockets.game.emit('play', {action: 'play_card', id: this.selected_card['id'], target: row_number})
+                    } else if (this.selected_card['type'] == 'medic') {
+                        this.medic = true
+                    } else {
+                        this.$sockets.game.emit('play', {action: 'play_card', id: this.selected_card['id'], target: null})
+                    }
                 } else {
                     this.selected_card = null
                 }
@@ -112,9 +128,9 @@
                     this.$sockets.game.emit('ready_to_play');
                 }
             },
-            do_mulligan(id) {
+            do_mulligan(card) {
                 if (this.mulligan_count < 2) {
-                    this.$sockets.game.emit('mulligan', {id: id})
+                    this.$sockets.game.emit('mulligan', {id: card.id})
                 }
             },
             skip_mulligan() {
@@ -133,6 +149,10 @@
                 } else {
                     return false
                 }
+            },
+            choose_medic_target(card){
+                this.$sockets.game.emit('play', {action: 'play_card', id: this.selected_card['id'], target: card['id']})
+                this.medic = false
             }
         }
     }

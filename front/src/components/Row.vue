@@ -5,6 +5,12 @@
                 <v-card v-for="card in cards" style="background-color: #3F3632; border-radius: 14px;"
                         :disabled="disabled" @click="card_click(card)">
                     <figure id="without_description">
+                        <v-btn v-if="!hand" class="effective_power"
+                            absolute
+                            fab
+                        >
+                            {{card.effective_power}}
+                        </v-btn>
                         <v-img :src="'./cards/' + card['img_name'] + '.png'"></v-img>
                     </figure>
                 </v-card>
@@ -12,7 +18,7 @@
         </v-col>
         <v-col cols="12" v-if="description" class="description_row">
             <v-row justify="center">
-                <v-card v-for="card in cards" style="background-color: #3F3632" @click="mulligan(card['id'])"
+                <v-card v-for="card in cards" style="background-color: #3F3632" @click="card_click(card)"
                         :disabled="disabled">
                     <v-img id="card" :src="'./cards/' + card['img_name'] + '.png'"></v-img>
                 </v-card>
@@ -25,11 +31,8 @@
     export default {
         name: "Row",
         components: {},
-        props: ['cards', 'description', 'disabled', 'number'],
+        props: ['cards', 'description', 'disabled', 'number', 'hand'],
         methods: {
-            mulligan(id) {
-                this.$emit('mulligan', id)
-            },
             row_click(){
                 this.$emit('row_click', this.number)
             },
@@ -59,6 +62,11 @@
         margin: 2px;
         padding: 0;
         border-color: coral;
+    }
+
+    .effective_power {
+        width: 25px;
+        height: 25px;
     }
 
     .description_row {

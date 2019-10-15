@@ -77,7 +77,7 @@ class Player:
         return [card.get_data() for card in self.cemetery]
 
     def do_mulligan(self, id, round_number):
-        if self.muligan_count >= 2 or round_number != 1:
+        if self.muligan_count >= 2 or round_number != 0:
             print('Unauthorized mulligan')
             return False
         else:
