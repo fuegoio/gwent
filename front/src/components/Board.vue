@@ -78,7 +78,7 @@
                     console.log('good placement')
                     if (this.selected_card['agile'] == true) {
                         this.$sockets.game.emit('play_card', {
-                            id: this.selected_card['id'],
+                            card: this.selected_card['id'],
                             target: row_number
                         })
                     } else if (this.selected_card['type'] == 'medic') {
@@ -86,13 +86,13 @@
                             this.medic = true
                         } else {
                             this.$sockets.game.emit('play_card', {
-                                id: this.selected_card['id'],
+                                card: this.selected_card['id'],
                                 target: null
                             })
                         }
                     } else {
                         this.$sockets.game.emit('play_card', {
-                            id: this.selected_card['id'],
+                            card: this.selected_card['id'],
                             target: null
                         })
                     }
