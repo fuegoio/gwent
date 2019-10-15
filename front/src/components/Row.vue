@@ -16,14 +16,6 @@
                 </v-card>
             </v-row>
         </v-col>
-        <v-col cols="12" v-if="description" class="description_row">
-            <v-row justify="center">
-                <v-card v-for="card in cards" style="background-color: #3F3632" @click="card_click(card)"
-                        :disabled="disabled">
-                    <v-img id="card" :src="'./cards/' + card['img_name'] + '.png'"></v-img>
-                </v-card>
-            </v-row>
-        </v-col>
     </div>
 </template>
 
@@ -52,11 +44,6 @@
         border-radius: 12px;
     }
 
-    #card {
-        max-height: 300px;
-        max-width: 150px;
-    }
-
     .row {
         height: 125px;
         margin: 2px;
@@ -67,9 +54,5 @@
     .effective_power {
         width: 25px;
         height: 25px;
-    }
-
-    .description_row {
-        height: 300px;
     }
 </style>
