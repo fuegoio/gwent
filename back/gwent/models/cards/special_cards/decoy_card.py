@@ -25,10 +25,19 @@ class DecoyCard(SpecialCard):
             return None
 
     def place_card(self, board, adversary_board, player, adversary, target):
-        if isinstance(target, UnitCard):
-            self.row = target.row
-            player.hand.append(target)
-            target.destroy(board, player)
+        targets = self.get_targets(player, board)
+        target_card = None
+
+        if targets is not None:
+            for card in targets:
+                if card.id == target:
+                    target_card = card
+                    break
+
+        if isinstance(target_card, UnitCard):
+            self.row = target_card.row
+            player.hand.append(target_card)
+            target_card.destroy(board, player)
             board.rows[self.row].append(self)
         else:
             self.row = random.randint(0, 2)
