@@ -32,11 +32,11 @@ class Game:
         return sum(players_deads) >= 1
 
     def draw_decks(self):
-        # Choix du deck
+        # Pick deck
         for player in self.players:
             player.pick_cards()
 
-        # Piocher cartes
+        # Pick cards
         for i in range(NUM_CARDS_HANDS):
             for player in self.players:
                 player.draw_card()

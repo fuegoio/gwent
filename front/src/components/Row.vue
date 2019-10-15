@@ -1,5 +1,5 @@
 <template>
-    <div style="background-color: #B78D9C; border-radius: 14px" @click="raw_click">
+    <div style="background-color: #B78D9C; border-radius: 14px" @click="row_click">
         <v-col v-if="!description" cols="12" class="row">
             <v-row justify="center" style="margin: 0">
                 <v-card v-for="card in cards" style="background-color: #3F3632; border-radius: 14px;"
@@ -30,7 +30,7 @@
             mulligan(id) {
                 this.$emit('mulligan', id)
             },
-            raw_click(){
+            row_click(){
                 this.$emit('row_click', this.number)
             },
             card_click(card){

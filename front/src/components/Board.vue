@@ -1,9 +1,9 @@
 <template>
     <div>
         <div v-if="!mulligan">
-            <Row :cards="adversary_board['siege']" :number="5" :description="false"></Row>
-            <Row :cards="adversary_board['distance']" :number="4" :description="false"></Row>
-            <Row :cards="adversary_board['melee']" :number="3" :description="false"></Row>
+            <Row :cards="adversary_board['siege']" :number="5" :description="false" v-on:row_click="place_card"></Row>
+            <Row :cards="adversary_board['distance']" :number="4" :description="false" v-on:row_click="place_card"></Row>
+            <Row :cards="adversary_board['melee']" :number="3" :description="false" v-on:row_click="place_card"></Row>
             <Row :cards="board['melee']" :number="0" :description="false" v-on:row_click="place_card"></Row>
             <Row :cards="board['distance']" :number="1" :description="false" v-on:row_click="place_card"></Row>
             <Row :cards="board['siege']" :number="2" :description="false" v-on:row_click="place_card"></Row>
@@ -47,6 +47,7 @@
                     siege: []
                 },
                 cemetery: [],
+                disabled_rows: [true, true, true, true, true, true],
                 turn: false,
                 mulligan: false,
                 disable_mulligan: false,
@@ -61,6 +62,10 @@
                 this.mulligan = true
                 this.increment_chronometer()
             });
+
+            this.$sockets.game.on('terminated', () => {
+                console.log('Game is over')
+            })
 
             this.$sockets.game.on('done_mulligan', (data) => {
                 this.hand = data['hand'];
@@ -86,8 +91,15 @@
         },
         methods: {
             select_card(card) {
-                console.log(card)
                 this.selected_card = card;
+            },
+            place_card(row_number) {
+                if (this.selected_card != null && this.check_emplacement(row_number)) {
+                    console.log('good placement')
+                    this.$sockets.game.emit('play', {action: 'play_card', id: this.selected_card['id'], raw_number: row_number})
+                } else {
+                    this.selected_card = null
+                }
             },
             increment_chronometer() {
                 if (this.mulligan_chronometer < 100) {
@@ -109,14 +121,6 @@
                 this.mulligan = false;
                 this.$sockets.game.emit('ready_to_play');
             },
-            place_card(row_number) {
-                if (this.selected_card != null && this.check_emplacement(row_number)) {
-                    console.log('good placement')
-                    this.$sockets.game.emit('place_card', {raw_number: row_number, id: this.selected_card['id']})
-                } else {
-                    this.selected_card = null
-                }
-            },
             check_emplacement(row_number) {
                 if (this.selected_card['unit_card']) {
                     if (this.selected_card['agile']) {
@@ -126,8 +130,10 @@
                     } else {
                         return this.selected_card['row'] == row_number
                     }
+                } else {
+                    return false
                 }
-            },
+            }
         }
     }
 </script>
