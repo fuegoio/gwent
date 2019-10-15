@@ -103,7 +103,7 @@
             check_emplacement(row_number) {
                 if (this.selected_card['unit_card']) {
                     if (this.selected_card['agile']) {
-                        return 0 <= row_number <= 1
+                        return 0 <= row_number && row_number <= 1
                     } else if (this.selected_card['type'] == 'spy') {
                         return this.selected_card['row'] + 3 == row_number
                     } else {
