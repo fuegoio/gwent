@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-row class="adversory">
+        <v-row class="adversory" no-gutters>
             <v-col cols="2" align-self="center" class="text-center">
                 <v-chip>
                     {{ adversary_board['siege'].score }}
@@ -159,10 +159,6 @@
             },
             handle_card_click(data) {
                 if (this.selected_card['type'] == 'decoy') {
-                    console.log('Hello decoy', {
-                        card: this.selected_card['id'],
-                        target: data['card']['id']
-                    })
                     this.$sockets.game.emit('play_card', {
                         card: this.selected_card['id'],
                         target: data['card']['id']
@@ -172,18 +168,14 @@
                 }
             },
             check_emplacement(row_number) {
-                if (this.selected_card['unit_card']) {
-                    if (this.selected_card['agile']) {
-                        return 0 <= row_number && row_number <= 1
-                    } else if (this.selected_card['type'] == 'spy') {
-                        return this.selected_card['row'] + 3 == row_number
-                    } else if (this.selected_card['type'] == 'commanders_horn') {
-                        return 0 <= row_number && row_number <= 2
-                    } else {
-                        return this.selected_card['row'] == row_number
-                    }
+                if (this.selected_card['agile']) {
+                    return 0 <= row_number && row_number <= 1
+                } else if (this.selected_card['type'] == 'spy') {
+                    return this.selected_card['row'] + 3 == row_number
+                } else if (this.selected_card['type'] == 'commanders_horn') {
+                    return 0 <= row_number && row_number <= 2
                 } else {
-                    return false
+                    return this.selected_card['row'] == row_number
                 }
             },
             choose_medic_target(card) {
