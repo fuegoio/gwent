@@ -105,3 +105,9 @@ class Player:
             else:
                 print('Card not found')
                 return False
+
+    def get_player_data(self):
+        return {'name': self.name,
+                'faction': self.faction,
+                'lives': self.__lives,
+                'hand_length': len(self.hand)}

@@ -59,6 +59,16 @@ class GameNamespace(socketio.AsyncNamespace):
             self.game.init_round()
             await self.broadcast_board()
 
+    async def on_pass(self, sid):
+        turn = self.game.get_current_turn()
+        if sid == self.players_sid[turn]:
+            current_round = self.game.current_round
+            current_round.pass_turn()
+            await self.broadcast_board()
+            await self.check_finished()
+        else:
+            print('Wrong user')
+
     async def on_play_card(self, sid, data):
         turn = self.game.get_current_turn()
 
@@ -87,6 +97,8 @@ class GameNamespace(socketio.AsyncNamespace):
         for i, sid in enumerate(self.players_sid):
             player = self.get_player_from_sid(sid)
             data = {
+                'player': self.game.current_round.players[i].get_player_data(),
+                'adversary': self.game.current_round.players[i].get_player_data(),
                 'hand': player.get_hand_data(),
                 'cemetery': player.get_cemetery_data(),
                 'board': self.game.current_round.boards[i].get_board_as_json(),

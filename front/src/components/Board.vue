@@ -2,7 +2,19 @@
     <div>
         <v-row class="adversory" no-gutters>
             <v-col cols="3">
-
+                <v-row no-gutters>
+                    <PlayerCard :length_hand="adversary['hand_length']" :player_lives="adversary['lives']"
+                                :player_name="adversary['name']" :score="adversary_board['score_total']">
+                    </PlayerCard>
+                </v-row>
+                <v-row style="height: 220px;"></v-row>
+                <v-btn height="60px" @click="pass_turn" :disabled="!turn">Pass</v-btn>
+                <v-row style="height: 220px;"></v-row>
+                <v-row no-gutters>
+                    <PlayerCard :length_hand="player['hand_length']" :player_lives="player['lives']"
+                                :player_name="player['name']" :score="board['score_total']">
+                    </PlayerCard>
+                </v-row>
             </v-col>
             <v-col cols="1">
                 <v-row class="score" align-content="center" justify="center">
@@ -15,7 +27,7 @@
                         {{adversary_board['distance']['score']}}
                     </v-chip>
                 </v-row>
-                <v-row class="score"align-content="center" justify="center">
+                <v-row class="score" align-content="center" justify="center">
                     <v-chip>
                         {{adversary_board['melee']['score']}}
                     </v-chip>
@@ -75,10 +87,11 @@
     import Row from "./Row"
     import MulliganDialog from "./MulliganDialog";
     import CemeteryDialog from "./MedicDialog";
+    import PlayerCard from "./PlayerCard";
 
     export default {
         name: "Board",
-        components: {Row, MulliganDialog, CemeteryDialog},
+        components: {Row, MulliganDialog, CemeteryDialog, PlayerCard},
         data() {
             return {
                 selected_card: null,
@@ -96,6 +109,14 @@
                 cemetery: [],
                 turn: false,
                 medic: false,
+                player: {
+                    name: String,
+                    faction: String,
+                    lives: Number},
+                adversary: {
+                    name: String,
+                    faction: String,
+                    lives: Number},
             }
         },
         beforeCreate() {
@@ -117,7 +138,9 @@
                 this.board = data['board'];
                 this.adversary_board = data['adversary_board'];
                 this.cemetery = data['cemetery'];
-                this.turn = data['turn']
+                this.turn = data['turn'];
+                this.player = data['player'];
+                this.adversary = data['adversary']
             });
 
             this.$sockets.game.emit('get_cards');
@@ -188,6 +211,9 @@
                     }
                 }
                 return revivable_card > 0
+            },
+            pass_turn() {
+                this.$sockets.game.emit('pass')
             }
         }
     }

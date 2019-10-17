@@ -21,8 +21,10 @@ class Round:
 
     def pass_turn(self):
         player = self.players[self.turn]
+        adversary = self.players[1 - self.turn]
         print(f'[Game] {player.name}\' passes his turn')
-        self.toggle_turn()
+        player.pass_turn()
+        self.toggle_turn(adversary)
 
     def toggle_turn(self, adversary):
         if not adversary.passed:
