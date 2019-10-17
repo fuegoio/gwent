@@ -1,47 +1,42 @@
 <template>
     <div>
         <v-row class="adversory" no-gutters>
-            <v-col cols="2" align-self="center" class="text-center">
+            <v-col cols="3">
 
             </v-col>
-            <v-col cols="1" align-self="center" class="text-center">
-                <v-row class="score" align-self="center">
+            <v-col cols="1">
+                <v-row class="score" align-content="center" justify="center">
                     <v-chip>
-                        5
+                        {{adversary_board['siege']['score']}}
                     </v-chip>
                 </v-row>
-                <v-row class="score">
+                <v-row class="score" align-content="center" justify="center">
                     <v-chip>
-                        5
+                        {{adversary_board['distance']['score']}}
                     </v-chip>
                 </v-row>
-                <v-row class="score">
+                <v-row class="score"align-content="center" justify="center">
                     <v-chip>
-                        5
+                        {{adversary_board['melee']['score']}}
                     </v-chip>
                 </v-row>
-                <v-row class="score">
+                <v-row class="score" align-content="center" justify="center">
                     <v-chip>
-                        5
+                        {{board['melee']['score']}}
                     </v-chip>
                 </v-row>
-                <v-row class="score">
+                <v-row class="score" align-content="center" justify="center">
                     <v-chip>
-                        5
+                        {{board['distance']['score']}}
                     </v-chip>
                 </v-row>
-                <v-row class="score">
+                <v-row class="score" align-content="center" justify="center">
                     <v-chip>
-                        5
-                    </v-chip>
-                </v-row>
-                <v-row class="score">
-                    <v-chip>
-                        MoulQ
+                        {{board['siege']['score']}}
                     </v-chip>
                 </v-row>
             </v-col>
-            <v-col cols="9">
+            <v-col cols="8">
                 <Row :cards="adversary_board['siege'].cards" :number="5" :description="false"
                      v-on:card_click="handle_card_click"
                      v-on:row_click="place_card">
@@ -64,10 +59,10 @@
                 <Row :cards="board['siege'].cards" :number="2" :description="false" v-on:row_click="place_card"
                      v-on:card_click="handle_card_click">
                 </Row>
-                <Row :cards="hand" :number="6" :description="false" v-on:card_click="select_card" hand="true"
+            </v-col>
+            <Row :cards="hand" :number="6" :description="false" v-on:card_click="select_card" hand="true"
                      :disabled="!turn">
                 </Row>
-            </v-col>
         </v-row>
 
         <MulliganDialog :cards="hand"></MulliganDialog>
@@ -199,11 +194,8 @@
 </script>
 
 <style scoped>
-    .full-height {
-        height: 100%;
-    }
-
     .score {
         height: 125px;
+        text-align: center;
     }
 </style>

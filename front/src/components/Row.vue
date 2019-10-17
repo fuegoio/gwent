@@ -3,11 +3,11 @@
         <v-card v-for="card in cards" style="background-color: #3F3632; border-radius: 14px;" :key="card.id"
                 :disabled="disabled" @click="card_click(card)">
             <figure id="without_description">
-                <v-btn v-if="!hand" class="effective_power"
+                <v-btn v-if="!hand && card['unit_card'] && !card['hero']" class="effective_power"
                        absolute
                        fab
                 >
-                    {{card.effective_power}}
+                    {{card['effective_power']}}
                 </v-btn>
                 <v-img :src="'./cards/' + card['img_name'] + '.png'"></v-img>
             </figure>
