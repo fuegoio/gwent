@@ -175,6 +175,8 @@
                     return this.selected_card['row'] + 3 == row_number
                 } else if (this.selected_card['type'] == 'commanders_horn') {
                     return 0 <= row_number && row_number <= 2
+                } else if (this.selected_card['type'] == 'scorch' || this.selected_card['type'] == 'clear_weather') {
+                    return true
                 } else {
                     return this.selected_card['row'] == row_number
                 }
