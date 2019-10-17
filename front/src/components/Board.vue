@@ -2,71 +2,71 @@
     <div>
         <v-row class="adversory" no-gutters>
             <v-col cols="2" align-self="center" class="text-center">
-                <v-chip>
-                    {{ adversary_board['siege'].score }}
-                </v-chip>
+
             </v-col>
-            <v-col cols="10">
+            <v-col cols="1" align-self="center" class="text-center">
+                <v-row class="score" align-self="center">
+                    <v-chip>
+                        5
+                    </v-chip>
+                </v-row>
+                <v-row class="score">
+                    <v-chip>
+                        5
+                    </v-chip>
+                </v-row>
+                <v-row class="score">
+                    <v-chip>
+                        5
+                    </v-chip>
+                </v-row>
+                <v-row class="score">
+                    <v-chip>
+                        5
+                    </v-chip>
+                </v-row>
+                <v-row class="score">
+                    <v-chip>
+                        5
+                    </v-chip>
+                </v-row>
+                <v-row class="score">
+                    <v-chip>
+                        5
+                    </v-chip>
+                </v-row>
+                <v-row class="score">
+                    <v-chip>
+                        MoulQ
+                    </v-chip>
+                </v-row>
+            </v-col>
+            <v-col cols="9">
                 <Row :cards="adversary_board['siege'].cards" :number="5" :description="false"
                      v-on:card_click="handle_card_click"
-                     v-on:row_click="place_card"></Row>
-            </v-col>
-            <v-col cols="2" align-self="center" class="text-center">
-                <v-chip>
-                    {{ adversary_board['distance'].score }}
-                </v-chip>
-            </v-col>
-            <v-col cols="10">
+                     v-on:row_click="place_card">
+                </Row>
                 <Row :cards="adversary_board['distance'].cards" :number="4" :description="false"
                      v-on:card_click="handle_card_click"
-                     v-on:row_click="place_card"></Row>
-            </v-col>
-            <v-col cols="2" align-self="center" class="text-center">
-                <v-chip>
-                    {{ adversary_board['melee'].score }}
-                </v-chip>
-            </v-col>
-            <v-col cols="10">
+                     v-on:row_click="place_card">
+                </Row>
                 <Row :cards="adversary_board['melee'].cards" :number="3" :description="false"
                      v-on:card_click="handle_card_click"
-                     v-on:row_click="place_card"></Row>
-            </v-col>
-            <v-col cols="2" align-self="center" class="text-center">
-                <v-chip>
-                    {{ board['melee'].score }}
-                </v-chip>
-            </v-col>
-            <v-col cols="10">
+                     v-on:row_click="place_card">
+                </Row>
                 <Row :cards="board['melee'].cards" :number="0" :description="false" v-on:row_click="place_card"
-                     v-on:card_click="handle_card_click"></Row>
-            </v-col>
-            <v-col cols="2" align-self="center" class="text-center">
-                <v-chip>
-                    {{ board['distance'].score }}
-                </v-chip>
-            </v-col>
-            <v-col cols="10">
+                     v-on:card_click="handle_card_click">
+                </Row>
                 <Row :cards="board['distance'].cards" :number="1" :description="false"
                      v-on:card_click="handle_card_click"
-                     v-on:row_click="place_card"></Row>
-            </v-col>
-            <v-col cols="2" align-self="center" class="text-center">
-                <v-chip>
-                    {{ board['siege'].score }}
-                </v-chip>
-            </v-col>
-            <v-col cols="10">
+                     v-on:row_click="place_card">
+                </Row>
                 <Row :cards="board['siege'].cards" :number="2" :description="false" v-on:row_click="place_card"
-                     v-on:card_click="handle_card_click"></Row>
-            </v-col>
-            <v-col cols="2" align-self="center" class="text-center">
-                <v-chip>
-                    Michel
-                </v-chip>
-            </v-col>
-            <v-col cols="10">
+                     v-on:card_click="handle_card_click">
+                </Row>
                 <Row :cards="hand" :number="6" :description="false" v-on:card_click="select_card" hand="true"
-                     :disabled="!turn"></Row>
+                     :disabled="!turn">
+                </Row>
             </v-col>
         </v-row>
 
@@ -159,7 +159,7 @@
                 }
             },
             handle_card_click(data) {
-                if (this.selected_card['type'] == 'decoy') {
+                if (this.selected_card['type'] == 'decoy' && data['row_number'] < 3) {
                     this.$sockets.game.emit('play_card', {
                         card: this.selected_card['id'],
                         target: data['card']['id']
@@ -201,5 +201,9 @@
 <style scoped>
     .full-height {
         height: 100%;
+    }
+
+    .score {
+        height: 125px;
     }
 </style>

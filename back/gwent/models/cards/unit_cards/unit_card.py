@@ -55,7 +55,7 @@ class UnitCard(Card):
 
     def get_effective_power(self, board):
         if self.hero:
-            return self.power * self.get_commanders_horn(board)
+            return self.power
         elif any(isinstance(x, WeatherCard) for x in board.rows[self.row]):
             return (1 + self.get_morale_boost(board)) * self.get_commanders_horn(board)
         else:

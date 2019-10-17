@@ -24,8 +24,8 @@ class Round:
         print(f'[Game] {player.name}\' passes his turn')
         self.toggle_turn()
 
-    def toggle_turn(self):
-        if sum([player.passed for player in self.players]) == 0:
+    def toggle_turn(self, adversary):
+        if not adversary.passed:
             self.turn = 1 - self.turn
 
     def check_players_hand(self):
@@ -45,6 +45,6 @@ class Round:
             card.place_card(board, adversary_board, player, adversary, target)
 
             self.check_players_hand()
-            self.toggle_turn()
+            self.toggle_turn(adversary)
         else:
             print('Card not found')

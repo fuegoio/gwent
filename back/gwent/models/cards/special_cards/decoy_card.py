@@ -40,5 +40,4 @@ class DecoyCard(SpecialCard):
             target_card.destroy(board, player)
             board.rows[self.row].append(self)
         else:
-            self.row = random.randint(0, 2)
-            board.rows[self.row].append(self)
+            print('Wrong target')

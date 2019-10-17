@@ -1,5 +1,5 @@
 <template>
-    <v-row justify="center" style="margin: 0" v-if="!description" cols="10" class="custom_row" @click="row_click">
+    <v-row justify="center" style="margin: 0" v-if="!description" class="custom_row" @click="row_click">
         <v-card v-for="card in cards" style="background-color: #3F3632; border-radius: 14px;" :key="card.id"
                 :disabled="disabled" @click="card_click(card)">
             <figure id="without_description">
