@@ -21,9 +21,10 @@ class Card:
     def place_card(self, board, adversary_board, player, adversary, target):
         pass
 
-    def destroy(self, board, player):
+    def destroy(self, board, player, exclude_from_cemetery=False):
         try:
-            player.cemetery.append(self)
+            if not exclude_from_cemetery:
+                player.cemetery.append(self)
             board.rows[self.row].remove(self)
         except ValueError:
             print("No more cards to remove !")

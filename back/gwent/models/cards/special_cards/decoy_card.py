@@ -8,32 +8,33 @@ class DecoyCard(SpecialCard):
     def __repr__(self):
         return f'<Decoy {self.name}>'
 
-    def get_targets(self, player, board):
+    def get_row_and_targets(self, player, board):
+        targets = []
+        for row in board.rows:
+            for card in row:
+                if isinstance(card, UnitCard) and card.hero is False:
+                    targets.append(card.id)
+        if len(targets) > 0:
+            return {'rows': [self.row], 'target': {'target_type': 'decoy', 'target_ids': [card['id'] for card in targets]}}
+        else:
+            return {'rows': [self.row], 'target': None}
+
+    def place_card(self, board, adversary_board, player, adversary, target):
         targets = []
         for row in board.rows:
             for card in row:
                 if isinstance(card, UnitCard) and card.hero is False:
                     targets.append(card)
-        print(targets)
-        if len(targets) > 0:
-            return targets
-        else:
-            return None
-
-    def place_card(self, board, adversary_board, player, adversary, target):
-        targets = self.get_targets(player, board)
         target_card = None
-
         if targets is not None:
             for card in targets:
                 if card.id == target:
                     target_card = card
                     break
-
         if isinstance(target_card, UnitCard):
             self.row = target_card.row
             player.hand.append(target_card)
-            target_card.destroy(board, player)
+            target_card.destroy(board, player, True)
             board.rows[self.row].append(self)
         else:
             print('Wrong target')

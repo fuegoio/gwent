@@ -3,9 +3,8 @@ from gwent.models.cards.special_cards.weather_card import WeatherCard
 
 
 class ClearWeatherCard(SpecialCard):
-    def __init__(self, name: str, img_name: str, faction: str, row: int):
-        super().__init__(name, img_name, faction, row)
-        self.type = 'clear_weather'
+    def get_row_and_targets(self, player, board):
+        return {'rows': [7], 'target': None}
 
     def place_card(self, board, adversary_board, player, adversary, target):
         self.apply_abilities(board, adversary_board, player, adversary)

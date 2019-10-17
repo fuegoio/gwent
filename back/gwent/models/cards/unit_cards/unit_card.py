@@ -40,11 +40,12 @@ class UnitCard(Card):
             return {'rows': [self.row], 'target': None}
 
     def place_card(self, board, adversary_board, player, adversary, target):
-        # to be overridden depending on abilities
-        if self.agile:
+        if not self.agile:
+            board.rows[self.row].append(self)
+        elif 0 <= target <= 1:
             board.rows[target].append(self)
         else:
-            board.rows[self.row].append(self)
+            print('Problem with agile target')
         self.apply_abilities(board, adversary_board, player, adversary, target)
 
     def apply_abilities(self, board, adversary_board, player, adversary, target):
