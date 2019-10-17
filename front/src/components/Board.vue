@@ -15,7 +15,7 @@
                         {{adversary_board['distance']['score']}}
                     </v-chip>
                 </v-row>
-                <v-row class="score"align-content="center" justify="center">
+                <v-row class="score" align-content="center" justify="center">
                     <v-chip>
                         {{adversary_board['melee']['score']}}
                     </v-chip>
@@ -37,32 +37,32 @@
                 </v-row>
             </v-col>
             <v-col cols="8">
-                <Row :cards="adversary_board['siege'].cards" :number="5" :description="false"
+                <Row :cards="adversary_board['siege'].cards" :number="5"
                      v-on:card_click="handle_card_click"
                      v-on:row_click="place_card">
                 </Row>
-                <Row :cards="adversary_board['distance'].cards" :number="4" :description="false"
+                <Row :cards="adversary_board['distance'].cards" :number="4"
                      v-on:card_click="handle_card_click"
                      v-on:row_click="place_card">
                 </Row>
-                <Row :cards="adversary_board['melee'].cards" :number="3" :description="false"
+                <Row :cards="adversary_board['melee'].cards" :number="3"
                      v-on:card_click="handle_card_click"
                      v-on:row_click="place_card">
                 </Row>
-                <Row :cards="board['melee'].cards" :number="0" :description="false" v-on:row_click="place_card"
+                <Row :cards="board['melee'].cards" :number="0" v-on:row_click="place_card"
                      v-on:card_click="handle_card_click">
                 </Row>
-                <Row :cards="board['distance'].cards" :number="1" :description="false"
+                <Row :cards="board['distance'].cards" :number="1"
                      v-on:card_click="handle_card_click"
                      v-on:row_click="place_card">
                 </Row>
-                <Row :cards="board['siege'].cards" :number="2" :description="false" v-on:row_click="place_card"
+                <Row :cards="board['siege'].cards" :number="2" v-on:row_click="place_card"
                      v-on:card_click="handle_card_click">
                 </Row>
             </v-col>
-            <Row :cards="hand" :number="6" :description="false" v-on:card_click="select_card" hand="true"
-                     :disabled="!turn">
-                </Row>
+            <Row :cards="hand" :number="6" v-on:card_click="select_card" hand="true"
+                 :disabled="!turn">
+            </Row>
         </v-row>
 
         <MulliganDialog :cards="hand"></MulliganDialog>
