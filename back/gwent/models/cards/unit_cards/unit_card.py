@@ -9,7 +9,6 @@ class UnitCard(Card):
         self.agile = agile
         self.hero = hero
         self.morale_boost = False
-        self.type = ''
 
     def get_data(self, board=None):
         if board is None:
@@ -21,7 +20,6 @@ class UnitCard(Card):
                 'hero': self.hero,
                 'row': self.row,
                 'unit_card': True,
-                'type': self.type
             }
         else:
             return {
@@ -33,14 +31,13 @@ class UnitCard(Card):
                 'hero': self.hero,
                 'row': self.row,
                 'unit_card': True,
-                'type': self.type
             }
 
-    def get_targets(self, player, board):
+    def get_row_and_targets(self, player, board):
         if self.agile:
-            return [0, 1]
+            return {'rows': [1, 2], 'target': None}
         else:
-            return None
+            return {'rows': [self.row], 'target': None}
 
     def place_card(self, board, adversary_board, player, adversary, target):
         # to be overridden depending on abilities
