@@ -44,7 +44,7 @@ class Player:
         self.__ready = True
 
     def pick_cards(self):
-        cards_available = cards_db.query_deck_by_faction(self.faction)
+        cards_available = cards_db.make_deck_by_faction(self.faction)
         print(cards_available)
 
         def pick_card():

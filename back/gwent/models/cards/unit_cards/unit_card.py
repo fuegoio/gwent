@@ -3,8 +3,8 @@ from gwent.models.cards.special_cards.weather_card import WeatherCard
 
 
 class UnitCard(Card):
-    def __init__(self, id: str, name: str, img_name: str, agile: bool, hero: bool, faction: str, power: int, row: int):
-        super().__init__(id, name, img_name, faction, row)
+    def __init__(self, name: str, img_name: str, agile: bool, hero: bool, faction: str, power: int, row: int):
+        super().__init__(name, img_name, faction, row)
         self.power = power
         self.agile = agile
         self.hero = hero

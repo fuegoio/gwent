@@ -3,8 +3,8 @@ from gwent.models.cards.special_cards.special_card import SpecialCard
 
 
 class ScorchCard(SpecialCard):
-    def __init__(self, id: str, name: str, img_name: str, faction: str, row: int):
-        super().__init__(id, name, img_name, faction, row)
+    def __init__(self, name: str, img_name: str, faction: str, row: int):
+        super().__init__(name, img_name, faction, row)
         self.type = 'scorch'
 
     def place_card(self, board, adversary_board, player, adversary, target):
