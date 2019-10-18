@@ -52,25 +52,23 @@ class UnitCard(Card):
         pass
 
     def get_effective_power(self, board):
+        boost = self.get_bonuses(board)
         if self.hero:
             return self.power
         elif any(isinstance(x, WeatherCard) for x in board.rows[self.row]):
-            return (1 + self.get_morale_boost(board)) * self.get_commanders_horn(board)
+            return (1 + boost['morale']) * boost['horn']
         else:
-            return (self.power + self.get_morale_boost(board)) * self.get_commanders_horn(board)
+            return (self.power + boost['morale']) * boost['horn']
 
-    # TODO : mix up get_moral_boost and get_commanders_horn method to check only once how to update the score
-    def get_morale_boost(self, board):
-        boost = -1 if self.morale_boost else 0
+    def get_bonuses(self, board):
+        boost = {
+            'morale': -1 if self.morale_boost else 0,
+            'horn': 1
+        }
         for card in board.rows[self.row]:
             if isinstance(card, UnitCard):
                 if card.morale_boost:
-                    boost += 1
+                    boost['morale'] += 1
+            if card.commanders_horn and boost['horn'] == 1:
+                boost['horn'] = 2
         return boost
-
-    def get_commanders_horn(self, board):
-        horn = 1
-        for card in board.rows[self.row]:
-            if card.commanders_horn:
-                horn += 1
-        return horn
