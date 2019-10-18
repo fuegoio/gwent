@@ -11,9 +11,9 @@ class MedicCard(UnitCard):
         revivable_units = [card for card in player.cemetery if card.hero is False and isinstance(card, UnitCard)]
         if len(revivable_units) > 0:
             print(revivable_units)
-            print([card['id'] for card in revivable_units])
+            print([card.id for card in revivable_units])
             return {'rows': [self.row],
-                    'target': {'target_type': 'medic', 'target_ids': [card['id'] for card in revivable_units]}}
+                    'target': {'target_type': 'medic', 'target_ids': [card.id for card in revivable_units]}}
         else:
             return {'rows': [self.row], 'target': None}
 
@@ -23,7 +23,7 @@ class MedicCard(UnitCard):
 
         if targets is not None:
             for card in [card for card in player.cemetery if card.hero is False and isinstance(card, UnitCard)]:
-                if card['id'] == target['target_id']:
+                if card.id == target['target_id']:
                     target_card = card
                     break
 

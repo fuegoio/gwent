@@ -13,5 +13,5 @@ class CommandersHornCard(SpecialCard):
         return {'rows': [0, 1, 2], 'targets': None}
 
     def place_card(self, board, adversary_board, player, adversary, target):
-        self.row = target
-        board.rows[self.row].append(self)
+        self.row = target['row']
+        board.rows[target['row']].append(self)

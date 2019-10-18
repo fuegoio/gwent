@@ -9,7 +9,7 @@ class TightBondCard(UnitCard):
     def get_effective_power(self, board):
         tight_bond_number = 0
         for card in board.rows[self.row]:
-            if card.id == self.id:
+            if card.img_name == self.img_name:
                 tight_bond_number += 1
         bonuses = self.get_bonuses(board)
         if any(isinstance(x, WeatherCard) for x in board.rows[self.row]):

@@ -8,9 +8,7 @@ class Round:
         self.boards = [Board(self, player) for player in self.game.players]
         self.players = self.game.players
         self.turn = first_to_play
-
         self.losers = None
-
         for player in self.game.players:
             player.reset_turn()
 

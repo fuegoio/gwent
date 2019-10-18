@@ -64,8 +64,8 @@ class GameNamespace(socketio.AsyncNamespace):
         if sid == self.players_sid[turn]:
             current_round = self.game.current_round
             current_round.pass_turn()
-            await self.broadcast_board()
             await self.check_finished()
+            await self.broadcast_board()
         else:
             print('Wrong user')
 
@@ -76,11 +76,9 @@ class GameNamespace(socketio.AsyncNamespace):
             card = data['card']
             target = data['target']
             current_round = self.game.current_round
-
             current_round.play_card(card, target)
-
-            await self.broadcast_board()
             await self.check_finished()
+            await self.broadcast_board()
         else:
             print('Wrong user')
 
@@ -88,22 +86,21 @@ class GameNamespace(socketio.AsyncNamespace):
         current_round = self.game.current_round
         if current_round.finished:
             self.game.finish_round()
-            await self.emit('round_finished')
-
-        if self.game.finished:
-            await self.emit('finished')
+            if self.game.finished:
+                await self.emit('finished')
 
     async def broadcast_board(self):
         for i, sid in enumerate(self.players_sid):
-            player = self.get_player_from_sid(sid)
+            players = self.game.current_round.players
+            boards = self.game.current_round.boards
             data = {
-                'player': player.get_player_data(),
-                'adversary': self.game.current_round.players[1 - i].get_player_data(),
-                'hand': player.get_hand_data(self.game.current_round.boards[i], player),
-                'cemetery': player.get_cemetery_data(),
-                'board': self.game.current_round.boards[i].get_board_as_json(),
-                'adversary_board': self.game.current_round.boards[1 - i].get_board_as_json(),
-                'turn': i == self.game.current_round.turn
+                'player': players[i].get_player_data(),
+                'adversary': players[1 - i].get_player_data(),
+                'hand': players[i].get_hand_data(boards[i]),
+                'cemetery': players[i].get_cemetery_data(),
+                'board': boards[i].get_board_as_json(players[i]),
+                'adversary_board': boards[1 - i].get_board_as_json(players[i - 1]),
+                'turn': i == self.game.get_current_turn()
             }
             await self.emit('board', data, sid)
 

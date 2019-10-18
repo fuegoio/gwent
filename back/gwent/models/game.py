@@ -57,4 +57,5 @@ class Game:
         for loser in losers:
             loser.lose()
             print(f'[Round] {loser.name} loses the round.')
-
+        if not self.finished:
+            self.init_round()

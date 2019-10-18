@@ -32,7 +32,7 @@ class UnitCard(Card):
 
     def get_row_and_targets(self, player, board):
         if self.agile:
-            return {'rows': [1, 2], 'target': None}
+            return {'rows': [0, 1], 'target': None}
         else:
             return {'rows': [self.row], 'target': None}
 
