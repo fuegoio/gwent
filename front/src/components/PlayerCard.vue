@@ -7,7 +7,7 @@
         <v-row>
             <v-col cols="1">{{length_hand}}
             </v-col>
-            <v-col cols="1"><v-img :src="'./card_icon.png'" height="25px" contain></v-img></v-col>
+            <!--<v-col cols="1"><v-img :src="'./card_icon.png'" height="25px" contain></v-img></v-col>-->
             <v-col cols="6"></v-col>
             <v-col>Lives : {{player_lives}}</v-col>
         </v-row>

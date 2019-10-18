@@ -27,7 +27,7 @@ class UnitCard(Card):
                 'effective_power': self.get_effective_power(board),
                 'hero': self.hero,
                 'unit_card': True,
-                'placement': self.get_row_and_targets(board, player)
+                'placement': self.get_row_and_targets(player, board)
             }
 
     def get_row_and_targets(self, player, board):

@@ -51,24 +51,24 @@
             <v-col cols="8">
                 <Row :cards="adversary_board['siege'].cards" :number="5"
                      v-on:card_click="handle_card_click"
-                     v-on:row_click="place_card">
+                     v-on:row_click="handle_row_click">
                 </Row>
                 <Row :cards="adversary_board['distance'].cards" :number="4"
                      v-on:card_click="handle_card_click"
-                     v-on:row_click="place_card">
+                     v-on:row_click="handle_row_click">
                 </Row>
                 <Row :cards="adversary_board['melee'].cards" :number="3"
                      v-on:card_click="handle_card_click"
-                     v-on:row_click="place_card">
+                     v-on:row_click="handle_row_click">
                 </Row>
-                <Row :cards="board['melee'].cards" :number="0" v-on:row_click="place_card"
+                <Row :cards="board['melee'].cards" :number="0" v-on:row_click="handle_row_click"
                      v-on:card_click="handle_card_click">
                 </Row>
                 <Row :cards="board['distance'].cards" :number="1"
                      v-on:card_click="handle_card_click"
-                     v-on:row_click="place_card">
+                     v-on:row_click="handle_row_click">
                 </Row>
-                <Row :cards="board['siege'].cards" :number="2" v-on:row_click="place_card"
+                <Row :cards="board['siege'].cards" :number="2" v-on:row_click="handle_row_click"
                      v-on:card_click="handle_card_click">
                 </Row>
             </v-col>
@@ -147,32 +147,14 @@
         },
         methods: {
             select_card(data) {
+                console.log(data)
                 this.selected_card = data['card'];
             },
-            place_card(row_number) {
-                if (this.selected_card != null && this.check_emplacement(row_number)) {
-                    console.log('good placement')
-                    if (this.selected_card['agile'] == true || this.selected_card['type'] == "commanders_horn") {
-                        this.$sockets.game.emit('play_card', {
-                            card: this.selected_card['id'],
-                            target: row_number
-                        })
-                    } else if (this.selected_card['type'] == 'medic') {
-                        if (this.any_card_revivable()) {
-                            this.medic = true
-                        } else {
-                            this.$sockets.game.emit('play_card', {
-                                card: this.selected_card['id'],
-                                target: null
-                            })
-                        }
-                    } else {
-                        this.$sockets.game.emit('play_card', {
-                            card: this.selected_card['id'],
-                            target: null
-                        })
-                    }
+            handle_row_click(row_number) {
+                if (this.selected_card != null && this.selected_card['placement']['rows'].includes(row_number)) {
+                    
                 } else {
+                    print('merdier')
                     this.selected_card = null
                 }
             },

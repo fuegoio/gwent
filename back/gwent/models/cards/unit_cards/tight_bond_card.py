@@ -11,9 +11,8 @@ class TightBondCard(UnitCard):
         for card in board.rows[self.row]:
             if card.id == self.id:
                 tight_bond_number += 1
-
+        bonuses = self.get_bonuses(board)
         if any(isinstance(x, WeatherCard) for x in board.rows[self.row]):
-            return (tight_bond_number + self.get_morale_boost(board)) * self.get_commanders_horn(board)
+            return (tight_bond_number + bonuses['morale'])*bonuses['horn']
         else:
-            return (self.power * tight_bond_number + self.get_morale_boost(board)) * self.get_commanders_horn(board)
-
+            return (self.power * tight_bond_number + bonuses['morale']) * bonuses['horn']

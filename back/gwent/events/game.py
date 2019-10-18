@@ -97,9 +97,9 @@ class GameNamespace(socketio.AsyncNamespace):
         for i, sid in enumerate(self.players_sid):
             player = self.get_player_from_sid(sid)
             data = {
-                'player': self.game.current_round.players[i].get_player_data(),
-                'adversary': self.game.current_round.players[i].get_player_data(),
-                'hand': player.get_hand_data(),
+                'player': player.get_player_data(),
+                'adversary': self.game.current_round.players[1 - i].get_player_data(),
+                'hand': player.get_hand_data(self.game.current_round.boards[i], player),
                 'cemetery': player.get_cemetery_data(),
                 'board': self.game.current_round.boards[i].get_board_as_json(),
                 'adversary_board': self.game.current_round.boards[1 - i].get_board_as_json(),

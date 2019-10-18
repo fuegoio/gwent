@@ -13,3 +13,5 @@ class SpyCard(UnitCard):
         player.draw_card()
         player.draw_card()
 
+    def get_row_and_targets(self, player, board):
+        return {'rows': [self.row + 3], 'target': None}

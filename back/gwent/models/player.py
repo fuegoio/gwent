@@ -34,8 +34,8 @@ class Player:
     def __repr__(self):
         return self.name
 
-    def get_hand_data(self):
-        return [card.get_data() for card in self.hand]
+    def get_hand_data(self, board=None, player=None):
+        return [card.get_data(board, player) for card in self.hand]
 
     def get_cemetery_data(self):
         return [card.get_data() for card in self.cemetery]
