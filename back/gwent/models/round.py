@@ -22,6 +22,9 @@ class Round:
         adversary = self.players[1 - self.turn]
         print(f'[Game] {player.name}\' passes his turn')
         player.pass_turn()
+        if len(adversary.hand) == 0:
+            adversary.pass_turn()
+            print(f'[Game] {adversary.name}\' passes his turn')
         self.toggle_turn(adversary)
 
     def toggle_turn(self, adversary):

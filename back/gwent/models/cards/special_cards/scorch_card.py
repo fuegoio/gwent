@@ -21,6 +21,7 @@ class ScorchCard(SpecialCard):
             for row in board.rows:
                 for card in row:
                     if isinstance(card, UnitCard) and max_power == card.get_effective_power(board) and card.hero is False:
+                        print('Destroying card from scorch')
                         card.destroy(board, board.player)
 
     def get_row_and_targets(self, player, board):
