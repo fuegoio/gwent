@@ -15,9 +15,9 @@ class DecoyCard(SpecialCard):
                 if isinstance(card, UnitCard) and card.hero is False:
                     targets.append(card.id)
         if len(targets) > 0:
-            return {'rows': [self.row], 'target': {'target_type': 'decoy', 'target_ids': [card['id'] for card in targets]}}
+            return {'rows': [0, 1, 2], 'targets': {'target_type': 'decoy', 'target_ids': targets}}
         else:
-            return {'rows': [self.row], 'target': None}
+            return {'rows': [0, 1, 2], 'targets': None}
 
     def place_card(self, board, adversary_board, player, adversary, target):
         targets = []
@@ -28,7 +28,7 @@ class DecoyCard(SpecialCard):
         target_card = None
         if targets is not None:
             for card in targets:
-                if card.id == target:
+                if card.id == target['target_id']:
                     target_card = card
                     break
         if isinstance(target_card, UnitCard):

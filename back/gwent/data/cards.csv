@@ -49,12 +49,18 @@ eithne,Eithne,10,hero,eithne,scoiatael,1
 havekar_healer,Havekar Healer,0,medic,healer,scoiatael,1
 riordain,Riordain,1,,riordain,scoiatael,1
 toruviel,Toruviel,2,,toruviel,scoiatael,1
-skirmisher_elven,Elven Skirmisher,2,muster,elven_skirmisher2,scoiatael,1
-skirmisher_dwarven,Dwarven Skirmisher,3,muster,skirmisher2,scoiatael,0
+skirmisher_elven_1,Elven Skirmisher,2,muster,elven_skirmisher_1,scoiatael,1
+skirmisher_elven_2,Elven Skirmisher,2,muster,elven_skirmisher_2,scoiatael,1
+skirmisher_elven_3,Elven Skirmisher,2,muster,elven_skirmisher_3,scoiatael,1
+skirmisher_1,Dwarven Skirmisher,3,muster,skirmisher_1,scoiatael,0
+skirmisher_2,Dwarven Skirmisher,3,muster,skirmisher_2,scoiatael,0
+skirmisher_3,Dwarven Skirmisher,3,muster,skirmisher_3,scoiatael,0
 ciaran_aep_easnillien,Ciaran aep Easnillien,3,agile,easnillien,scoiatael,1
 vrihedd_brigade_recruit,Vrihedd Brigade Recruit,4,,recruit,scoiatael,1
 dol_blathanna_archer,Dol Blathanna Archer,4,,archer,scoiatael,1
-havekar_smuggler,Havekar Smuggler,5,muster,smuggler1,scoiatael,0
+havekar_smuggler_1,Havekar Smuggler,5,muster,smuggler_1,scoiatael,0
+havekar_smuggler_2,Havekar Smuggler,5,muster,smuggler_2,scoiatael,0
+havekar_smuggler_3,Havekar Smuggler,5,muster,smuggler_3,scoiatael,0
 mahakaman_defender,Mahakaman Defender,5,,defender2,scoiatael,0
 vrihedd_brigade_veteran,Vrihedd Brigade Veteran,5,agile,veteran1,scoiatael,0
 dennis_cranmer,Dennis Cranmer,6,,cranmer,scoiatael,0
@@ -72,12 +78,12 @@ kayran,Kayran,8,"hero,morale_boost,agile",kayran,monster,1
 leshen,Leshen,10,hero,leshen,monster,1
 imlerith,Imlerith,10,hero,imlerith,monster,0
 draug,Draug,10,hero,draug,monster,0
-ghoul_1,Ghoul,1,muster,ghoul1,monster,0
-ghoul_2,Ghoul,1,muster,ghoul2,monster,0
-ghoul_3,Ghoul,1,muster,ghoul3,monster,0
-nekker_1,Nekker,2,muster,nekker1,monster,0
-nekker_2,Nekker,2,muster,nekker2,monster,0
-nekker_3,Nekker,2,muster,nekker3,monster,0
+ghoul_1,Ghoul,1,muster,ghoul_1,monster,0
+ghoul_2,Ghoul,1,muster,ghoul_2,monster,0
+ghoul_3,Ghoul,1,muster,ghoul_3,monster,0
+nekker_1,Nekker,2,muster,nekker_1,monster,0
+nekker_2,Nekker,2,muster,nekker_2,monster,0
+nekker_3,Nekker,2,muster,nekker_3,monster,0
 wyvern,Wyvern,2,,wyvern,monster,1
 foglet,Foglet,2,,foglet,monster,0
 celaeno_harpy,Celaeno Harpy,2,agile,celaeno_harpy,monster,1
@@ -89,9 +95,9 @@ vampire_bruxa,Vampire: Bruxa,4,muster,vampire_bruxa,monster,0
 vampire_fleder,Vampire: Fleder,4,muster,vampire_fleder,monster,0
 vampire_garkain,Vampire: Garkain,4,muster,vampire_garkain,monster,0
 vampire_ekimmara,Vampire: Ekimmara,4,muster,vampire_ekimmara,monster,0
-arachas_1,Arachas,4,muster,arachas1,monster,0
-arachas_2,Arachas,4,muster,arachas2,monster,0
-arachas_3,Arachas,4,muster,arachas3,monster,0
+arachas_1,Arachas,4,muster,arachas_1,monster,0
+arachas_2,Arachas,4,muster,arachas_2,monster,0
+arachas_3,Arachas,4,muster,arachas_3,monster,0
 botchling,Botchling,4,,botchling,monster,0
 forktail,Forktail,5,,forktail,monster,0
 plague_maiden,Plague Maiden,5,,forktail,monster,0

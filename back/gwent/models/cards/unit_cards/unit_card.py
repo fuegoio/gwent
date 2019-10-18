@@ -39,9 +39,9 @@ class UnitCard(Card):
     def place_card(self, board, adversary_board, player, adversary, target):
         if not self.agile:
             board.rows[self.row].append(self)
-        elif 0 <= target <= 1:
-            self.row = target
-            board.rows[target].append(self)
+        elif 0 <= target['row'] <= 1:
+            self.row = target['row']
+            board.rows[target['row']].append(self)
         else:
             print('Problem with agile target')
         self.apply_abilities(board, adversary_board, player, adversary, target)

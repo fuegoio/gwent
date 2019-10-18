@@ -112,11 +112,13 @@
                 player: {
                     name: String,
                     faction: String,
-                    lives: Number},
+                    lives: Number
+                },
                 adversary: {
                     name: String,
                     faction: String,
-                    lives: Number},
+                    lives: Number
+                },
             }
         },
         beforeCreate() {
@@ -151,38 +153,42 @@
                 this.selected_card = data['card'];
             },
             handle_row_click(row_number) {
-                if (this.selected_card != null && this.selected_card['placement']['rows'].includes(row_number)) {
-                    
+                console.log('Handling row click')
+                const placement = this.selected_card['placement'];
+                if (this.selected_card != null && placement['rows'].includes(row_number)) {
+                    if (placement['targets'] == null) {
+                        console.log('Card without target')
+                        this.$sockets.game.emit('play_card', {
+                            card: this.selected_card['id'],
+                            target: {row: row_number, target: null}
+                        })
+                    } else if (placement['targets']['target_type'] == 'medic') {
+                        this.medic = true
+                    }
                 } else {
-                    print('merdier')
-                    this.selected_card = null
+                    console.log('Wrong row selected');
                 }
             },
             handle_card_click(data) {
-                if (this.selected_card['type'] == 'decoy' && data['row_number'] < 3) {
-                    this.$sockets.game.emit('play_card', {
-                        card: this.selected_card['id'],
-                        target: data['card']['id']
-                    })
+                const targets = this.selected_card['placement']['targets']
+                if (targets != null && targets['target_type'] == 'decoy') {
+                    if (targets['target_ids'].includes(data['card']['id'])) {
+                        this.$sockets.game.emit('play_card', {
+                            card: this.selected_card['id'],
+                            target: {row: data['row_number'], target_id: data['card']['id']}
+                        })
+                    } else {
+                        console.log('Wrong decoy placement')
+                    }
                 } else {
-                    this.place_card(data['row_number'])
-                }
-            },
-            check_emplacement(row_number) {
-                if (this.selected_card['agile']) {
-                    return 0 <= row_number && row_number <= 1
-                } else if (this.selected_card['type'] == 'spy') {
-                    return this.selected_card['row'] + 3 == row_number
-                } else if (this.selected_card['type'] == 'commanders_horn') {
-                    return 0 <= row_number && row_number <= 2
-                } else if (this.selected_card['type'] == 'scorch' || this.selected_card['type'] == 'clear_weather') {
-                    return true
-                } else {
-                    return this.selected_card['row'] == row_number
+                    this.handle_row_click(data['row_number'])
                 }
             },
             choose_medic_target(card) {
-                this.$sockets.game.emit('play_card', {card: this.selected_card['id'], target: card['id']})
+                this.$sockets.game.emit('play_card', {
+                    card: this.selected_card['id'],
+                    target: {row: null, target_id: card['id']}
+                });
                 this.medic = false
             },
             any_card_revivable() {
