@@ -40,6 +40,7 @@ class UnitCard(Card):
         if not self.agile:
             board.rows[self.row].append(self)
         elif 0 <= target <= 1:
+            self.row = target
             board.rows[target].append(self)
         else:
             print('Problem with agile target')
