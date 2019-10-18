@@ -24,4 +24,4 @@ class ScorchCard(SpecialCard):
                         card.destroy(board, board.player)
 
     def get_row_and_targets(self, player, board):
-        return {'rows': [7], 'target': None}
+        return {'rows': [0, 1, 2, 3, 4, 5], 'target': None}

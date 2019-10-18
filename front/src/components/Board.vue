@@ -153,16 +153,15 @@
                 this.selected_card = data['card'];
             },
             handle_row_click(row_number) {
-                console.log('Handling row click')
                 const placement = this.selected_card['placement'];
                 if (this.selected_card != null && placement['rows'].includes(row_number)) {
                     if (placement['targets'] == null) {
-                        console.log('Card without target')
                         this.$sockets.game.emit('play_card', {
                             card: this.selected_card['id'],
                             target: {row: row_number, target: null}
                         })
                     } else if (placement['targets']['target_type'] == 'medic') {
+                        console.log('Displaying medic')
                         this.medic = true
                     }
                 } else {

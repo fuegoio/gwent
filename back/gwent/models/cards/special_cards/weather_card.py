@@ -10,4 +10,4 @@ class WeatherCard(SpecialCard):
             board.rows[self.row].append(self)
 
     def get_row_and_targets(self, player, board):
-        return {'rows': [7], 'target': None}
+        return {'rows': [self.row], 'target': {'target_type': 'weather'}}

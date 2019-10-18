@@ -10,7 +10,7 @@ class CommandersHornCard(SpecialCard):
         return '<Commanders Horn>'
 
     def get_row_and_targets(self, player, board):
-        return {'rows': [0, 1, 2], 'target': None}
+        return {'rows': [0, 1, 2], 'targets': None}
 
     def place_card(self, board, adversary_board, player, adversary, target):
         self.row = target

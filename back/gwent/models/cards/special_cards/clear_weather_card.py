@@ -4,7 +4,7 @@ from gwent.models.cards.special_cards.weather_card import WeatherCard
 
 class ClearWeatherCard(SpecialCard):
     def get_row_and_targets(self, player, board):
-        return {'rows': [7], 'target': None}
+        return {'rows': [0, 1, 2, 3, 4, 5], 'target': None}
 
     def place_card(self, board, adversary_board, player, adversary, target):
         self.apply_abilities(board, adversary_board, player, adversary)
