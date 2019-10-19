@@ -1,30 +1,32 @@
 <template>
-    <v-container class="player_card_back">
-        <v-row>
-            <v-col>{{player_name}}</v-col>
-            <v-col>Total score : {{score}}</v-col>
+    <div style="background-color: blue">
+        <v-row style="background-color: red">
+            <v-img :src="'./cards/' + faction_to_image[player['faction']] + '.png'"></v-img>
         </v-row>
         <v-row>
-            <v-col cols="1">{{length_hand}}
-            </v-col>
-            <!--<v-col cols="1"><v-img :src="'./card_icon.png'" height="25px" contain></v-img></v-col>-->
-            <v-col cols="6"></v-col>
-            <v-col>Lives : {{player_lives}}</v-col>
+            {{player['name']}}
+            {{player['faction']}}
+            {{player['lives']}}
         </v-row>
-    </v-container>
+    </div>
 </template>
 
 <script>
     export default {
         name: "PlayerCard",
         components: {},
-        props: ['player_name', 'player_lives', 'length_hand', 'score']
+        props: ['player'],
+        data: () => ({
+            faction_to_image: {
+                northern: 'foltest_forged',
+                nilfgaardian: '',
+                scoiatael: 'francesca_beautiful',
+                monster: 'eredin_bringer',
+            }
+        })
     }
 </script>
 
 <style scoped>
-    .player_card_back{
-        background-color: #05DC95;
-        border-radius: 7px;
-    }
+
 </style>

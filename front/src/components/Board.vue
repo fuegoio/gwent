@@ -2,18 +2,14 @@
     <div>
         <v-row class="adversory" no-gutters>
             <v-col cols="3">
-                <v-row no-gutters>
-                    <PlayerCard :length_hand="adversary['hand_length']" :player_lives="adversary['lives']"
-                                :player_name="adversary['name']" :score="adversary_board['score_total']">
-                    </PlayerCard>
+                <v-row class="big_row">
+                    <PlayerCard :player="adversary"></PlayerCard>
                 </v-row>
-                <v-row style="height: 220px;"></v-row>
-                <v-btn height="60px" @click="pass_turn" :disabled="!turn">Pass</v-btn>
-                <v-row style="height: 220px;"></v-row>
-                <v-row no-gutters>
-                    <PlayerCard :length_hand="player['hand_length']" :player_lives="player['lives']"
-                                :player_name="player['name']" :score="board['score_total']">
-                    </PlayerCard>
+                <v-row class="big_row" align-content="center" justify="center">
+                    <v-btn @click="pass_turn" :disabled="!turn" x-large>Pass</v-btn>
+                </v-row>
+                <v-row class="big_row">
+                    <PlayerCard :player="player"></PlayerCard>
                 </v-row>
             </v-col>
             <v-col cols="1">
@@ -111,14 +107,14 @@
                 medic: false,
                 medic_ids: [],
                 player: {
-                    name: String,
-                    faction: String,
-                    lives: Number
+                    name: '',
+                    faction: '',
+                    lives: 2
                 },
                 adversary: {
-                    name: String,
-                    faction: String,
-                    lives: Number
+                    name: '',
+                    faction: '',
+                    lives: 2
                 },
             }
         },
@@ -210,5 +206,10 @@
     .score {
         height: 125px;
         text-align: center;
+    }
+
+    .big_row {
+        height: 253px;
+        margin-top: 3px;
     }
 </style>
