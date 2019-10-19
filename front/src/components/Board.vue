@@ -79,19 +79,19 @@
 
         <MulliganDialog :cards="hand"></MulliganDialog>
 
-        <CemeteryDialog :cards="cemetery" :active="medic" v-on:card_click="choose_medic_target"></CemeteryDialog>
+        <MedicDialog :cards="cemetery" :active="medic" :ids="medic_ids" v-on:card_click="choose_medic_target"></MedicDialog>
     </div>
 </template>
 
 <script>
     import Row from "./Row"
     import MulliganDialog from "./MulliganDialog";
-    import CemeteryDialog from "./MedicDialog";
+    import MedicDialog from "./MedicDialog";
     import PlayerCard from "./PlayerCard";
 
     export default {
         name: "Board",
-        components: {Row, MulliganDialog, CemeteryDialog, PlayerCard},
+        components: {Row, MulliganDialog, MedicDialog, PlayerCard},
         data() {
             return {
                 selected_card: null,
@@ -109,6 +109,7 @@
                 cemetery: [],
                 turn: false,
                 medic: false,
+                medic_ids: [],
                 player: {
                     name: String,
                     faction: String,
@@ -149,11 +150,11 @@
         },
         methods: {
             select_card(data) {
-                console.log(data)
                 this.selected_card = data['card'];
             },
             handle_row_click(row_number) {
                 const placement = this.selected_card['placement'];
+                console.log(placement)
                 if (this.selected_card != null && placement['rows'].includes(row_number)) {
                     if (placement['targets'] == null) {
                         this.$sockets.game.emit('play_card', {
@@ -161,8 +162,15 @@
                             target: {row: row_number, target: null}
                         })
                     } else if (placement['targets']['target_type'] == 'medic') {
-                        console.log('Displaying medic')
-                        this.medic = true
+                        if (placement['targets']['target_ids'].length > 0) {
+                            this.medic_ids = placement['targets']['target_ids'];
+                            this.medic = true;
+                        } else {
+                            this.$sockets.game.emit('play_card', {
+                                card: this.selected_card['id'],
+                                target: {row: row_number, target: null}
+                            })
+                        }
                     }
                 } else {
                     console.log('Wrong row selected');
@@ -189,15 +197,7 @@
                     target: {row: null, target_id: card['id']}
                 });
                 this.medic = false
-            },
-            any_card_revivable() {
-                let revivable_card = 0
-                for (let i = 0; i < this.cemetery.length; i++) {
-                    if (this.cemetery[i]['unit_card'] && !this.cemetery[i]['hero']) {
-                        revivable_card += 1
-                    }
-                }
-                return revivable_card > 0
+                this.medic_ids = []
             },
             pass_turn() {
                 this.$sockets.game.emit('pass')

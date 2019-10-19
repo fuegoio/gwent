@@ -22,8 +22,8 @@ class Game:
 
     @property
     def finished(self):
-        players_deads = [player.lives == 0 for player in self.players]
-        return sum(players_deads) >= 1
+        players_dead = [player.lives == 0 for player in self.players]
+        return sum(players_dead) >= 1
 
     def get_score(self):
         return [sum(board.scores) for board in self.current_round.boards]

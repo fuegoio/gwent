@@ -10,15 +10,13 @@ class MedicCard(UnitCard):
     def get_row_and_targets(self, player, board):
         revivable_units = [card for card in player.cemetery if card.hero is False and isinstance(card, UnitCard)]
         if len(revivable_units) > 0:
-            print(revivable_units)
-            print([card.id for card in revivable_units])
             return {'rows': [self.row],
-                    'target': {'target_type': 'medic', 'target_ids': [card.id for card in revivable_units]}}
+                    'targets': {'target_type': 'medic', 'target_ids': [card.id for card in revivable_units]}}
         else:
-            return {'rows': [self.row], 'target': None}
+            return {'rows': [self.row], 'targets': None}
 
     def apply_abilities(self, board, adversary_board, player, adversary, target):
-        targets = self.get_row_and_targets(player, board)['target']
+        targets = self.get_row_and_targets(player, board)
         target_card = None
 
         if targets is not None:

@@ -8,7 +8,7 @@
             <v-col cols="12" class="description_row">
                 <v-row justify="center">
                     <v-card v-for="card in cards" style="background-color: #3F3632" @click="card_click(card)"
-                            :key="card.id">
+                            :key="card.id" v-if="ids.includes(card.id)">
                         <v-img id="card" :src="'./cards/' + card['img_name'] + '.png'"></v-img>
                     </v-card>
                 </v-row>
@@ -20,7 +20,7 @@
 <script>
     export default {
         name: "MedicDialog",
-        props: ['cards', 'active'],
+        props: ['cards', 'active', 'ids'],
         methods: {
             card_click(card) {
                 this.$emit('card_click', card);
