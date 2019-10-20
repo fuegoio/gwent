@@ -132,14 +132,15 @@
             });
 
             this.$sockets.game.on('board', (data) => {
-                console.log(data);
                 this.hand = data['hand'];
                 this.board = data['board'];
                 this.adversary_board = data['adversary_board'];
                 this.cemetery = data['cemetery'];
                 this.turn = data['turn'];
                 this.player = data['player'];
+                this.player['score'] = this.board['melee']['score'] + this.board['distance']['score'] + this.board['siege']['score']
                 this.adversary = data['adversary']
+                this.adversary['score'] = this.adversary_board['melee']['score'] + this.adversary_board['distance']['score'] + this.adversary_board['siege']['score']
             });
 
             this.$sockets.game.emit('get_cards');

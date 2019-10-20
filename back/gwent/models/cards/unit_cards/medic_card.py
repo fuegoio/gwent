@@ -27,5 +27,6 @@ class MedicCard(UnitCard):
 
         if target_card is not None:
             target_card.place_card(board, adversary_board, player, adversary, None)
+            player.cemetery.remove(target_card)
         else:
             print('No cards revived by medic')
