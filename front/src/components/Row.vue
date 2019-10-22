@@ -24,7 +24,7 @@
             row_click() {
                 this.$emit('row_click', this.number)
             },
-            card_click(card){
+            card_click(card) {
                 this.$emit('card_click', {card: card, row_number: this.number});
             }
         }
@@ -44,7 +44,7 @@
         height: 125px;
         padding: 0;
         margin-top: 3px;
-        background-color: #05DC95;
+        border: solid #05DC95;
         border-radius: 14px;
     }
 
