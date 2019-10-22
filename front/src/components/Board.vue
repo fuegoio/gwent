@@ -6,7 +6,7 @@
                     <PlayerCard :player="adversary"></PlayerCard>
                 </v-row>
                 <v-row class="big_row" align-content="center" justify="center">
-                    <v-btn @click="pass_turn" :disabled="!turn" x-large>Pass</v-btn>
+                    <v-btn @click="pass_turn" :disabled="!turn" x-large dark>Pass</v-btn>
                 </v-row>
                 <v-row class="big_row">
                     <PlayerCard :player="player"></PlayerCard>
@@ -46,36 +46,43 @@
             </v-col>
             <v-col cols="8">
                 <Row :cards="adversary_board['siege'].cards" :number="5"
+                     :selected="selected_card"
                      v-on:card_click="handle_card_click"
                      v-on:row_click="handle_row_click">
                 </Row>
                 <Row :cards="adversary_board['distance'].cards" :number="4"
+                     :selected="selected_card"
                      v-on:card_click="handle_card_click"
                      v-on:row_click="handle_row_click">
                 </Row>
                 <Row :cards="adversary_board['melee'].cards" :number="3"
+                     :selected="selected_card"
                      v-on:card_click="handle_card_click"
                      v-on:row_click="handle_row_click">
                 </Row>
                 <Row :cards="board['melee'].cards" :number="0" v-on:row_click="handle_row_click"
+                     :selected="selected_card"
                      v-on:card_click="handle_card_click">
                 </Row>
                 <Row :cards="board['distance'].cards" :number="1"
+                     :selected="selected_card"
                      v-on:card_click="handle_card_click"
                      v-on:row_click="handle_row_click">
                 </Row>
                 <Row :cards="board['siege'].cards" :number="2" v-on:row_click="handle_row_click"
+                     :selected="selected_card"
                      v-on:card_click="handle_card_click">
                 </Row>
             </v-col>
             <Row :cards="hand" :number="6" v-on:card_click="select_card" hand="true"
-                 :disabled="!turn">
+                 :selected="selected_card" :disabled="!turn">
             </Row>
         </v-row>
 
         <MulliganDialog :cards="hand"></MulliganDialog>
 
-        <MedicDialog :cards="cemetery" :active="medic" :ids="medic_ids" v-on:card_click="choose_medic_target"></MedicDialog>
+        <MedicDialog :cards="cemetery" :active="medic" :ids="medic_ids"
+                     v-on:card_click="choose_medic_target"></MedicDialog>
     </div>
 </template>
 
@@ -139,8 +146,10 @@
                 this.turn = data['turn'];
                 this.player = data['player'];
                 this.player['score'] = this.board['melee']['score'] + this.board['distance']['score'] + this.board['siege']['score']
-                this.adversary = data['adversary']
+                this.adversary = data['adversary'];
                 this.adversary['score'] = this.adversary_board['melee']['score'] + this.adversary_board['distance']['score'] + this.adversary_board['siege']['score']
+
+                this.selected_card = null;
             });
 
             this.$sockets.game.emit('get_cards');
@@ -150,27 +159,28 @@
                 this.selected_card = data['card'];
             },
             handle_row_click(row_number) {
-                const placement = this.selected_card['placement'];
-                console.log(placement)
-                if (this.selected_card != null && placement['rows'].includes(row_number)) {
-                    if (placement['targets'] == null) {
-                        this.$sockets.game.emit('play_card', {
-                            card: this.selected_card['id'],
-                            target: {row: row_number, target: null}
-                        })
-                    } else if (placement['targets']['target_type'] == 'medic') {
-                        if (placement['targets']['target_ids'].length > 0) {
-                            this.medic_ids = placement['targets']['target_ids'];
-                            this.medic = true;
-                        } else {
+                if (this.selected_card) {
+                    const placement = this.selected_card['placement'];
+                    if (this.selected_card != null && placement['rows'].includes(row_number)) {
+                        if (placement['targets'] == null) {
                             this.$sockets.game.emit('play_card', {
                                 card: this.selected_card['id'],
                                 target: {row: row_number, target: null}
-                            })
+                            });
+                        } else if (placement['targets']['target_type'] == 'medic') {
+                            if (placement['targets']['target_ids'].length > 0) {
+                                this.medic_ids = placement['targets']['target_ids'];
+                                this.medic = true;
+                            } else {
+                                this.$sockets.game.emit('play_card', {
+                                    card: this.selected_card['id'],
+                                    target: {row: row_number, target: null}
+                                });
+                            }
                         }
+                    } else {
+                        console.log('Wrong row selected');
                     }
-                } else {
-                    console.log('Wrong row selected');
                 }
             },
             handle_card_click(data) {
@@ -180,7 +190,7 @@
                         this.$sockets.game.emit('play_card', {
                             card: this.selected_card['id'],
                             target: {row: data['row_number'], target_id: data['card']['id']}
-                        })
+                        });
                     } else {
                         console.log('Wrong decoy placement')
                     }
@@ -193,8 +203,8 @@
                     card: this.selected_card['id'],
                     target: {row: null, target_id: card['id']}
                 });
-                this.medic = false
-                this.medic_ids = []
+                this.medic = false;
+                this.medic_ids = [];
             },
             pass_turn() {
                 this.$sockets.game.emit('pass')

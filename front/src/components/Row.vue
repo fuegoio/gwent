@@ -1,7 +1,7 @@
 <template>
-    <v-row justify="center" class="custom_row" @click="row_click">
+    <v-row justify="center" @click="row_click" :class="{'custom_row': true, 'not-highlighted': !highlight}">
         <v-card v-for="card in cards" style="border-radius: 14px;" :key="card.id"
-                :disabled="disabled" @click="card_click(card)">
+                :disabled="disabled" @click="card_click(card)" class="mx-1 elevation-2">
             <figure class="card">
                 <v-btn v-if="!hand && card['unit_card'] && !card['hero']" class="effective_power"
                        absolute
@@ -19,7 +19,15 @@
     export default {
         name: "Row",
         components: {},
-        props: ['cards', 'disabled', 'number', 'hand'],
+        props: ['cards', 'disabled', 'number', 'hand', 'selected'],
+        computed: {
+            highlight() {
+                if (!this.hand && this.selected !== null) {
+                   return this.selected.placement.rows.indexOf(this.number) > -1;
+                }
+                return true;
+            }
+        },
         methods: {
             row_click() {
                 this.$emit('row_click', this.number)
@@ -34,7 +42,7 @@
 <style scoped>
     .card {
         width: 90px;
-        height: 125px;
+        height: 116px;
         overflow: hidden;
         margin: 0;
         border-radius: 12px;
@@ -42,10 +50,14 @@
 
     .custom_row {
         height: 125px;
-        padding: 0;
+        padding: 2px;
         margin-top: 3px;
         border: solid #05DC95;
         border-radius: 14px;
+    }
+
+    .not-highlighted {
+        border: solid #dc6072;
     }
 
     .effective_power {
