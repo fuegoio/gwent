@@ -87,7 +87,8 @@ class GameNamespace(socketio.AsyncNamespace):
         if current_round.finished:
             self.game.finish_round()
             if self.game.finished:
-                await self.emit('finished')
+                for i, player_sid in enumerate(self.players_sid):
+                    await self.emit('finished', {'result': self.game.players[i].lives != 0}, player_sid)
 
     async def broadcast_board(self):
         for i, sid in enumerate(self.players_sid):

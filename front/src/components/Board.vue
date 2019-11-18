@@ -130,8 +130,12 @@
                 this.hand = data['hand'];
             });
 
-            this.$sockets.game.on('terminated', () => {
-                console.log('Game is over')
+            this.$sockets.game.on('finished', (data) => {
+                if (data['result']){
+                    console.log('You won');
+                } else {
+                    console.log('You lost');
+                }
             });
 
             this.$sockets.game.on('done_mulligan', (data) => {
