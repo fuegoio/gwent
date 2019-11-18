@@ -139,7 +139,7 @@
 
             this.$sockets.main.on('game_created', (data) => {
                 this.game_proposal = false;
-                sockets.game = io('http://gwent-pooa.herokuapp.com/' + data.namespace, {query: {token: this.sid}, forceNew: true});
+                sockets.game = io('https://gwent-pooa.herokuapp.com/' + data.namespace, {query: {token: this.sid}, forceNew: true});
                 this.$router.push('/game');
             });
         },

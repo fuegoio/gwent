@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 
 let sockets = {
-    main: io('http://gwent-pooa.herokuapp.com/'),
+    main: io('https://gwent-pooa.herokuapp.com/'),
     game: undefined
 };
 
