@@ -21,7 +21,7 @@
                 </v-text-field>
 
                 <v-btn block style="margin-top: 20px" :disabled="username.length === 0" v-if="!registered"
-                       @click="sign_in">Connect
+                       @click="sign_in(username)">Connect
                 </v-btn>
 
                 <v-card
@@ -31,7 +31,8 @@
                     <p style="text-align: center; color: #05DC95;" class="mt-3">
                         Available users
                     </p>
-                    <v-list-item two-line v-for="user in users.filter((user) => user.id !== sid)" class="list-item"
+                    <v-list-item two-line v-for="user in users.filter((user) => user.id !== sid)"
+                                 :class="{'available_player': user['available'], 'in_game_player': !user['available']}"
                                  style="margin-top: 10px" :key="user.sid">
                         <v-list-item-content>
                             <v-list-item-title>{{user['username']}}</v-list-item-title>
@@ -114,6 +115,7 @@
             this.$sockets.main.on('available_players', (data) => {
                 console.log(data);
                 if (data['registered'] === this.sid) {
+                    console.log('client registered')
                     this.registered = true
                 }
                 this.users = data['available_users'];
@@ -145,9 +147,9 @@
             });
         },
         methods: {
-            sign_in() {
+            sign_in(username) {
                 this.loading = true;
-                this.$sockets.main.emit('register', {'username': this.username});
+                this.$sockets.main.emit('register', {'username': username});
             },
             propose_game(adversary) {
                 console.log('Sending game proposal to ' + adversary['id']);
@@ -158,8 +160,8 @@
             },
             launch_game() {
                 this.game_proposal = false;
-                this.adversary['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))];
-                this.yourself['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))];
+                this.adversary['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * 4)];
+                this.yourself['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * 4)];
                 this.$sockets.main.emit('launch_game', {
                     player1: this.adversary,
                     player2: this.yourself,
@@ -183,7 +185,15 @@
         display: block;
     }
 
-    .list-item {
+    .in_game_player {
+        background-color: #dc6072;
+        border-radius: 15px;
+        margin-bottom: 5px;
+        overflow-y: auto;
+        max-height: 50%;
+    }
+
+    .available_player {
         background-color: #05DC95;
         border-radius: 15px;
         margin-bottom: 5px;
