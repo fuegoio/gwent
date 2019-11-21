@@ -3,7 +3,8 @@
         <v-card v-for="card in cards" style="border-radius: 14px;" :key="card.id"
                 :disabled="disabled" @click="card_click(card)" class="mx-1 elevation-2">
             <figure class="card">
-                <v-btn v-if="!hand && card['unit_card'] && !card['hero']" class="effective_power"
+                <v-btn v-if="!hand && card['unit_card'] && !card['hero']"
+                       class="effective_power"
                        absolute
                        fab
                 >
