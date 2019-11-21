@@ -6,7 +6,7 @@
                     <PlayerCard :player="adversary"></PlayerCard>
                 </v-row>
                 <v-row class="big_row" align-content="center" justify="center">
-                    <v-btn @click="pass_turn" :disabled="!turn" x-large dark>Pass</v-btn>
+                    <v-btn @click="pass_turn" :disabled="!turn" x-large color="white">Pass</v-btn>
                 </v-row>
                 <v-row class="big_row">
                     <PlayerCard :player="player"></PlayerCard>
