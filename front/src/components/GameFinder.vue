@@ -113,6 +113,7 @@
             });
 
             this.$sockets.main.on('available_players', (data) => {
+                console.log(data);
                 if (data['registered'] === this.sid) {
                     this.registered = true
                 }
