@@ -1,6 +1,7 @@
 import socketio
 
 from gwent.data.games import games_db
+from gwent.models.unauthorized_action_error import UnauthorizedActionError, CardNotFoundError
 
 
 class GameNamespace(socketio.AsyncNamespace):
@@ -48,7 +49,13 @@ class GameNamespace(socketio.AsyncNamespace):
 
     async def on_mulligan(self, sid, data):
         player = self.get_player_from_sid(sid)
-        if player.do_mulligan(data['id'], self.game.round_number):
+        try:
+            player.do_mulligan(data['id'], self.game.round_number)
+        except UnauthorizedActionError:
+            print(UnauthorizedActionError.message)
+        except CardNotFoundError:
+            print(CardNotFoundError.message)
+        else:
             await self.emit('done_mulligan', {'hand': player.get_hand_data()}, sid)
 
     async def on_ready_to_play(self, sid):
@@ -76,7 +83,10 @@ class GameNamespace(socketio.AsyncNamespace):
             card = data['card']
             target = data['target']
             current_round = self.game.current_round
-            current_round.play_card(card, target)
+            try:
+                current_round.play_card(card, target)
+            except CardNotFoundError:
+                print(CardNotFoundError.message)
             await self.check_finished()
             await self.broadcast_board()
         else:

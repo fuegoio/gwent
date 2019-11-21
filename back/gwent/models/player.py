@@ -1,6 +1,7 @@
 import random
 
 from gwent.data.cards import cards_db
+from gwent.models.unauthorized_action_error import UnauthorizedActionError, CardNotFoundError
 
 NUM_CARDS = 22
 
@@ -87,8 +88,11 @@ class Player:
 
     def do_mulligan(self, card_id, round_number):
         if self.__mulligan_count >= 2 or round_number != 0:
-            print('Unauthorized mulligan')
-            return False
+            if self.__mulligan_count >= 2:
+                raise UnauthorizedActionError('Mulligan exhausted')
+            else:
+                raise UnauthorizedActionError('Not your turn')
+
         else:
             card_to_mulligan = None
             for card in self.hand:
@@ -103,8 +107,7 @@ class Player:
                 print('Mulligan done correctly')
                 return True
             else:
-                print('Card not found')
-                return False
+                raise CardNotFoundError(card_to_mulligan)
 
     def get_player_data(self):
         return {'name': self.name,
