@@ -83,6 +83,18 @@
 
         <MedicDialog :cards="cemetery" :active="medic" :ids="medic_ids"
                      v-on:card_click="choose_medic_target"></MedicDialog>
+
+        <v-dialog v-model="finished" persistent>
+            <v-layout column class="full-height" style="background-color: #3F3632; padding: 15px;">
+                <v-row justify="center" style="margin-bottom: 15px;">
+                    <iframe src="https://giphy.com/embed/K3RxMSrERT8iI" width="287" height="480" frameBorder="0" style="pointer-events: none;" v-if="won"></iframe>
+                    <iframe src="https://giphy.com/embed/1xVfByxByNvUiclzzL" width="480" height="480" frameBorder="0" style="pointer-events: none;" v-else></iframe>
+                </v-row>
+                <v-btn style="background-color: #05DC95" @click="">
+                    Back to homepage
+                </v-btn>
+            </v-layout>
+        </v-dialog>
     </div>
 </template>
 
@@ -123,6 +135,8 @@
                     faction: '',
                     lives: 2
                 },
+                finished: false,
+                won: true
             }
         },
         beforeCreate() {
@@ -131,11 +145,8 @@
             });
 
             this.$sockets.game.on('finished', (data) => {
-                if (data['result']){
-                    console.log('You won');
-                } else {
-                    console.log('You lost');
-                }
+                this.finished = true;
+                this.won = data['result']
             });
 
             this.$sockets.game.on('done_mulligan', (data) => {
@@ -152,7 +163,6 @@
                 this.player['score'] = this.board['melee']['score'] + this.board['distance']['score'] + this.board['siege']['score']
                 this.adversary = data['adversary'];
                 this.adversary['score'] = this.adversary_board['melee']['score'] + this.adversary_board['distance']['score'] + this.adversary_board['siege']['score']
-
                 this.selected_card = null;
             });
 
