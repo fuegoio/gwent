@@ -110,4 +110,5 @@ class Player:
         return {'name': self.name,
                 'faction': self.faction,
                 'lives': self.__lives,
-                'hand_length': len(self.hand)}
+                'hand_length': len(self.hand),
+                'passed': self.__passed}
