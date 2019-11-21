@@ -1,19 +1,22 @@
 <template>
-    <v-row justify="center" @click="row_click" :class="{'custom_row': true, 'not-highlighted': !highlight}">
-        <v-card v-for="card in cards" style="border-radius: 14px;" :key="card.id"
-                :disabled="disabled" @click="card_click(card)" class="mx-1 elevation-2">
-            <figure class="card">
-                <v-btn v-if="!hand && card['unit_card'] && !card['hero']"
-                       class="effective_power"
-                       absolute
-                       fab
-                >
-                    {{card['effective_power']}}
-                </v-btn>
-                <v-img :src="'./cards/' + card['img_name'] + '.png'"></v-img>
-            </figure>
-        </v-card>
-    </v-row>
+    <div class='board-row' @click="row_click">
+        <v-fade-transition group tag="div"
+                           :class="{'row justify-center custom_row': true, 'not-highlighted': !highlight}">
+            <v-card v-for="card in cards" style="border-radius: 14px;" :key="card.id"
+                    :disabled="disabled" @click="card_click(card)" class="mx-1 elevation-2">
+                <figure class="card">
+                    <v-btn v-if="!hand && card['unit_card'] && !card['hero']"
+                           class="effective_power"
+                           absolute
+                           fab
+                    >
+                        {{card['effective_power']}}
+                    </v-btn>
+                    <v-img :src="'./cards/' + card['img_name'] + '.png'"></v-img>
+                </figure>
+            </v-card>
+        </v-fade-transition>
+    </div>
 </template>
 
 <script>
@@ -24,7 +27,7 @@
         computed: {
             highlight() {
                 if (!this.hand && this.selected !== null) {
-                   return this.selected.placement.rows.indexOf(this.number) > -1;
+                    return this.selected.placement.rows.indexOf(this.number) > -1;
                 }
                 return true;
             }
@@ -41,6 +44,10 @@
 </script>
 
 <style scoped>
+    .board-row {
+        width: 100%;
+    }
+
     .card {
         width: 90px;
         height: 116px;
