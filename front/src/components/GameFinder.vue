@@ -21,7 +21,7 @@
                 </v-text-field>
 
                 <v-btn block style="margin-top: 20px" :disabled="username.length === 0" v-if="!registered"
-                       @click="sign_in">Connect
+                       @click="sign_in(username)">Connect
                 </v-btn>
 
                 <v-card
@@ -115,6 +115,7 @@
             this.$sockets.main.on('available_players', (data) => {
                 console.log(data);
                 if (data['registered'] === this.sid) {
+                    console.log('client registered')
                     this.registered = true
                 }
                 this.users = data['available_users'];
@@ -146,9 +147,9 @@
             });
         },
         methods: {
-            sign_in() {
+            sign_in(username) {
                 this.loading = true;
-                this.$sockets.main.emit('register', {'username': this.username});
+                this.$sockets.main.emit('register', {'username': username});
             },
             propose_game(adversary) {
                 console.log('Sending game proposal to ' + adversary['id']);
@@ -159,8 +160,8 @@
             },
             launch_game() {
                 this.game_proposal = false;
-                this.adversary['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))];
-                this.yourself['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * Math.floor(4))];
+                this.adversary['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * 4)];
+                this.yourself['faction'] = ['northern', 'nilfgaardian', 'scoiatael', 'monster'][Math.floor(Math.random() * 4)];
                 this.$sockets.main.emit('launch_game', {
                     player1: this.adversary,
                     player2: this.yourself,

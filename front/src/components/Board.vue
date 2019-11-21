@@ -90,7 +90,7 @@
                     <iframe src="https://giphy.com/embed/K3RxMSrERT8iI" width="287" height="480" frameBorder="0" style="pointer-events: none;" v-if="won"></iframe>
                     <iframe src="https://giphy.com/embed/1xVfByxByNvUiclzzL" width="480" height="480" frameBorder="0" style="pointer-events: none;" v-else></iframe>
                 </v-row>
-                <v-btn style="background-color: #05DC95" @click="">
+                <v-btn style="background-color: #05DC95" @click="goToHomepage">
                     Back to homepage
                 </v-btn>
             </v-layout>
@@ -222,6 +222,9 @@
             },
             pass_turn() {
                 this.$sockets.game.emit('pass')
+            },
+            goToHomepage(){
+                this.$router.push('/');
             }
         }
     }
