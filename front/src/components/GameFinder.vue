@@ -31,7 +31,8 @@
                     <p style="text-align: center; color: #05DC95;" class="mt-3">
                         Available users
                     </p>
-                    <v-list-item two-line v-for="user in users.filter((user) => user.id !== sid)" class="list-item"
+                    <v-list-item two-line v-for="user in users.filter((user) => user.id !== sid)"
+                                 :class="{'available_player': user['available'], 'in_game_player': !user['available']}"
                                  style="margin-top: 10px" :key="user.sid">
                         <v-list-item-content>
                             <v-list-item-title>{{user['username']}}</v-list-item-title>
@@ -112,7 +113,6 @@
             });
 
             this.$sockets.main.on('available_players', (data) => {
-                console.log(data);
                 if (data['registered'] === this.sid) {
                     this.registered = true
                 }
@@ -183,7 +183,15 @@
         display: block;
     }
 
-    .list-item {
+    .in_game_player {
+        background-color: #dc6072;
+        border-radius: 15px;
+        margin-bottom: 5px;
+        overflow-y: auto;
+        max-height: 50%;
+    }
+
+    .available_player {
         background-color: #05DC95;
         border-radius: 15px;
         margin-bottom: 5px;
