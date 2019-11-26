@@ -3,13 +3,11 @@ class Error(Exception):
 
 
 class UnauthorizedActionError(Error):
-
     def __init__(self, message):
         self.message = message
 
 
 class CardNotFoundError(Error):
-
     message = None
 
     def __init__(self, card):

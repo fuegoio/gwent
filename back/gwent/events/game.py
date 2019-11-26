@@ -51,10 +51,10 @@ class GameNamespace(socketio.AsyncNamespace):
         player = self.get_player_from_sid(sid)
         try:
             player.do_mulligan(data['id'], self.game.round_number)
-        except UnauthorizedActionError:
-            print(UnauthorizedActionError.message)
-        except CardNotFoundError:
-            print(CardNotFoundError.message)
+        except UnauthorizedActionError as e:
+            print(e.message)
+        except CardNotFoundError as e:
+            print(e.message)
         else:
             await self.emit('done_mulligan', {'hand': player.get_hand_data()}, sid)
 
@@ -87,8 +87,8 @@ class GameNamespace(socketio.AsyncNamespace):
             current_round = self.game.current_round
             try:
                 current_round.play_card(card, target)
-            except CardNotFoundError:
-                print(CardNotFoundError.message)
+            except CardNotFoundError as e:
+                print(e.message)
             await self.check_finished()
             await self.broadcast_board()
         else:
