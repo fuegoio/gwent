@@ -1,7 +1,7 @@
 import random
 
 from gwent.data.cards import cards_db
-from gwent.models.unauthorized_action_error import UnauthorizedActionError, CardNotFoundError
+from gwent.errors import UnauthorizedActionError, CardNotFoundError
 
 NUM_CARDS = 22
 

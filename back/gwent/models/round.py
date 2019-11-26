@@ -1,5 +1,5 @@
 from gwent.models.board import Board
-from gwent.models.unauthorized_action_error import CardNotFoundError
+from gwent.errors import CardNotFoundError
 
 
 class Round:

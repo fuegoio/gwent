@@ -1,7 +1,7 @@
 import socketio
 
 from gwent.data.games import games_db
-from gwent.models.unauthorized_action_error import UnauthorizedActionError, CardNotFoundError
+from gwent.errors import UnauthorizedActionError, CardNotFoundError
 
 
 class GameNamespace(socketio.AsyncNamespace):
