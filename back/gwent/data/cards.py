@@ -48,7 +48,6 @@ class CardsDb:
                 if line['id'] == card_id:
                     if int(line['type']) < 3:
                         if 'weather' in line['ability'].split('_'):
-                            print(line['ability'])
                             new_card = constructor_dic['weather'](
                                 line['name'],
                                 line['img'],
