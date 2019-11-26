@@ -121,7 +121,9 @@ class GameNamespace(socketio.AsyncNamespace):
         for i, player_sid in enumerate(self.players_sid):
             if player_sid == sid:
                 self.players_sid[i] = None
-                break
+            else:
+                print('player left')
+                await self.emit('adversary disconnected', {}, player_sid)
 
         if len([sid for sid in self.players_sid if sid is not None]) == 0:
             print('Deleting namespace ...')
