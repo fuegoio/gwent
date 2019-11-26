@@ -62,6 +62,8 @@ class GameNamespace(socketio.AsyncNamespace):
         player = self.get_player_from_sid(sid)
         player.set_ready()
 
+        print(f'{player.name} ready')
+
         if len([player for player in self.game.players if player.ready]) == 2:
             self.game.init_round()
             await self.broadcast_board()

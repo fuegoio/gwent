@@ -16,7 +16,6 @@ def register_events(sio):
             user['available'] = True
         if not already_registered:
             registered_users.append({'id': sid, 'username': data['username'], 'available': True})
-        print({'available_users': registered_users, 'registered': sid})
         await sio.emit('available_players', {'available_users': registered_users, 'registered': sid})
 
     @sio.event
