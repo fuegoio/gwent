@@ -38,7 +38,6 @@ class CardsDb:
                         deck.append(new_card)
                     else:
                         print('Card is None')
-        print(deck)
         return deck
 
     def make_card(self, card_id):
@@ -47,7 +46,6 @@ class CardsDb:
             new_card = None
             for line in csv_file_reader:
                 if line['id'] == card_id:
-                    print(line['name'])
                     if int(line['type']) < 3:
                         if 'weather' in line['ability'].split('_'):
                             print(line['ability'])
